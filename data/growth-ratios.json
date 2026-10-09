@@ -1,0 +1,830 @@
+{
+  "source": {
+    "citation": "Salt C, Morris PJ, German AJ, et al. Growth standard charts for monitoring bodyweight in dogs of different sizes. PLoS ONE 2017;12(9):e0182064.",
+    "article": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5584974/",
+    "dataset": "https://datacat.liverpool.ac.uk/377/",
+    "datasetDoi": "https://doi.org/10.17638/datacat.liverpool.ac.uk/377",
+    "license": "CC BY 4.0",
+    "correction": "PLoS One 2024;19(11):e0314711 corrects only the Data Availability statement; no change to data, categories or method.",
+    "accessed": "2026-10-10"
+  },
+  "generatedAt": "2026-10-10",
+  "filters": {
+    "visitType": "PREVENTIVE_CARE_VISIT == 'Y' OR HEALTHY_PET_DIAGNOSIS == 'Y'",
+    "ageYears": [
+      0.2,
+      2.25
+    ],
+    "bodyCondition": "Normal (recorded, else predicted)",
+    "neuterStatus": "not yet neutered at the visit",
+    "maxAdultKg": 40,
+    "minBinN": 200,
+    "ageBins": "weekly 12-52 weeks, then 4-weekly to 104 weeks",
+    "ratio": "WEIGHT / AV_BREED_WEIGHT",
+    "smoothing": "monotone non-decreasing isotonic regression on median, capped at 1.0"
+  },
+  "totals": {
+    "dogs": 43299,
+    "visits": 65356
+  },
+  "categories": {
+    "I": {
+      "minKg": 0.0,
+      "maxKg": 6.5,
+      "points": [
+        {
+          "weeks": 12,
+          "n": 1255,
+          "p25": 0.29475,
+          "median": 0.36788,
+          "p75": 0.45837,
+          "medianSmoothed": 0.36788
+        },
+        {
+          "weeks": 13,
+          "n": 1164,
+          "p25": 0.31539,
+          "median": 0.38555,
+          "p75": 0.48637,
+          "medianSmoothed": 0.38555
+        },
+        {
+          "weeks": 14,
+          "n": 1199,
+          "p25": 0.33923,
+          "median": 0.42676,
+          "p75": 0.53706,
+          "medianSmoothed": 0.42676
+        },
+        {
+          "weeks": 15,
+          "n": 1143,
+          "p25": 0.35284,
+          "median": 0.44605,
+          "p75": 0.55746,
+          "medianSmoothed": 0.44605
+        },
+        {
+          "weeks": 16,
+          "n": 1309,
+          "p25": 0.36788,
+          "median": 0.47088,
+          "p75": 0.60034,
+          "medianSmoothed": 0.47088
+        },
+        {
+          "weeks": 17,
+          "n": 1534,
+          "p25": 0.39634,
+          "median": 0.51159,
+          "p75": 0.64249,
+          "medianSmoothed": 0.51159
+        },
+        {
+          "weeks": 18,
+          "n": 1222,
+          "p25": 0.40752,
+          "median": 0.51388,
+          "p75": 0.64389,
+          "medianSmoothed": 0.51388
+        },
+        {
+          "weeks": 19,
+          "n": 1083,
+          "p25": 0.43376,
+          "median": 0.53966,
+          "p75": 0.68912,
+          "medianSmoothed": 0.53966
+        },
+        {
+          "weeks": 20,
+          "n": 935,
+          "p25": 0.44593,
+          "median": 0.55241,
+          "p75": 0.71271,
+          "medianSmoothed": 0.55241
+        },
+        {
+          "weeks": 21,
+          "n": 937,
+          "p25": 0.47091,
+          "median": 0.58769,
+          "p75": 0.7204,
+          "medianSmoothed": 0.58769
+        },
+        {
+          "weeks": 22,
+          "n": 641,
+          "p25": 0.44593,
+          "median": 0.59122,
+          "p75": 0.74626,
+          "medianSmoothed": 0.59122
+        },
+        {
+          "weeks": 23,
+          "n": 564,
+          "p25": 0.46261,
+          "median": 0.59741,
+          "p75": 0.75631,
+          "medianSmoothed": 0.59603
+        },
+        {
+          "weeks": 24,
+          "n": 574,
+          "p25": 0.46261,
+          "median": 0.59465,
+          "p75": 0.76223,
+          "medianSmoothed": 0.59603
+        },
+        {
+          "weeks": 25,
+          "n": 485,
+          "p25": 0.48839,
+          "median": 0.63179,
+          "p75": 0.80941,
+          "medianSmoothed": 0.63179
+        },
+        {
+          "weeks": 26,
+          "n": 436,
+          "p25": 0.49549,
+          "median": 0.6681,
+          "p75": 0.80816,
+          "medianSmoothed": 0.63926
+        },
+        {
+          "weeks": 27,
+          "n": 321,
+          "p25": 0.47535,
+          "median": 0.61042,
+          "p75": 0.81406,
+          "medianSmoothed": 0.63926
+        },
+        {
+          "weeks": 28,
+          "n": 236,
+          "p25": 0.49934,
+          "median": 0.66004,
+          "p75": 0.81151,
+          "medianSmoothed": 0.66004
+        },
+        {
+          "weeks": 30,
+          "n": 270,
+          "p25": 0.52,
+          "median": 0.66714,
+          "p75": 0.8751,
+          "medianSmoothed": 0.66714
+        },
+        {
+          "weeks": 34,
+          "n": 235,
+          "p25": 0.56298,
+          "median": 0.72101,
+          "p75": 0.95099,
+          "medianSmoothed": 0.72101
+        },
+        {
+          "weeks": 52,
+          "n": 816,
+          "p25": 0.63716,
+          "median": 0.81077,
+          "p75": 1.03268,
+          "medianSmoothed": 0.791
+        },
+        {
+          "weeks": 56,
+          "n": 415,
+          "p25": 0.61671,
+          "median": 0.7762,
+          "p75": 1.00146,
+          "medianSmoothed": 0.791
+        },
+        {
+          "weeks": 60,
+          "n": 484,
+          "p25": 0.60813,
+          "median": 0.78604,
+          "p75": 0.98312,
+          "medianSmoothed": 0.791
+        },
+        {
+          "weeks": 64,
+          "n": 511,
+          "p25": 0.61671,
+          "median": 0.80049,
+          "p75": 1.04621,
+          "medianSmoothed": 0.80049
+        },
+        {
+          "weeks": 68,
+          "n": 603,
+          "p25": 0.64436,
+          "median": 0.80963,
+          "p75": 1.05943,
+          "medianSmoothed": 0.80269
+        },
+        {
+          "weeks": 72,
+          "n": 555,
+          "p25": 0.62241,
+          "median": 0.79574,
+          "p75": 1.02561,
+          "medianSmoothed": 0.80269
+        },
+        {
+          "weeks": 76,
+          "n": 668,
+          "p25": 0.66744,
+          "median": 0.84816,
+          "p75": 1.06599,
+          "medianSmoothed": 0.82824
+        },
+        {
+          "weeks": 80,
+          "n": 506,
+          "p25": 0.61671,
+          "median": 0.81317,
+          "p75": 1.0555,
+          "medianSmoothed": 0.82824
+        },
+        {
+          "weeks": 84,
+          "n": 425,
+          "p25": 0.63179,
+          "median": 0.83513,
+          "p75": 1.06657,
+          "medianSmoothed": 0.82824
+        },
+        {
+          "weeks": 88,
+          "n": 430,
+          "p25": 0.62975,
+          "median": 0.82238,
+          "p75": 1.08394,
+          "medianSmoothed": 0.82824
+        },
+        {
+          "weeks": 92,
+          "n": 417,
+          "p25": 0.64249,
+          "median": 0.82238,
+          "p75": 1.08061,
+          "medianSmoothed": 0.82824
+        },
+        {
+          "weeks": 96,
+          "n": 352,
+          "p25": 0.67807,
+          "median": 0.84816,
+          "p75": 1.06731,
+          "medianSmoothed": 0.84816
+        },
+        {
+          "weeks": 100,
+          "n": 358,
+          "p25": 0.65396,
+          "median": 0.85635,
+          "p75": 1.083,
+          "medianSmoothed": 0.85635
+        }
+      ]
+    },
+    "II": {
+      "minKg": 6.5,
+      "maxKg": 9.0,
+      "points": [
+        {
+          "weeks": 12,
+          "n": 234,
+          "p25": 0.28251,
+          "median": 0.34348,
+          "p75": 0.41766,
+          "medianSmoothed": 0.34348
+        },
+        {
+          "weeks": 13,
+          "n": 215,
+          "p25": 0.3368,
+          "median": 0.40422,
+          "p75": 0.47558,
+          "medianSmoothed": 0.40422
+        },
+        {
+          "weeks": 14,
+          "n": 204,
+          "p25": 0.34675,
+          "median": 0.4231,
+          "p75": 0.50681,
+          "medianSmoothed": 0.4231
+        },
+        {
+          "weeks": 15,
+          "n": 219,
+          "p25": 0.37088,
+          "median": 0.45643,
+          "p75": 0.56501,
+          "medianSmoothed": 0.45643
+        },
+        {
+          "weeks": 16,
+          "n": 233,
+          "p25": 0.41772,
+          "median": 0.49694,
+          "p75": 0.58863,
+          "medianSmoothed": 0.49694
+        },
+        {
+          "weeks": 17,
+          "n": 242,
+          "p25": 0.43353,
+          "median": 0.52069,
+          "p75": 0.62404,
+          "medianSmoothed": 0.52069
+        }
+      ]
+    },
+    "III": {
+      "minKg": 9.0,
+      "maxKg": 15.0,
+      "points": [
+        {
+          "weeks": 12,
+          "n": 371,
+          "p25": 0.24888,
+          "median": 0.31395,
+          "p75": 0.37059,
+          "medianSmoothed": 0.31395
+        },
+        {
+          "weeks": 13,
+          "n": 360,
+          "p25": 0.26343,
+          "median": 0.33654,
+          "p75": 0.40479,
+          "medianSmoothed": 0.33654
+        },
+        {
+          "weeks": 14,
+          "n": 366,
+          "p25": 0.29361,
+          "median": 0.35669,
+          "p75": 0.4369,
+          "medianSmoothed": 0.35669
+        },
+        {
+          "weeks": 15,
+          "n": 352,
+          "p25": 0.32582,
+          "median": 0.40246,
+          "p75": 0.48369,
+          "medianSmoothed": 0.40246
+        },
+        {
+          "weeks": 16,
+          "n": 338,
+          "p25": 0.33726,
+          "median": 0.41484,
+          "p75": 0.50308,
+          "medianSmoothed": 0.41484
+        },
+        {
+          "weeks": 17,
+          "n": 417,
+          "p25": 0.38228,
+          "median": 0.46098,
+          "p75": 0.54374,
+          "medianSmoothed": 0.46098
+        },
+        {
+          "weeks": 18,
+          "n": 350,
+          "p25": 0.39658,
+          "median": 0.47633,
+          "p75": 0.56283,
+          "medianSmoothed": 0.47633
+        },
+        {
+          "weeks": 19,
+          "n": 292,
+          "p25": 0.42047,
+          "median": 0.51877,
+          "p75": 0.62797,
+          "medianSmoothed": 0.51877
+        },
+        {
+          "weeks": 20,
+          "n": 229,
+          "p25": 0.44753,
+          "median": 0.53051,
+          "p75": 0.64961,
+          "medianSmoothed": 0.53051
+        },
+        {
+          "weeks": 21,
+          "n": 232,
+          "p25": 0.44704,
+          "median": 0.55623,
+          "p75": 0.66697,
+          "medianSmoothed": 0.55623
+        }
+      ]
+    },
+    "IV": {
+      "minKg": 15.0,
+      "maxKg": 30.0,
+      "points": [
+        {
+          "weeks": 12,
+          "n": 1164,
+          "p25": 0.23173,
+          "median": 0.28432,
+          "p75": 0.33818,
+          "medianSmoothed": 0.28432
+        },
+        {
+          "weeks": 13,
+          "n": 1169,
+          "p25": 0.25275,
+          "median": 0.30743,
+          "p75": 0.36945,
+          "medianSmoothed": 0.30743
+        },
+        {
+          "weeks": 14,
+          "n": 1012,
+          "p25": 0.28938,
+          "median": 0.34364,
+          "p75": 0.40744,
+          "medianSmoothed": 0.34364
+        },
+        {
+          "weeks": 15,
+          "n": 1063,
+          "p25": 0.3091,
+          "median": 0.37489,
+          "p75": 0.44447,
+          "medianSmoothed": 0.37489
+        },
+        {
+          "weeks": 16,
+          "n": 1179,
+          "p25": 0.34124,
+          "median": 0.40283,
+          "p75": 0.47233,
+          "medianSmoothed": 0.40283
+        },
+        {
+          "weeks": 17,
+          "n": 1329,
+          "p25": 0.36173,
+          "median": 0.43,
+          "p75": 0.513,
+          "medianSmoothed": 0.43
+        },
+        {
+          "weeks": 18,
+          "n": 931,
+          "p25": 0.38805,
+          "median": 0.46366,
+          "p75": 0.54792,
+          "medianSmoothed": 0.46366
+        },
+        {
+          "weeks": 19,
+          "n": 750,
+          "p25": 0.41106,
+          "median": 0.49108,
+          "p75": 0.5694,
+          "medianSmoothed": 0.49108
+        },
+        {
+          "weeks": 20,
+          "n": 650,
+          "p25": 0.44216,
+          "median": 0.51752,
+          "p75": 0.60181,
+          "medianSmoothed": 0.51752
+        },
+        {
+          "weeks": 21,
+          "n": 640,
+          "p25": 0.48047,
+          "median": 0.56681,
+          "p75": 0.66096,
+          "medianSmoothed": 0.56228
+        },
+        {
+          "weeks": 22,
+          "n": 430,
+          "p25": 0.48024,
+          "median": 0.55776,
+          "p75": 0.65728,
+          "medianSmoothed": 0.56228
+        },
+        {
+          "weeks": 23,
+          "n": 357,
+          "p25": 0.51941,
+          "median": 0.59386,
+          "p75": 0.68773,
+          "medianSmoothed": 0.59386
+        },
+        {
+          "weeks": 24,
+          "n": 332,
+          "p25": 0.5437,
+          "median": 0.62795,
+          "p75": 0.714,
+          "medianSmoothed": 0.62795
+        },
+        {
+          "weeks": 25,
+          "n": 320,
+          "p25": 0.54045,
+          "median": 0.64454,
+          "p75": 0.72998,
+          "medianSmoothed": 0.64454
+        },
+        {
+          "weeks": 26,
+          "n": 295,
+          "p25": 0.57549,
+          "median": 0.67412,
+          "p75": 0.78184,
+          "medianSmoothed": 0.67412
+        },
+        {
+          "weeks": 30,
+          "n": 210,
+          "p25": 0.64725,
+          "median": 0.76375,
+          "p75": 0.8794,
+          "medianSmoothed": 0.76375
+        },
+        {
+          "weeks": 52,
+          "n": 501,
+          "p25": 0.77668,
+          "median": 0.88668,
+          "p75": 1.00957,
+          "medianSmoothed": 0.88668
+        },
+        {
+          "weeks": 56,
+          "n": 276,
+          "p25": 0.78318,
+          "median": 0.90971,
+          "p75": 1.03155,
+          "medianSmoothed": 0.90971
+        },
+        {
+          "weeks": 60,
+          "n": 305,
+          "p25": 0.80795,
+          "median": 0.92076,
+          "p75": 1.04901,
+          "medianSmoothed": 0.92076
+        },
+        {
+          "weeks": 64,
+          "n": 363,
+          "p25": 0.84143,
+          "median": 0.95955,
+          "p75": 1.07731,
+          "medianSmoothed": 0.92803
+        },
+        {
+          "weeks": 68,
+          "n": 407,
+          "p25": 0.82654,
+          "median": 0.92559,
+          "p75": 1.05779,
+          "medianSmoothed": 0.92803
+        },
+        {
+          "weeks": 72,
+          "n": 306,
+          "p25": 0.80085,
+          "median": 0.91513,
+          "p75": 1.0279,
+          "medianSmoothed": 0.92803
+        },
+        {
+          "weeks": 76,
+          "n": 397,
+          "p25": 0.80908,
+          "median": 0.91585,
+          "p75": 1.04818,
+          "medianSmoothed": 0.92803
+        },
+        {
+          "weeks": 80,
+          "n": 319,
+          "p25": 0.81254,
+          "median": 0.92406,
+          "p75": 1.05351,
+          "medianSmoothed": 0.92803
+        },
+        {
+          "weeks": 84,
+          "n": 259,
+          "p25": 0.83857,
+          "median": 0.93198,
+          "p75": 1.0527,
+          "medianSmoothed": 0.93198
+        },
+        {
+          "weeks": 88,
+          "n": 236,
+          "p25": 0.84156,
+          "median": 0.95756,
+          "p75": 1.09264,
+          "medianSmoothed": 0.95756
+        },
+        {
+          "weeks": 92,
+          "n": 229,
+          "p25": 0.85438,
+          "median": 0.97173,
+          "p75": 1.10031,
+          "medianSmoothed": 0.96662
+        },
+        {
+          "weeks": 96,
+          "n": 210,
+          "p25": 0.8334,
+          "median": 0.96151,
+          "p75": 1.08061,
+          "medianSmoothed": 0.96662
+        },
+        {
+          "weeks": 100,
+          "n": 202,
+          "p25": 0.83775,
+          "median": 0.9668,
+          "p75": 1.09434,
+          "medianSmoothed": 0.9668
+        }
+      ]
+    },
+    "V": {
+      "minKg": 30.0,
+      "maxKg": 40.0,
+      "points": [
+        {
+          "weeks": 12,
+          "n": 764,
+          "p25": 0.21819,
+          "median": 0.26802,
+          "p75": 0.31075,
+          "medianSmoothed": 0.26802
+        },
+        {
+          "weeks": 13,
+          "n": 775,
+          "p25": 0.24018,
+          "median": 0.29216,
+          "p75": 0.3459,
+          "medianSmoothed": 0.29216
+        },
+        {
+          "weeks": 14,
+          "n": 806,
+          "p25": 0.27357,
+          "median": 0.32934,
+          "p75": 0.38512,
+          "medianSmoothed": 0.32934
+        },
+        {
+          "weeks": 15,
+          "n": 695,
+          "p25": 0.29482,
+          "median": 0.35191,
+          "p75": 0.41922,
+          "medianSmoothed": 0.35191
+        },
+        {
+          "weeks": 16,
+          "n": 788,
+          "p25": 0.32536,
+          "median": 0.38646,
+          "p75": 0.44753,
+          "medianSmoothed": 0.38646
+        },
+        {
+          "weeks": 17,
+          "n": 832,
+          "p25": 0.3422,
+          "median": 0.40571,
+          "p75": 0.47807,
+          "medianSmoothed": 0.40571
+        },
+        {
+          "weeks": 18,
+          "n": 649,
+          "p25": 0.36919,
+          "median": 0.44568,
+          "p75": 0.5122,
+          "medianSmoothed": 0.44568
+        },
+        {
+          "weeks": 19,
+          "n": 497,
+          "p25": 0.39176,
+          "median": 0.47145,
+          "p75": 0.5551,
+          "medianSmoothed": 0.47145
+        },
+        {
+          "weeks": 20,
+          "n": 392,
+          "p25": 0.40888,
+          "median": 0.48606,
+          "p75": 0.5634,
+          "medianSmoothed": 0.48606
+        },
+        {
+          "weeks": 21,
+          "n": 381,
+          "p25": 0.43559,
+          "median": 0.51792,
+          "p75": 0.6215,
+          "medianSmoothed": 0.51792
+        },
+        {
+          "weeks": 22,
+          "n": 241,
+          "p25": 0.46481,
+          "median": 0.53384,
+          "p75": 0.61884,
+          "medianSmoothed": 0.53384
+        },
+        {
+          "weeks": 52,
+          "n": 295,
+          "p25": 0.73041,
+          "median": 0.86743,
+          "p75": 0.99599,
+          "medianSmoothed": 0.85934
+        },
+        {
+          "weeks": 60,
+          "n": 200,
+          "p25": 0.75131,
+          "median": 0.85126,
+          "p75": 0.99102,
+          "medianSmoothed": 0.85934
+        },
+        {
+          "weeks": 64,
+          "n": 238,
+          "p25": 0.74036,
+          "median": 0.88114,
+          "p75": 1.02919,
+          "medianSmoothed": 0.88114
+        },
+        {
+          "weeks": 68,
+          "n": 256,
+          "p25": 0.79648,
+          "median": 0.90851,
+          "p75": 1.01264,
+          "medianSmoothed": 0.89772
+        },
+        {
+          "weeks": 72,
+          "n": 207,
+          "p25": 0.77156,
+          "median": 0.90204,
+          "p75": 1.02256,
+          "medianSmoothed": 0.89772
+        },
+        {
+          "weeks": 76,
+          "n": 262,
+          "p25": 0.79031,
+          "median": 0.88525,
+          "p75": 1.01658,
+          "medianSmoothed": 0.89772
+        },
+        {
+          "weeks": 80,
+          "n": 210,
+          "p25": 0.76328,
+          "median": 0.89507,
+          "p75": 0.99482,
+          "medianSmoothed": 0.89772
+        },
+        {
+          "weeks": 92,
+          "n": 213,
+          "p25": 0.80158,
+          "median": 0.92962,
+          "p75": 1.0438,
+          "medianSmoothed": 0.92962
+        }
+      ]
+    }
+  }
+}
