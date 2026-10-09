@@ -239,9 +239,26 @@ def main() -> None:
         visits = int(len(sub))
         obs = [p["weeks"] for p in pts if p["source"] == "observed"]
         interp = [p["weeks"] for p in pts if p["source"] == "interpolated"]
-        categories_out[name] = {"minKg": lo, "maxKg": hi, "policy": "C",
-                                "dogs": dogs, "visits": visits, "points": pts}
-        per_band.append((name, lo, hi, dogs, visits, obs, interp, pts))
+
+        # Normalization (approved 2026-10-10): plateau = median ratio across the
+        # observed 96-104 week visits; normalized = raw / plateau, so the curve
+        # predicts weight at ~2 years rather than breed-average adult weight.
+        plateau_r = sub.loc[(sub["WEEKS"] >= 96) & (sub["WEEKS"] < 104), "RATIO"]
+        plateau_n = int(plateau_r.shape[0])
+        plateau = float(np.median(plateau_r)) if plateau_n else 1.0
+        for p in pts:
+            p["normP25"] = round(p["p25"] / plateau, 5)
+            p["normMedian"] = round(p["median"] / plateau, 5)
+            p["normP75"] = round(p["p75"] / plateau, 5)
+            p["normMedianSmoothed"] = round(p["medianSmoothed"] / plateau, 5)
+
+        categories_out[name] = {
+            "minKg": lo, "maxKg": hi, "policy": "C",
+            "dogs": dogs, "visits": visits,
+            "plateau": round(plateau, 5), "plateauN": plateau_n,
+            "points": pts}
+        per_band.append((name, lo, hi, dogs, visits, obs, interp, pts,
+                         plateau, plateau_n))
 
     total_dogs = int(gc_used["PET_ID"].nunique())
     total_visits = int(len(gc_used))
@@ -271,6 +288,12 @@ def main() -> None:
                         "interpolated (isotonic), not observed"),
             "minBinN": MIN_N,
             "smoothing": "monotone isotonic regression on median, capped at 1.0",
+            "normalization": ("per band, plateau = median ratio across observed "
+                              "96-104 week visits; normalized = raw / plateau. "
+                              "Adult weight means the typical weight of healthy-"
+                              "weight dogs at 2 years; breed averages that include "
+                              "older, heavier dogs run higher."),
+            "predict": "adult = weight / normMedianSmoothed(age); range weight/normP75..weight/normP25",
             "referenceWeeks": REF_WEEKS,
         },
         "totals": {"dogs": total_dogs, "visits": total_visits},
@@ -278,11 +301,14 @@ def main() -> None:
     }
     OUT_JSON.write_text(json.dumps(out, indent=2) + "\n", encoding="utf-8")
 
-    # ---- summary markdown ----
-    def pct_at(pts, wk):
+    # ---- helpers on normalized curve ----
+    def interp_field(pts, field, wk):
         xs = [p["weeks"] for p in pts]
-        ys = [p["medianSmoothed"] for p in pts]
-        return float(np.interp(wk, xs, ys)) * 100
+        ys = [p[field] for p in pts]
+        return float(np.interp(wk, xs, ys))
+
+    def pct_at(pts, wk):  # normalized % of adult (2-year) weight
+        return interp_field(pts, "normMedianSmoothed", wk) * 100
 
     sl = ["# Puppy growth-ratio table - build summary\n",
           f"Generated: {dt.date.today().isoformat()}  ",
@@ -297,42 +323,112 @@ def main() -> None:
           "2-3 years, with no recorded Thin/Heavy visit at any age (Policy C). "
           "The ~28-52 week adolescent range is coarsely re-binned (8- or 12-week) "
           "and kept as observed where n>=200; remaining reference ages are "
-          "interpolated on the monotone isotonic curve.\n",
+          "interpolated on the monotone isotonic curve. Curves are normalized so "
+          "100% = the typical weight of healthy-weight dogs at 2 years (plateau = "
+          "median ratio across observed 96-104 week visits).\n",
           f"- Raw rows read: **{total_raw:,}**" if total_raw else "- (loaded from cache)",
           f"- Total unique dogs: **{total_dogs:,}**",
           f"- Total visits: **{total_visits:,}**\n",
           "## Per size category\n",
-          "| Category | Adult weight (kg) | Dogs | Visits | Observed weeks | Interpolated ref weeks |",
-          "|---|---|---|---|---|---|"]
-    for name, lo, hi, dogs, visits, obs, interp, pts in per_band:
+          "| Category | Adult weight (kg) | Dogs | Visits | Plateau (n) | Observed weeks | Interpolated ref weeks |",
+          "|---|---|---|---|---|---|---|"]
+    for name, lo, hi, dogs, visits, obs, interp, pts, plateau, pn in per_band:
         band = f"<{hi}" if lo == 0 else f"{lo}-<{hi}"
         obs_str = ", ".join(str(w) for w in obs)
-        sl.append(f"| {name} | {band} | {dogs:,} | {visits:,} | {obs_str} | "
+        sl.append(f"| {name} | {band} | {dogs:,} | {visits:,} | {plateau:.3f} "
+                  f"(n={pn:,}) | {obs_str} | "
                   f"{', '.join(str(w) for w in interp) or 'none'} |")
-    sl.append("\n## % of adult weight by age (medianSmoothed x 100)\n")
+    sl.append("\n## % of adult weight (at 2 years) by age\n")
+    sl.append("Normalized medianSmoothed x 100. * = interpolated age.\n")
     sl.append("| Weeks | " + " | ".join(CAT_NAMES) + " |")
     sl.append("|---|" + "---|" * len(CAT_NAMES))
     for wk in REF_WEEKS:
-        row = [str(wk)]
-        for name, *_rest, pts in per_band:
+        star = "*" if wk in (32, 40, 78) else ""
+        row = [f"{wk}{star}"]
+        for *_rest, pts, _p, _n in per_band:
             row.append(f"{pct_at(pts, wk):.1f}%")
         sl.append("| " + " | ".join(row) + " |")
+
+    # rising check: still gaining >3 points of adult weight between 52 and 100 wk
+    sl.append("\n## Still rising 52 -> 100 weeks (normalized)\n")
+    sl.append("| Band | 52wk % | 100wk % | rise (pts) | flag |")
+    sl.append("|---|---|---|---|---|")
+    for name, *_r, pts, _p, _n in per_band:
+        r52 = pct_at(pts, 52)
+        r100 = pct_at(pts, 100)
+        rise = r100 - r52
+        sl.append(f"| {name} | {r52:.1f}% | {r100:.1f}% | {rise:+.1f} | "
+                  f"{'RISING >3pts' if rise > 3 else 'ok'} |")
+
+    # worked examples on the normalized curve
+    def predict(cat, wk, weight_kg):
+        pts = categories_out[cat]["points"]
+        nm = interp_field(pts, "normMedianSmoothed", wk)
+        p25 = interp_field(pts, "normP25", wk)
+        p75 = interp_field(pts, "normP75", wk)
+        return (weight_kg / nm, weight_kg / p75, weight_kg / p25)
+
+    def choose_not_sure(wk, weight_kg):
+        ests = {}
+        for name, lo, hi, *_x in per_band:
+            adult, _l, _h = predict(name, wk, weight_kg)
+            ests[name] = adult
+        qualifying = [n for (n, lo, hi, *_x) in per_band
+                      if (categories_out[n]["minKg"] <= ests[n]
+                          < categories_out[n]["maxKg"])]
+        if len(qualifying) == 1:
+            return qualifying[0], ests
+        if len(qualifying) > 1:
+            def mid_dist(n):
+                lo = categories_out[n]["minKg"]; hi = categories_out[n]["maxKg"]
+                return abs(ests[n] - (lo + hi) / 2)
+            return min(qualifying, key=mid_dist), ests
+        # none qualify: nearest band edge
+        def edge_dist(n):
+            lo = categories_out[n]["minKg"]; hi = categories_out[n]["maxKg"]
+            return min(abs(ests[n] - lo), abs(ests[n] - hi))
+        return min(CAT_NAMES, key=edge_dist), ests
+
+    kg = 0.45359237
+    ex1_kg = 20 * kg
+    ex1_band, ex1_ests = choose_not_sure(16, ex1_kg)
+    a1, lo1, hi1 = predict(ex1_band, 16, ex1_kg)
+    ex2_kg = 9.0  # 24 wk, 9 kg, size Medium = category III
+    a2, lo2, hi2 = predict("III", 24, ex2_kg)
+
+    sl.append("\n## Worked examples (normalized curve)\n")
+    sl.append(f"- Example 1: 16 wk, 20 lb ({ex1_kg:.3f} kg), size Not sure -> "
+              f"band {ex1_band}; adult ~ {a1:.2f} kg ({a1 / kg:.1f} lb); "
+              f"range {lo1 / kg:.1f}-{hi1 / kg:.1f} lb. "
+              f"Per-band estimates (kg): "
+              + ", ".join(f"{n}={ex1_ests[n]:.2f}" for n in CAT_NAMES) + ".")
+    sl.append(f"- Example 2: 24 wk, 9 kg, size Medium (cat III) -> "
+              f"adult ~ {a2:.2f} kg ({a2 / kg:.1f} lb); "
+              f"range {lo2:.2f}-{hi2:.2f} kg ({lo2 / kg:.1f}-{hi2 / kg:.1f} lb).")
     sl.append("")
     OUT_SUMMARY.write_text("\n".join(sl) + "\n", encoding="utf-8")
 
     # ---- console ----
-    print("\n==== GROWTH TABLE SUMMARY (Policy C everywhere) ====")
+    print("\n==== GROWTH TABLE SUMMARY (Policy C, normalized) ====")
     print(f"Total dogs / visits: {total_dogs:,} / {total_visits:,}")
-    print("Band  kg          Dogs      Visits    Obs bins  Interp ref weeks")
-    for name, lo, hi, dogs, visits, obs, interp, pts in per_band:
+    print("Band  kg          Dogs      Visits    Plateau(n)      ObsBins")
+    for name, lo, hi, dogs, visits, obs, interp, pts, plateau, pn in per_band:
         band = f"<{hi}" if lo == 0 else f"{lo}-<{hi}"
-        print(f"  {name:<4} {band:<11} {dogs:<9,} {visits:<9,} {len(obs):<9} "
-              f"{interp}")
-    print("\n% of adult weight by age:")
+        print(f"  {name:<4} {band:<11} {dogs:<9,} {visits:<9,} "
+              f"{plateau:.3f}(n={pn:,})".ljust(16) + f"  {len(obs)}")
+    print("\n% of adult weight (at 2 years) by age:")
     print("wk   " + "  ".join(f"{n:>6}" for n in CAT_NAMES))
     for wk in REF_WEEKS:
         print(f"{wk:<4} " + "  ".join(f"{pct_at(pts, wk):>5.1f}%"
-              for *_r, pts in per_band))
+              for *_r, pts, _p, _n in per_band))
+    print("\nRising 52->100 wk (pts):")
+    for name, *_r, pts, _p, _n in per_band:
+        rise = pct_at(pts, 100) - pct_at(pts, 52)
+        print(f"  {name}: {rise:+.1f}  {'RISING>3' if rise > 3 else 'ok'}")
+    print(f"\nEx1 16wk/20lb/Not sure -> band {ex1_band}: {a1 / kg:.1f} lb "
+          f"({lo1 / kg:.1f}-{hi1 / kg:.1f})")
+    print(f"Ex2 24wk/9kg/Medium(III) -> {a2:.2f} kg ({a2 / kg:.1f} lb), "
+          f"{lo2:.2f}-{hi2:.2f} kg")
     print(f"\nWrote {OUT_JSON}")
     print(f"Wrote {OUT_SUMMARY}")
 
