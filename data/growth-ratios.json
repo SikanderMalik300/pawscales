@@ -5,824 +5,1814 @@
     "dataset": "https://datacat.liverpool.ac.uk/377/",
     "datasetDoi": "https://doi.org/10.17638/datacat.liverpool.ac.uk/377",
     "license": "CC BY 4.0",
-    "correction": "PLoS One 2024;19(11):e0314711 corrects only the Data Availability statement; no change to data, categories or method.",
+    "correction": "PLoS One 2024;19(11):e0314711 corrects only the Data Availability statement; method unchanged.",
     "accessed": "2026-10-10"
   },
   "generatedAt": "2026-10-10",
-  "filters": {
-    "visitType": "PREVENTIVE_CARE_VISIT == 'Y' OR HEALTHY_PET_DIAGNOSIS == 'Y'",
-    "ageYears": [
-      0.2,
-      2.25
-    ],
-    "bodyCondition": "Normal (recorded, else predicted)",
-    "neuterStatus": "not yet neutered at the visit",
-    "maxAdultKg": 40,
-    "minBinN": 200,
-    "ageBins": "weekly 12-52 weeks, then 4-weekly to 104 weeks",
+  "method": {
+    "population": "dogs confirmed lean (Normal body condition) at 2-3 years, with no recorded Thin/Heavy visit at any age (Policy C); all their 0.20-2.25y preventive/healthy, not-yet-neutered visits",
     "ratio": "WEIGHT / AV_BREED_WEIGHT",
-    "smoothing": "monotone non-decreasing isotonic regression on median, capped at 1.0"
+    "ageBins": "weekly 12-28 wk; 8- or 12-week bins across the 28-52 wk adolescent gap; 4-weekly 52-104 wk; bins with n<200 interpolated (isotonic), not observed",
+    "minBinN": 200,
+    "smoothing": "monotone isotonic regression on median, capped at 1.0",
+    "referenceWeeks": [
+      12,
+      16,
+      20,
+      24,
+      32,
+      40,
+      52,
+      78
+    ]
   },
   "totals": {
-    "dogs": 43299,
-    "visits": 65356
+    "dogs": 60951,
+    "visits": 199355
   },
   "categories": {
     "I": {
       "minKg": 0.0,
       "maxKg": 6.5,
+      "policy": "C",
+      "dogs": 23844,
+      "visits": 83146,
       "points": [
         {
           "weeks": 12,
-          "n": 1255,
-          "p25": 0.29475,
-          "median": 0.36788,
-          "p75": 0.45837,
-          "medianSmoothed": 0.36788
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 3590,
+          "p25": 0.28415,
+          "median": 0.3445,
+          "p75": 0.4089,
+          "medianSmoothed": 0.3445
         },
         {
           "weeks": 13,
-          "n": 1164,
-          "p25": 0.31539,
-          "median": 0.38555,
-          "p75": 0.48637,
-          "medianSmoothed": 0.38555
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 4122,
+          "p25": 0.3048,
+          "median": 0.36788,
+          "p75": 0.44605,
+          "medianSmoothed": 0.36788
         },
         {
           "weeks": 14,
-          "n": 1199,
-          "p25": 0.33923,
-          "median": 0.42676,
-          "p75": 0.53706,
-          "medianSmoothed": 0.42676
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 3780,
+          "p25": 0.32748,
+          "median": 0.39724,
+          "p75": 0.47483,
+          "medianSmoothed": 0.39724
         },
         {
           "weeks": 15,
-          "n": 1143,
-          "p25": 0.35284,
-          "median": 0.44605,
-          "p75": 0.55746,
-          "medianSmoothed": 0.44605
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 3722,
+          "p25": 0.35919,
+          "median": 0.42565,
+          "p75": 0.50806,
+          "medianSmoothed": 0.42565
         },
         {
           "weeks": 16,
-          "n": 1309,
-          "p25": 0.36788,
-          "median": 0.47088,
-          "p75": 0.60034,
-          "medianSmoothed": 0.47088
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 4121,
+          "p25": 0.37657,
+          "median": 0.44882,
+          "p75": 0.53706,
+          "medianSmoothed": 0.44882
         },
         {
           "weeks": 17,
-          "n": 1534,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 4510,
           "p25": 0.39634,
-          "median": 0.51159,
-          "p75": 0.64249,
-          "medianSmoothed": 0.51159
+          "median": 0.47483,
+          "p75": 0.56761,
+          "medianSmoothed": 0.47483
         },
         {
           "weeks": 18,
-          "n": 1222,
-          "p25": 0.40752,
-          "median": 0.51388,
-          "p75": 0.64389,
-          "medianSmoothed": 0.51388
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 3662,
+          "p25": 0.41138,
+          "median": 0.49549,
+          "p75": 0.58865,
+          "medianSmoothed": 0.49549
         },
         {
           "weeks": 19,
-          "n": 1083,
-          "p25": 0.43376,
-          "median": 0.53966,
-          "p75": 0.68912,
-          "medianSmoothed": 0.53966
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 3232,
+          "p25": 0.43343,
+          "median": 0.52035,
+          "p75": 0.618,
+          "medianSmoothed": 0.52035
         },
         {
           "weeks": 20,
-          "n": 935,
-          "p25": 0.44593,
-          "median": 0.55241,
-          "p75": 0.71271,
-          "medianSmoothed": 0.55241
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 2716,
+          "p25": 0.44882,
+          "median": 0.5398,
+          "p75": 0.64249,
+          "medianSmoothed": 0.5398
         },
         {
           "weeks": 21,
-          "n": 937,
-          "p25": 0.47091,
-          "median": 0.58769,
-          "p75": 0.7204,
-          "medianSmoothed": 0.58769
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 2756,
+          "p25": 0.47088,
+          "median": 0.56544,
+          "p75": 0.67497,
+          "medianSmoothed": 0.56544
         },
         {
           "weeks": 22,
-          "n": 641,
-          "p25": 0.44593,
-          "median": 0.59122,
-          "p75": 0.74626,
-          "medianSmoothed": 0.59122
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 2081,
+          "p25": 0.47603,
+          "median": 0.57388,
+          "p75": 0.69165,
+          "medianSmoothed": 0.57388
         },
         {
           "weeks": 23,
-          "n": 564,
-          "p25": 0.46261,
-          "median": 0.59741,
-          "p75": 0.75631,
-          "medianSmoothed": 0.59603
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1629,
+          "p25": 0.48839,
+          "median": 0.5878,
+          "p75": 0.69781,
+          "medianSmoothed": 0.5878
         },
         {
           "weeks": 24,
-          "n": 574,
-          "p25": 0.46261,
-          "median": 0.59465,
-          "p75": 0.76223,
-          "medianSmoothed": 0.59603
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1623,
+          "p25": 0.49734,
+          "median": 0.60813,
+          "p75": 0.73109,
+          "medianSmoothed": 0.60813
         },
         {
           "weeks": 25,
-          "n": 485,
-          "p25": 0.48839,
-          "median": 0.63179,
-          "p75": 0.80941,
-          "medianSmoothed": 0.63179
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1355,
+          "p25": 0.52035,
+          "median": 0.62188,
+          "p75": 0.74329,
+          "medianSmoothed": 0.62188
         },
         {
           "weeks": 26,
-          "n": 436,
-          "p25": 0.49549,
-          "median": 0.6681,
-          "p75": 0.80816,
-          "medianSmoothed": 0.63926
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1297,
+          "p25": 0.53994,
+          "median": 0.64436,
+          "p75": 0.77502,
+          "medianSmoothed": 0.64436
         },
         {
           "weeks": 27,
-          "n": 321,
-          "p25": 0.47535,
-          "median": 0.61042,
-          "p75": 0.81406,
-          "medianSmoothed": 0.63926
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 879,
+          "p25": 0.54643,
+          "median": 0.65578,
+          "p75": 0.78655,
+          "medianSmoothed": 0.65578
         },
         {
           "weeks": 28,
-          "n": 236,
-          "p25": 0.49934,
-          "median": 0.66004,
-          "p75": 0.81151,
-          "medianSmoothed": 0.66004
+          "binWeeks": 8,
+          "source": "observed",
+          "n": 4648,
+          "p25": 0.57819,
+          "median": 0.7009,
+          "p75": 0.84796,
+          "medianSmoothed": 0.7009
         },
         {
-          "weeks": 30,
-          "n": 270,
-          "p25": 0.52,
-          "median": 0.66714,
-          "p75": 0.8751,
-          "medianSmoothed": 0.66714
+          "weeks": 32,
+          "binWeeks": null,
+          "source": "interpolated",
+          "n": null,
+          "p25": 0.60183,
+          "median": 0.73243,
+          "p75": 0.88584,
+          "medianSmoothed": 0.73243
         },
         {
-          "weeks": 34,
-          "n": 235,
-          "p25": 0.56298,
-          "median": 0.72101,
-          "p75": 0.95099,
-          "medianSmoothed": 0.72101
+          "weeks": 36,
+          "binWeeks": 8,
+          "source": "observed",
+          "n": 3597,
+          "p25": 0.62547,
+          "median": 0.76396,
+          "p75": 0.92372,
+          "medianSmoothed": 0.76396
+        },
+        {
+          "weeks": 40,
+          "binWeeks": null,
+          "source": "interpolated",
+          "n": null,
+          "p25": 0.63398,
+          "median": 0.77391,
+          "p75": 0.93198,
+          "medianSmoothed": 0.77391
+        },
+        {
+          "weeks": 44,
+          "binWeeks": 8,
+          "source": "observed",
+          "n": 2791,
+          "p25": 0.64249,
+          "median": 0.78385,
+          "p75": 0.94024,
+          "medianSmoothed": 0.78385
         },
         {
           "weeks": 52,
-          "n": 816,
-          "p25": 0.63716,
-          "median": 0.81077,
-          "p75": 1.03268,
-          "medianSmoothed": 0.791
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 2381,
+          "p25": 0.67846,
+          "median": 0.81406,
+          "p75": 0.97274,
+          "medianSmoothed": 0.81406
         },
         {
           "weeks": 56,
-          "n": 415,
-          "p25": 0.61671,
-          "median": 0.7762,
-          "p75": 1.00146,
-          "medianSmoothed": 0.791
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 1519,
+          "p25": 0.67497,
+          "median": 0.81671,
+          "p75": 0.97034,
+          "medianSmoothed": 0.81671
         },
         {
           "weeks": 60,
-          "n": 484,
-          "p25": 0.60813,
-          "median": 0.78604,
-          "p75": 0.98312,
-          "medianSmoothed": 0.791
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 1836,
+          "p25": 0.67689,
+          "median": 0.82527,
+          "p75": 0.99126,
+          "medianSmoothed": 0.82527
         },
         {
           "weeks": 64,
-          "n": 511,
-          "p25": 0.61671,
-          "median": 0.80049,
-          "p75": 1.04621,
-          "medianSmoothed": 0.80049
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 2296,
+          "p25": 0.6992,
+          "median": 0.8447,
+          "p75": 1.00065,
+          "medianSmoothed": 0.8414
         },
         {
           "weeks": 68,
-          "n": 603,
-          "p25": 0.64436,
-          "median": 0.80963,
-          "p75": 1.05943,
-          "medianSmoothed": 0.80269
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 2733,
+          "p25": 0.69377,
+          "median": 0.84115,
+          "p75": 0.99335,
+          "medianSmoothed": 0.8414
         },
         {
           "weeks": 72,
-          "n": 555,
-          "p25": 0.62241,
-          "median": 0.79574,
-          "p75": 1.02561,
-          "medianSmoothed": 0.80269
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 2517,
+          "p25": 0.68968,
+          "median": 0.83835,
+          "p75": 1.00065,
+          "medianSmoothed": 0.8414
         },
         {
           "weeks": 76,
-          "n": 668,
-          "p25": 0.66744,
-          "median": 0.84816,
-          "p75": 1.06599,
-          "medianSmoothed": 0.82824
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 2803,
+          "p25": 0.70934,
+          "median": 0.85353,
+          "p75": 1.01541,
+          "medianSmoothed": 0.85306
+        },
+        {
+          "weeks": 78,
+          "binWeeks": null,
+          "source": "interpolated",
+          "n": null,
+          "p25": 0.71152,
+          "median": 0.85306,
+          "p75": 1.01541,
+          "medianSmoothed": 0.85306
         },
         {
           "weeks": 80,
-          "n": 506,
-          "p25": 0.61671,
-          "median": 0.81317,
-          "p75": 1.0555,
-          "medianSmoothed": 0.82824
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 2056,
+          "p25": 0.71371,
+          "median": 0.8526,
+          "p75": 1.01541,
+          "medianSmoothed": 0.85306
         },
         {
           "weeks": 84,
-          "n": 425,
-          "p25": 0.63179,
-          "median": 0.83513,
-          "p75": 1.06657,
-          "medianSmoothed": 0.82824
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 1835,
+          "p25": 0.73577,
+          "median": 0.86091,
+          "p75": 1.03001,
+          "medianSmoothed": 0.86091
         },
         {
           "weeks": 88,
-          "n": 430,
-          "p25": 0.62975,
-          "median": 0.82238,
-          "p75": 1.08394,
-          "medianSmoothed": 0.82824
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 1832,
+          "p25": 0.73474,
+          "median": 0.87154,
+          "p75": 1.02836,
+          "medianSmoothed": 0.87154
         },
         {
           "weeks": 92,
-          "n": 417,
-          "p25": 0.64249,
-          "median": 0.82238,
-          "p75": 1.08061,
-          "medianSmoothed": 0.82824
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 1794,
+          "p25": 0.73229,
+          "median": 0.88669,
+          "p75": 1.04379,
+          "medianSmoothed": 0.88013
         },
         {
           "weeks": 96,
-          "n": 352,
-          "p25": 0.67807,
-          "median": 0.84816,
-          "p75": 1.06731,
-          "medianSmoothed": 0.84816
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 1692,
+          "p25": 0.72478,
+          "median": 0.87981,
+          "p75": 1.04549,
+          "medianSmoothed": 0.88013
         },
         {
           "weeks": 100,
-          "n": 358,
-          "p25": 0.65396,
-          "median": 0.85635,
-          "p75": 1.083,
-          "medianSmoothed": 0.85635
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 1741,
+          "p25": 0.74351,
+          "median": 0.8739,
+          "p75": 1.05207,
+          "medianSmoothed": 0.88013
         }
       ]
     },
     "II": {
       "minKg": 6.5,
       "maxKg": 9.0,
+      "policy": "C",
+      "dogs": 5702,
+      "visits": 17438,
       "points": [
         {
           "weeks": 12,
-          "n": 234,
-          "p25": 0.28251,
-          "median": 0.34348,
-          "p75": 0.41766,
-          "medianSmoothed": 0.34348
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 793,
+          "p25": 0.29465,
+          "median": 0.35679,
+          "p75": 0.41605,
+          "medianSmoothed": 0.35679
         },
         {
           "weeks": 13,
-          "n": 215,
-          "p25": 0.3368,
-          "median": 0.40422,
-          "p75": 0.47558,
-          "medianSmoothed": 0.40422
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 895,
+          "p25": 0.31783,
+          "median": 0.37969,
+          "p75": 0.43937,
+          "medianSmoothed": 0.37969
         },
         {
           "weeks": 14,
-          "n": 204,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 830,
           "p25": 0.34675,
-          "median": 0.4231,
-          "p75": 0.50681,
-          "medianSmoothed": 0.4231
+          "median": 0.41146,
+          "p75": 0.47962,
+          "medianSmoothed": 0.41146
         },
         {
           "weeks": 15,
-          "n": 219,
-          "p25": 0.37088,
-          "median": 0.45643,
-          "p75": 0.56501,
-          "medianSmoothed": 0.45643
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 831,
+          "p25": 0.37672,
+          "median": 0.44731,
+          "p75": 0.51895,
+          "medianSmoothed": 0.44731
         },
         {
           "weeks": 16,
-          "n": 233,
-          "p25": 0.41772,
-          "median": 0.49694,
-          "p75": 0.58863,
-          "medianSmoothed": 0.49694
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 865,
+          "p25": 0.40446,
+          "median": 0.47093,
+          "p75": 0.54784,
+          "medianSmoothed": 0.47093
         },
         {
           "weeks": 17,
-          "n": 242,
-          "p25": 0.43353,
-          "median": 0.52069,
-          "p75": 0.62404,
-          "medianSmoothed": 0.52069
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 961,
+          "p25": 0.42156,
+          "median": 0.49121,
+          "p75": 0.57098,
+          "medianSmoothed": 0.49121
+        },
+        {
+          "weeks": 18,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 792,
+          "p25": 0.45563,
+          "median": 0.52388,
+          "p75": 0.60628,
+          "medianSmoothed": 0.52388
+        },
+        {
+          "weeks": 19,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 633,
+          "p25": 0.47093,
+          "median": 0.55334,
+          "p75": 0.63466,
+          "medianSmoothed": 0.55334
+        },
+        {
+          "weeks": 20,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 514,
+          "p25": 0.49442,
+          "median": 0.56501,
+          "p75": 0.65248,
+          "medianSmoothed": 0.56501
+        },
+        {
+          "weeks": 21,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 564,
+          "p25": 0.50623,
+          "median": 0.58863,
+          "p75": 0.68593,
+          "medianSmoothed": 0.58863
+        },
+        {
+          "weeks": 22,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 379,
+          "p25": 0.53159,
+          "median": 0.62393,
+          "p75": 0.72803,
+          "medianSmoothed": 0.61802
+        },
+        {
+          "weeks": 23,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 279,
+          "p25": 0.53786,
+          "median": 0.61212,
+          "p75": 0.71814,
+          "medianSmoothed": 0.61802
+        },
+        {
+          "weeks": 24,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 293,
+          "p25": 0.55872,
+          "median": 0.63466,
+          "p75": 0.75344,
+          "medianSmoothed": 0.63466
+        },
+        {
+          "weeks": 25,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 251,
+          "p25": 0.5696,
+          "median": 0.65251,
+          "p75": 0.75401,
+          "medianSmoothed": 0.65251
+        },
+        {
+          "weeks": 26,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 229,
+          "p25": 0.58863,
+          "median": 0.69911,
+          "p75": 0.79745,
+          "medianSmoothed": 0.69911
+        },
+        {
+          "weeks": 28,
+          "binWeeks": 8,
+          "source": "observed",
+          "n": 885,
+          "p25": 0.64755,
+          "median": 0.75247,
+          "p75": 0.8653,
+          "medianSmoothed": 0.75247
+        },
+        {
+          "weeks": 32,
+          "binWeeks": null,
+          "source": "interpolated",
+          "n": null,
+          "p25": 0.67104,
+          "median": 0.77651,
+          "p75": 0.89104,
+          "medianSmoothed": 0.77651
+        },
+        {
+          "weeks": 36,
+          "binWeeks": 8,
+          "source": "observed",
+          "n": 677,
+          "p25": 0.69452,
+          "median": 0.80055,
+          "p75": 0.91677,
+          "medianSmoothed": 0.80055
+        },
+        {
+          "weeks": 40,
+          "binWeeks": null,
+          "source": "interpolated",
+          "n": null,
+          "p25": 0.70758,
+          "median": 0.81932,
+          "p75": 0.93847,
+          "medianSmoothed": 0.81932
+        },
+        {
+          "weeks": 44,
+          "binWeeks": 8,
+          "source": "observed",
+          "n": 584,
+          "p25": 0.72064,
+          "median": 0.83808,
+          "p75": 0.96018,
+          "medianSmoothed": 0.83808
+        },
+        {
+          "weeks": 52,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 544,
+          "p25": 0.72356,
+          "median": 0.84357,
+          "p75": 0.97644,
+          "medianSmoothed": 0.84357
+        },
+        {
+          "weeks": 56,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 321,
+          "p25": 0.73389,
+          "median": 0.86102,
+          "p75": 0.98229,
+          "medianSmoothed": 0.85163
+        },
+        {
+          "weeks": 60,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 382,
+          "p25": 0.74338,
+          "median": 0.84765,
+          "p75": 0.97644,
+          "medianSmoothed": 0.85163
+        },
+        {
+          "weeks": 64,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 490,
+          "p25": 0.74312,
+          "median": 0.84621,
+          "p75": 0.98229,
+          "medianSmoothed": 0.85163
+        },
+        {
+          "weeks": 68,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 633,
+          "p25": 0.76268,
+          "median": 0.86785,
+          "p75": 1.00649,
+          "medianSmoothed": 0.86247
+        },
+        {
+          "weeks": 72,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 540,
+          "p25": 0.73962,
+          "median": 0.85709,
+          "p75": 0.9725,
+          "medianSmoothed": 0.86247
+        },
+        {
+          "weeks": 76,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 711,
+          "p25": 0.75811,
+          "median": 0.86675,
+          "p75": 1.00065,
+          "medianSmoothed": 0.86675
+        },
+        {
+          "weeks": 78,
+          "binWeeks": null,
+          "source": "interpolated",
+          "n": null,
+          "p25": 0.76154,
+          "median": 0.86895,
+          "p75": 1.00052,
+          "medianSmoothed": 0.86895
+        },
+        {
+          "weeks": 80,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 470,
+          "p25": 0.76498,
+          "median": 0.87114,
+          "p75": 1.00039,
+          "medianSmoothed": 0.87114
+        },
+        {
+          "weeks": 84,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 403,
+          "p25": 0.79471,
+          "median": 0.89476,
+          "p75": 1.01694,
+          "medianSmoothed": 0.88652
+        },
+        {
+          "weeks": 88,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 403,
+          "p25": 0.78384,
+          "median": 0.88295,
+          "p75": 1.01985,
+          "medianSmoothed": 0.88652
+        },
+        {
+          "weeks": 92,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 395,
+          "p25": 0.79159,
+          "median": 0.895,
+          "p75": 1.0184,
+          "medianSmoothed": 0.88652
+        },
+        {
+          "weeks": 96,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 372,
+          "p25": 0.75939,
+          "median": 0.87336,
+          "p75": 1.00347,
+          "medianSmoothed": 0.88652
+        },
+        {
+          "weeks": 100,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 388,
+          "p25": 0.77835,
+          "median": 0.89809,
+          "p75": 1.00933,
+          "medianSmoothed": 0.89809
         }
       ]
     },
     "III": {
       "minKg": 9.0,
       "maxKg": 15.0,
+      "policy": "C",
+      "dogs": 8726,
+      "visits": 27734,
       "points": [
         {
           "weeks": 12,
-          "n": 371,
-          "p25": 0.24888,
-          "median": 0.31395,
-          "p75": 0.37059,
-          "medianSmoothed": 0.31395
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1279,
+          "p25": 0.24925,
+          "median": 0.29959,
+          "p75": 0.3503,
+          "medianSmoothed": 0.29959
         },
         {
           "weeks": 13,
-          "n": 360,
-          "p25": 0.26343,
-          "median": 0.33654,
-          "p75": 0.40479,
-          "medianSmoothed": 0.33654
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1334,
+          "p25": 0.26738,
+          "median": 0.32155,
+          "p75": 0.37895,
+          "medianSmoothed": 0.32155
         },
         {
           "weeks": 14,
-          "n": 366,
-          "p25": 0.29361,
-          "median": 0.35669,
-          "p75": 0.4369,
-          "medianSmoothed": 0.35669
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1303,
+          "p25": 0.29502,
+          "median": 0.35498,
+          "p75": 0.41484,
+          "medianSmoothed": 0.35498
         },
         {
           "weeks": 15,
-          "n": 352,
-          "p25": 0.32582,
-          "median": 0.40246,
-          "p75": 0.48369,
-          "medianSmoothed": 0.40246
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1260,
+          "p25": 0.32477,
+          "median": 0.38253,
+          "p75": 0.44387,
+          "medianSmoothed": 0.38253
         },
         {
           "weeks": 16,
-          "n": 338,
-          "p25": 0.33726,
-          "median": 0.41484,
-          "p75": 0.50308,
-          "medianSmoothed": 0.41484
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1317,
+          "p25": 0.34573,
+          "median": 0.40417,
+          "p75": 0.47581,
+          "medianSmoothed": 0.40417
         },
         {
           "weeks": 17,
-          "n": 417,
-          "p25": 0.38228,
-          "median": 0.46098,
-          "p75": 0.54374,
-          "medianSmoothed": 0.46098
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1422,
+          "p25": 0.36413,
+          "median": 0.43333,
+          "p75": 0.51245,
+          "medianSmoothed": 0.43333
         },
         {
           "weeks": 18,
-          "n": 350,
-          "p25": 0.39658,
-          "median": 0.47633,
-          "p75": 0.56283,
-          "medianSmoothed": 0.47633
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1177,
+          "p25": 0.40417,
+          "median": 0.47022,
+          "p75": 0.5439,
+          "medianSmoothed": 0.47022
         },
         {
           "weeks": 19,
-          "n": 292,
-          "p25": 0.42047,
-          "median": 0.51877,
-          "p75": 0.62797,
-          "medianSmoothed": 0.51877
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 970,
+          "p25": 0.41499,
+          "median": 0.48551,
+          "p75": 0.56283,
+          "medianSmoothed": 0.48551
         },
         {
           "weeks": 20,
-          "n": 229,
-          "p25": 0.44753,
-          "median": 0.53051,
-          "p75": 0.64961,
-          "medianSmoothed": 0.53051
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 815,
+          "p25": 0.42495,
+          "median": 0.50171,
+          "p75": 0.58409,
+          "medianSmoothed": 0.50171
         },
         {
           "weeks": 21,
-          "n": 232,
-          "p25": 0.44704,
-          "median": 0.55623,
-          "p75": 0.66697,
-          "medianSmoothed": 0.55623
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 832,
+          "p25": 0.45284,
+          "median": 0.53476,
+          "p75": 0.61496,
+          "medianSmoothed": 0.53476
+        },
+        {
+          "weeks": 22,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 549,
+          "p25": 0.466,
+          "median": 0.5452,
+          "p75": 0.64237,
+          "medianSmoothed": 0.5452
+        },
+        {
+          "weeks": 23,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 441,
+          "p25": 0.47534,
+          "median": 0.55994,
+          "p75": 0.64735,
+          "medianSmoothed": 0.55994
+        },
+        {
+          "weeks": 24,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 460,
+          "p25": 0.50796,
+          "median": 0.60316,
+          "p75": 0.69368,
+          "medianSmoothed": 0.60316
+        },
+        {
+          "weeks": 25,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 371,
+          "p25": 0.51939,
+          "median": 0.61175,
+          "p75": 0.71041,
+          "medianSmoothed": 0.61175
+        },
+        {
+          "weeks": 26,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 383,
+          "p25": 0.54033,
+          "median": 0.62797,
+          "p75": 0.72178,
+          "medianSmoothed": 0.62797
+        },
+        {
+          "weeks": 27,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 231,
+          "p25": 0.54033,
+          "median": 0.63618,
+          "p75": 0.73618,
+          "medianSmoothed": 0.63618
+        },
+        {
+          "weeks": 28,
+          "binWeeks": 8,
+          "source": "observed",
+          "n": 1336,
+          "p25": 0.58855,
+          "median": 0.69266,
+          "p75": 0.79991,
+          "medianSmoothed": 0.69266
+        },
+        {
+          "weeks": 32,
+          "binWeeks": null,
+          "source": "interpolated",
+          "n": null,
+          "p25": 0.62045,
+          "median": 0.72767,
+          "p75": 0.833,
+          "medianSmoothed": 0.72767
+        },
+        {
+          "weeks": 36,
+          "binWeeks": 8,
+          "source": "observed",
+          "n": 1196,
+          "p25": 0.65235,
+          "median": 0.76268,
+          "p75": 0.8661,
+          "medianSmoothed": 0.76268
+        },
+        {
+          "weeks": 40,
+          "binWeeks": null,
+          "source": "interpolated",
+          "n": null,
+          "p25": 0.66901,
+          "median": 0.77778,
+          "p75": 0.88245,
+          "medianSmoothed": 0.77778
+        },
+        {
+          "weeks": 44,
+          "binWeeks": 8,
+          "source": "observed",
+          "n": 958,
+          "p25": 0.68566,
+          "median": 0.79289,
+          "p75": 0.8988,
+          "medianSmoothed": 0.79289
+        },
+        {
+          "weeks": 52,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 930,
+          "p25": 0.6929,
+          "median": 0.80242,
+          "p75": 0.90946,
+          "medianSmoothed": 0.8018
+        },
+        {
+          "weeks": 56,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 519,
+          "p25": 0.69618,
+          "median": 0.80118,
+          "p75": 0.8966,
+          "medianSmoothed": 0.8018
+        },
+        {
+          "weeks": 60,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 612,
+          "p25": 0.6929,
+          "median": 0.81524,
+          "p75": 0.92615,
+          "medianSmoothed": 0.81524
+        },
+        {
+          "weeks": 64,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 916,
+          "p25": 0.7244,
+          "median": 0.8275,
+          "p75": 0.94908,
+          "medianSmoothed": 0.8275
+        },
+        {
+          "weeks": 68,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 1052,
+          "p25": 0.72178,
+          "median": 0.83006,
+          "p75": 0.93906,
+          "medianSmoothed": 0.83006
+        },
+        {
+          "weeks": 72,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 841,
+          "p25": 0.72178,
+          "median": 0.83435,
+          "p75": 0.94908,
+          "medianSmoothed": 0.83435
+        },
+        {
+          "weeks": 76,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 1033,
+          "p25": 0.72827,
+          "median": 0.8383,
+          "p75": 0.9455,
+          "medianSmoothed": 0.8383
+        },
+        {
+          "weeks": 78,
+          "binWeeks": null,
+          "source": "interpolated",
+          "n": null,
+          "p25": 0.72935,
+          "median": 0.83991,
+          "p75": 0.95274,
+          "medianSmoothed": 0.83991
+        },
+        {
+          "weeks": 80,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 739,
+          "p25": 0.73044,
+          "median": 0.84152,
+          "p75": 0.95998,
+          "medianSmoothed": 0.84152
+        },
+        {
+          "weeks": 84,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 695,
+          "p25": 0.76268,
+          "median": 0.8661,
+          "p75": 0.96799,
+          "medianSmoothed": 0.86512
+        },
+        {
+          "weeks": 88,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 694,
+          "p25": 0.75417,
+          "median": 0.8661,
+          "p75": 0.98344,
+          "medianSmoothed": 0.86512
+        },
+        {
+          "weeks": 92,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 687,
+          "p25": 0.75669,
+          "median": 0.8707,
+          "p75": 0.97796,
+          "medianSmoothed": 0.86512
+        },
+        {
+          "weeks": 96,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 678,
+          "p25": 0.75102,
+          "median": 0.85757,
+          "p75": 0.98648,
+          "medianSmoothed": 0.86512
+        },
+        {
+          "weeks": 100,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 704,
+          "p25": 0.76506,
+          "median": 0.88389,
+          "p75": 0.99137,
+          "medianSmoothed": 0.88389
         }
       ]
     },
     "IV": {
       "minKg": 15.0,
       "maxKg": 30.0,
+      "policy": "C",
+      "dogs": 9153,
+      "visits": 29566,
       "points": [
         {
           "weeks": 12,
-          "n": 1164,
-          "p25": 0.23173,
-          "median": 0.28432,
-          "p75": 0.33818,
-          "medianSmoothed": 0.28432
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1421,
+          "p25": 0.25157,
+          "median": 0.29613,
+          "p75": 0.34105,
+          "medianSmoothed": 0.29613
         },
         {
           "weeks": 13,
-          "n": 1169,
-          "p25": 0.25275,
-          "median": 0.30743,
-          "p75": 0.36945,
-          "medianSmoothed": 0.30743
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1618,
+          "p25": 0.27459,
+          "median": 0.32225,
+          "p75": 0.37507,
+          "medianSmoothed": 0.32225
         },
         {
           "weeks": 14,
-          "n": 1012,
-          "p25": 0.28938,
-          "median": 0.34364,
-          "p75": 0.40744,
-          "medianSmoothed": 0.34364
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1430,
+          "p25": 0.31239,
+          "median": 0.35923,
+          "p75": 0.41059,
+          "medianSmoothed": 0.35923
         },
         {
           "weeks": 15,
-          "n": 1063,
-          "p25": 0.3091,
-          "median": 0.37489,
-          "p75": 0.44447,
-          "medianSmoothed": 0.37489
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1357,
+          "p25": 0.34034,
+          "median": 0.39159,
+          "p75": 0.45309,
+          "medianSmoothed": 0.39159
         },
         {
           "weeks": 16,
-          "n": 1179,
-          "p25": 0.34124,
-          "median": 0.40283,
-          "p75": 0.47233,
-          "medianSmoothed": 0.40283
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1445,
+          "p25": 0.36996,
+          "median": 0.42433,
+          "p75": 0.48342,
+          "medianSmoothed": 0.42433
         },
         {
           "weeks": 17,
-          "n": 1329,
-          "p25": 0.36173,
-          "median": 0.43,
-          "p75": 0.513,
-          "medianSmoothed": 0.43
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1572,
+          "p25": 0.39483,
+          "median": 0.4547,
+          "p75": 0.51455,
+          "medianSmoothed": 0.4547
         },
         {
           "weeks": 18,
-          "n": 931,
-          "p25": 0.38805,
-          "median": 0.46366,
-          "p75": 0.54792,
-          "medianSmoothed": 0.46366
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1198,
+          "p25": 0.42563,
+          "median": 0.49298,
+          "p75": 0.55685,
+          "medianSmoothed": 0.49298
         },
         {
           "weeks": 19,
-          "n": 750,
-          "p25": 0.41106,
-          "median": 0.49108,
-          "p75": 0.5694,
-          "medianSmoothed": 0.49108
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 998,
+          "p25": 0.45316,
+          "median": 0.51377,
+          "p75": 0.57549,
+          "medianSmoothed": 0.51377
         },
         {
           "weeks": 20,
-          "n": 650,
-          "p25": 0.44216,
-          "median": 0.51752,
-          "p75": 0.60181,
-          "medianSmoothed": 0.51752
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 900,
+          "p25": 0.47574,
+          "median": 0.54424,
+          "p75": 0.6149,
+          "medianSmoothed": 0.54424
         },
         {
           "weeks": 21,
-          "n": 640,
-          "p25": 0.48047,
-          "median": 0.56681,
-          "p75": 0.66096,
-          "medianSmoothed": 0.56228
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 840,
+          "p25": 0.50129,
+          "median": 0.57875,
+          "p75": 0.65468,
+          "medianSmoothed": 0.57875
         },
         {
           "weeks": 22,
-          "n": 430,
-          "p25": 0.48024,
-          "median": 0.55776,
-          "p75": 0.65728,
-          "medianSmoothed": 0.56228
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 579,
+          "p25": 0.52426,
+          "median": 0.59191,
+          "p75": 0.67337,
+          "medianSmoothed": 0.59191
         },
         {
           "weeks": 23,
-          "n": 357,
-          "p25": 0.51941,
-          "median": 0.59386,
-          "p75": 0.68773,
-          "medianSmoothed": 0.59386
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 465,
+          "p25": 0.54252,
+          "median": 0.60628,
+          "p75": 0.68895,
+          "medianSmoothed": 0.60628
         },
         {
           "weeks": 24,
-          "n": 332,
-          "p25": 0.5437,
-          "median": 0.62795,
-          "p75": 0.714,
-          "medianSmoothed": 0.62795
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 470,
+          "p25": 0.55903,
+          "median": 0.6494,
+          "p75": 0.7389,
+          "medianSmoothed": 0.6494
         },
         {
           "weeks": 25,
-          "n": 320,
-          "p25": 0.54045,
-          "median": 0.64454,
-          "p75": 0.72998,
-          "medianSmoothed": 0.64454
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 432,
+          "p25": 0.58723,
+          "median": 0.66874,
+          "p75": 0.74112,
+          "medianSmoothed": 0.66874
         },
         {
           "weeks": 26,
-          "n": 295,
-          "p25": 0.57549,
-          "median": 0.67412,
-          "p75": 0.78184,
-          "medianSmoothed": 0.67412
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 433,
+          "p25": 0.59601,
+          "median": 0.68932,
+          "p75": 0.78265,
+          "medianSmoothed": 0.68932
         },
         {
-          "weeks": 30,
-          "n": 210,
-          "p25": 0.64725,
-          "median": 0.76375,
-          "p75": 0.8794,
-          "medianSmoothed": 0.76375
+          "weeks": 27,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 296,
+          "p25": 0.62555,
+          "median": 0.71222,
+          "p75": 0.80166,
+          "medianSmoothed": 0.71222
+        },
+        {
+          "weeks": 28,
+          "binWeeks": 8,
+          "source": "observed",
+          "n": 1703,
+          "p25": 0.69058,
+          "median": 0.78595,
+          "p75": 0.87888,
+          "medianSmoothed": 0.78595
+        },
+        {
+          "weeks": 32,
+          "binWeeks": null,
+          "source": "interpolated",
+          "n": null,
+          "p25": 0.7304,
+          "median": 0.82869,
+          "p75": 0.92036,
+          "medianSmoothed": 0.82869
+        },
+        {
+          "weeks": 36,
+          "binWeeks": 8,
+          "source": "observed",
+          "n": 1326,
+          "p25": 0.77023,
+          "median": 0.87142,
+          "p75": 0.96185,
+          "medianSmoothed": 0.87142
+        },
+        {
+          "weeks": 40,
+          "binWeeks": null,
+          "source": "interpolated",
+          "n": null,
+          "p25": 0.78803,
+          "median": 0.88095,
+          "p75": 0.97913,
+          "medianSmoothed": 0.88071
+        },
+        {
+          "weeks": 44,
+          "binWeeks": 8,
+          "source": "observed",
+          "n": 1085,
+          "p25": 0.80583,
+          "median": 0.89048,
+          "p75": 0.99641,
+          "medianSmoothed": 0.89
         },
         {
           "weeks": 52,
-          "n": 501,
-          "p25": 0.77668,
-          "median": 0.88668,
-          "p75": 1.00957,
-          "medianSmoothed": 0.88668
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 877,
+          "p25": 0.79862,
+          "median": 0.88951,
+          "p75": 1.00043,
+          "medianSmoothed": 0.89
         },
         {
           "weeks": 56,
-          "n": 276,
-          "p25": 0.78318,
-          "median": 0.90971,
-          "p75": 1.03155,
-          "medianSmoothed": 0.90971
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 630,
+          "p25": 0.82495,
+          "median": 0.9132,
+          "p75": 1.00297,
+          "medianSmoothed": 0.9132
         },
         {
           "weeks": 60,
-          "n": 305,
-          "p25": 0.80795,
-          "median": 0.92076,
-          "p75": 1.04901,
-          "medianSmoothed": 0.92076
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 689,
+          "p25": 0.83363,
+          "median": 0.93722,
+          "p75": 1.04206,
+          "medianSmoothed": 0.93455
         },
         {
           "weeks": 64,
-          "n": 363,
-          "p25": 0.84143,
-          "median": 0.95955,
-          "p75": 1.07731,
-          "medianSmoothed": 0.92803
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 862,
+          "p25": 0.83855,
+          "median": 0.93518,
+          "p75": 1.03866,
+          "medianSmoothed": 0.93455
         },
         {
           "weeks": 68,
-          "n": 407,
-          "p25": 0.82654,
-          "median": 0.92559,
-          "p75": 1.05779,
-          "medianSmoothed": 0.92803
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 987,
+          "p25": 0.84314,
+          "median": 0.9385,
+          "p75": 1.04206,
+          "medianSmoothed": 0.93455
         },
         {
           "weeks": 72,
-          "n": 306,
-          "p25": 0.80085,
-          "median": 0.91513,
-          "p75": 1.0279,
-          "medianSmoothed": 0.92803
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 823,
+          "p25": 0.84223,
+          "median": 0.94052,
+          "p75": 1.0391,
+          "medianSmoothed": 0.93455
         },
         {
           "weeks": 76,
-          "n": 397,
-          "p25": 0.80908,
-          "median": 0.91585,
-          "p75": 1.04818,
-          "medianSmoothed": 0.92803
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 1036,
+          "p25": 0.84272,
+          "median": 0.92131,
+          "p75": 1.02803,
+          "medianSmoothed": 0.93455
+        },
+        {
+          "weeks": 78,
+          "binWeeks": null,
+          "source": "interpolated",
+          "n": null,
+          "p25": 0.84393,
+          "median": 0.93148,
+          "p75": 1.02866,
+          "medianSmoothed": 0.9381
         },
         {
           "weeks": 80,
-          "n": 319,
-          "p25": 0.81254,
-          "median": 0.92406,
-          "p75": 1.05351,
-          "medianSmoothed": 0.92803
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 773,
+          "p25": 0.84514,
+          "median": 0.94165,
+          "p75": 1.02929,
+          "medianSmoothed": 0.94165
         },
         {
           "weeks": 84,
-          "n": 259,
-          "p25": 0.83857,
-          "median": 0.93198,
-          "p75": 1.0527,
-          "medianSmoothed": 0.93198
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 682,
+          "p25": 0.86569,
+          "median": 0.95038,
+          "p75": 1.05304,
+          "medianSmoothed": 0.94885
         },
         {
           "weeks": 88,
-          "n": 236,
-          "p25": 0.84156,
-          "median": 0.95756,
-          "p75": 1.09264,
-          "medianSmoothed": 0.95756
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 681,
+          "p25": 0.86001,
+          "median": 0.94733,
+          "p75": 1.03885,
+          "medianSmoothed": 0.94885
         },
         {
           "weeks": 92,
-          "n": 229,
-          "p25": 0.85438,
-          "median": 0.97173,
-          "p75": 1.10031,
-          "medianSmoothed": 0.96662
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 645,
+          "p25": 0.8622,
+          "median": 0.95559,
+          "p75": 1.04408,
+          "medianSmoothed": 0.95559
         },
         {
           "weeks": 96,
-          "n": 210,
-          "p25": 0.8334,
-          "median": 0.96151,
-          "p75": 1.08061,
-          "medianSmoothed": 0.96662
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 661,
+          "p25": 0.86801,
+          "median": 0.96057,
+          "p75": 1.0615,
+          "medianSmoothed": 0.96023
         },
         {
           "weeks": 100,
-          "n": 202,
-          "p25": 0.83775,
-          "median": 0.9668,
-          "p75": 1.09434,
-          "medianSmoothed": 0.9668
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 652,
+          "p25": 0.87335,
+          "median": 0.95989,
+          "p75": 1.05231,
+          "medianSmoothed": 0.96023
         }
       ]
     },
     "V": {
       "minKg": 30.0,
       "maxKg": 40.0,
+      "policy": "C",
+      "dogs": 13526,
+      "visits": 41471,
       "points": [
         {
           "weeks": 12,
-          "n": 764,
-          "p25": 0.21819,
-          "median": 0.26802,
-          "p75": 0.31075,
-          "medianSmoothed": 0.26802
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 2180,
+          "p25": 0.22842,
+          "median": 0.26741,
+          "p75": 0.30545,
+          "medianSmoothed": 0.26741
         },
         {
           "weeks": 13,
-          "n": 775,
-          "p25": 0.24018,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 2411,
+          "p25": 0.24746,
           "median": 0.29216,
-          "p75": 0.3459,
+          "p75": 0.33599,
           "medianSmoothed": 0.29216
         },
         {
           "weeks": 14,
-          "n": 806,
-          "p25": 0.27357,
-          "median": 0.32934,
-          "p75": 0.38512,
-          "medianSmoothed": 0.32934
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 2180,
+          "p25": 0.27937,
+          "median": 0.32536,
+          "p75": 0.37185,
+          "medianSmoothed": 0.32536
         },
         {
           "weeks": 15,
-          "n": 695,
-          "p25": 0.29482,
-          "median": 0.35191,
-          "p75": 0.41922,
-          "medianSmoothed": 0.35191
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 2077,
+          "p25": 0.30677,
+          "median": 0.35654,
+          "p75": 0.40444,
+          "medianSmoothed": 0.35654
         },
         {
           "weeks": 16,
-          "n": 788,
-          "p25": 0.32536,
-          "median": 0.38646,
-          "p75": 0.44753,
-          "medianSmoothed": 0.38646
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 2284,
+          "p25": 0.33599,
+          "median": 0.38582,
+          "p75": 0.43517,
+          "medianSmoothed": 0.38582
         },
         {
           "weeks": 17,
-          "n": 832,
-          "p25": 0.3422,
-          "median": 0.40571,
-          "p75": 0.47807,
-          "medianSmoothed": 0.40571
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 2393,
+          "p25": 0.35856,
+          "median": 0.41242,
+          "p75": 0.46744,
+          "medianSmoothed": 0.41242
         },
         {
           "weeks": 18,
-          "n": 649,
-          "p25": 0.36919,
-          "median": 0.44568,
-          "p75": 0.5122,
-          "medianSmoothed": 0.44568
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1895,
+          "p25": 0.39278,
+          "median": 0.44436,
+          "p75": 0.49912,
+          "medianSmoothed": 0.44436
         },
         {
           "weeks": 19,
-          "n": 497,
-          "p25": 0.39176,
-          "median": 0.47145,
-          "p75": 0.5551,
-          "medianSmoothed": 0.47145
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1498,
+          "p25": 0.41167,
+          "median": 0.46565,
+          "p75": 0.53121,
+          "medianSmoothed": 0.46565
         },
         {
           "weeks": 20,
-          "n": 392,
-          "p25": 0.40888,
-          "median": 0.48606,
-          "p75": 0.5634,
-          "medianSmoothed": 0.48606
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1268,
+          "p25": 0.42763,
+          "median": 0.49136,
+          "p75": 0.5498,
+          "medianSmoothed": 0.49136
         },
         {
           "weeks": 21,
-          "n": 381,
-          "p25": 0.43559,
-          "median": 0.51792,
-          "p75": 0.6215,
-          "medianSmoothed": 0.51792
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 1137,
+          "p25": 0.45418,
+          "median": 0.52058,
+          "p75": 0.58538,
+          "medianSmoothed": 0.52058
         },
         {
           "weeks": 22,
-          "n": 241,
-          "p25": 0.46481,
-          "median": 0.53384,
-          "p75": 0.61884,
-          "medianSmoothed": 0.53384
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 789,
+          "p25": 0.47894,
+          "median": 0.54714,
+          "p75": 0.61222,
+          "medianSmoothed": 0.54714
+        },
+        {
+          "weeks": 23,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 606,
+          "p25": 0.49369,
+          "median": 0.5624,
+          "p75": 0.64009,
+          "medianSmoothed": 0.5624
+        },
+        {
+          "weeks": 24,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 611,
+          "p25": 0.52483,
+          "median": 0.59228,
+          "p75": 0.66135,
+          "medianSmoothed": 0.59228
+        },
+        {
+          "weeks": 25,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 516,
+          "p25": 0.54837,
+          "median": 0.62417,
+          "p75": 0.70119,
+          "medianSmoothed": 0.62417
+        },
+        {
+          "weeks": 26,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 537,
+          "p25": 0.54447,
+          "median": 0.62683,
+          "p75": 0.70119,
+          "medianSmoothed": 0.62683
+        },
+        {
+          "weeks": 27,
+          "binWeeks": 1,
+          "source": "observed",
+          "n": 339,
+          "p25": 0.57222,
+          "median": 0.66401,
+          "p75": 0.73505,
+          "medianSmoothed": 0.66401
+        },
+        {
+          "weeks": 28,
+          "binWeeks": 8,
+          "source": "observed",
+          "n": 1914,
+          "p25": 0.62417,
+          "median": 0.70778,
+          "p75": 0.79826,
+          "medianSmoothed": 0.70778
+        },
+        {
+          "weeks": 32,
+          "binWeeks": null,
+          "source": "interpolated",
+          "n": null,
+          "p25": 0.66334,
+          "median": 0.75229,
+          "p75": 0.84933,
+          "medianSmoothed": 0.75229
+        },
+        {
+          "weeks": 36,
+          "binWeeks": 8,
+          "source": "observed",
+          "n": 1579,
+          "p25": 0.70251,
+          "median": 0.79681,
+          "p75": 0.9004,
+          "medianSmoothed": 0.79681
+        },
+        {
+          "weeks": 40,
+          "binWeeks": null,
+          "source": "interpolated",
+          "n": null,
+          "p25": 0.72377,
+          "median": 0.81616,
+          "p75": 0.91576,
+          "medianSmoothed": 0.81544
+        },
+        {
+          "weeks": 44,
+          "binWeeks": 8,
+          "source": "observed",
+          "n": 1351,
+          "p25": 0.74503,
+          "median": 0.83551,
+          "p75": 0.93112,
+          "medianSmoothed": 0.83408
         },
         {
           "weeks": 52,
-          "n": 295,
-          "p25": 0.73041,
-          "median": 0.86743,
-          "p75": 0.99599,
-          "medianSmoothed": 0.85934
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 1163,
+          "p25": 0.74035,
+          "median": 0.83265,
+          "p75": 0.9278,
+          "medianSmoothed": 0.83408
+        },
+        {
+          "weeks": 56,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 774,
+          "p25": 0.75697,
+          "median": 0.84992,
+          "p75": 0.94318,
+          "medianSmoothed": 0.84992
         },
         {
           "weeks": 60,
-          "n": 200,
-          "p25": 0.75131,
-          "median": 0.85126,
-          "p75": 0.99102,
-          "medianSmoothed": 0.85934
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 939,
+          "p25": 0.75632,
+          "median": 0.85391,
+          "p75": 0.94821,
+          "medianSmoothed": 0.85391
         },
         {
           "weeks": 64,
-          "n": 238,
-          "p25": 0.74036,
-          "median": 0.88114,
-          "p75": 1.02919,
-          "medianSmoothed": 0.88114
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 1263,
+          "p25": 0.7676,
+          "median": 0.85522,
+          "p75": 0.95304,
+          "medianSmoothed": 0.85522
         },
         {
           "weeks": 68,
-          "n": 256,
-          "p25": 0.79648,
-          "median": 0.90851,
-          "p75": 1.01264,
-          "medianSmoothed": 0.89772
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 1510,
+          "p25": 0.78352,
+          "median": 0.87118,
+          "p75": 0.95617,
+          "medianSmoothed": 0.86479
         },
         {
           "weeks": 72,
-          "n": 207,
-          "p25": 0.77156,
-          "median": 0.90204,
-          "p75": 1.02256,
-          "medianSmoothed": 0.89772
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 1232,
+          "p25": 0.78352,
+          "median": 0.86797,
+          "p75": 0.96477,
+          "medianSmoothed": 0.86479
         },
         {
           "weeks": 76,
-          "n": 262,
-          "p25": 0.79031,
-          "median": 0.88525,
-          "p75": 1.01658,
-          "medianSmoothed": 0.89772
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 1473,
+          "p25": 0.76625,
+          "median": 0.85522,
+          "p75": 0.95524,
+          "medianSmoothed": 0.86479
+        },
+        {
+          "weeks": 78,
+          "binWeeks": null,
+          "source": "interpolated",
+          "n": null,
+          "p25": 0.7756,
+          "median": 0.86585,
+          "p75": 0.96327,
+          "medianSmoothed": 0.87064
         },
         {
           "weeks": 80,
-          "n": 210,
-          "p25": 0.76328,
-          "median": 0.89507,
-          "p75": 0.99482,
-          "medianSmoothed": 0.89772
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 1066,
+          "p25": 0.78495,
+          "median": 0.87648,
+          "p75": 0.97131,
+          "medianSmoothed": 0.87648
+        },
+        {
+          "weeks": 84,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 869,
+          "p25": 0.78495,
+          "median": 0.87914,
+          "p75": 0.96414,
+          "medianSmoothed": 0.87914
+        },
+        {
+          "weeks": 88,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 923,
+          "p25": 0.79681,
+          "median": 0.88977,
+          "p75": 0.97697,
+          "medianSmoothed": 0.88977
         },
         {
           "weeks": 92,
-          "n": 213,
-          "p25": 0.80158,
-          "median": 0.92962,
-          "p75": 1.0438,
-          "medianSmoothed": 0.92962
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 912,
+          "p25": 0.79289,
+          "median": 0.89109,
+          "p75": 0.9804,
+          "medianSmoothed": 0.89109
+        },
+        {
+          "weeks": 96,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 909,
+          "p25": 0.80888,
+          "median": 0.9004,
+          "p75": 0.99335,
+          "medianSmoothed": 0.89855
+        },
+        {
+          "weeks": 100,
+          "binWeeks": 4,
+          "source": "observed",
+          "n": 873,
+          "p25": 0.81008,
+          "median": 0.8967,
+          "p75": 0.98671,
+          "medianSmoothed": 0.89855
         }
       ]
     }
