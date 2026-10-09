@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* PawScales design tokens (design.md section 3). Light theme only at launch;
+   names allow a dark theme later. Do not use Tailwind default palette classes. */
+:root {
+  --bg: #FBFAF6;
+  --surface: #FFFFFF;
+  --surface-2: #F3F0E8;
+  --ink: #1B1F1D;
+  --text: #2E3532;
+  --muted: #5B6661;
+  --border: #E3DED3;
+  --border-strong: #8C8576;
+  --brand: #1F5C45;
+  --brand-hover: #174836;
+  --brand-tint: #E7F0EB;
+  --accent: #F2C46B;
+  --accent-ink: #8A5A12;
+  --danger: #B42318;
+  --focus: #1F5C45;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    font-feature-settings: 'tnum' 0;
+  }
+  h1, h2 {
+    font-family: var(--font-heading), Georgia, serif;
+    font-weight: 600;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  h3, h4, h5, h6 {
+    font-weight: 600;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  /* Tabular figures everywhere numbers matter */
+  input, table, .tabular, .result-number {
+    font-variant-numeric: tabular-nums;
+  }
+  /* Links in running text: brand, always underlined (design.md 4) */
+  .prose-text a,
+  a.link {
+    color: var(--brand);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  .prose-text a:hover,
+  a.link:hover {
+    text-decoration-thickness: 2px;
+  }
+  /* Visible focus ring on every interactive element (design.md 11) */
+  :where(a, button, input, select, textarea, details summary, [tabindex]):focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+}
+
+@layer utilities {
+  .container-page {
+    max-width: 1120px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  @media (min-width: 640px) {
+    .container-page { padding-left: 24px; padding-right: 24px; }
+  }
+  @media (min-width: 960px) {
+    .container-page { padding-left: 32px; padding-right: 32px; }
+  }
+}
+
+/* Motion (design.md 10): short transitions on color/bg/border only */
+@media (prefers-reduced-motion: no-preference) {
+  a, button, input, select, summary, .seg-btn {
+    transition: color 150ms ease-out, background-color 150ms ease-out,
+      border-color 150ms ease-out, text-decoration-thickness 150ms ease-out;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
