@@ -2,23 +2,22 @@ import * as React from 'react';
 import { cn } from '@/lib/cn';
 
 /**
- * The table style (design.md 7.6, MUST): even 1px border on all four sides,
- * radius 10, horizontal scroll on small screens, surface-2 header, 1px row
- * dividers full width, no zebra, highlighted row = accent at 35% with a tag in
- * the first cell. No one-sided borders, no vertical lines.
+ * Table style (design.md v2 7.6): even 1px --line border all four sides, radius
+ * 16, overflow hidden, horizontal scroll inside the wrapper on small screens.
+ * Header --sand 13/600; rows 15px, min 44px, 1px dividers full width, no zebra,
+ * no vertical lines. User's row = --lime across the row + "Your dog" pill in the
+ * first cell. Caption above (H3), source below. Interpolated values get a *.
  */
 
 export interface Column {
   key: string;
   header: string;
-  /** right-align numeric columns */
   numeric?: boolean;
 }
 
 export interface Row {
   cells: Record<string, React.ReactNode>;
   highlight?: boolean;
-  /** text shown in the first cell when highlighted, e.g. "Your dog" */
   tag?: string;
 }
 
@@ -27,38 +26,35 @@ export function DataTable({
   columns,
   rows,
   source,
-  textHeavy = false,
-  stickyHeader = false,
+  footnote,
   className,
 }: {
   caption?: React.ReactNode;
   columns: Column[];
   rows: Row[];
   source?: React.ReactNode;
-  textHeavy?: boolean;
-  stickyHeader?: boolean;
+  footnote?: React.ReactNode;
   className?: string;
 }) {
   return (
     <figure className={cn('m-0', className)}>
       {caption && (
-        <figcaption className="mb-2 text-[14px] font-semibold text-ink">
+        <figcaption className="mb-2 text-[18px] font-semibold text-ink">
           {caption}
         </figcaption>
       )}
-      <div className="overflow-hidden rounded-[10px] border border-border">
+      <div className="overflow-hidden rounded-[16px] border border-line">
         <div className="overflow-x-auto">
           <table className="w-full border-collapse text-left">
             <thead>
-              <tr className="bg-surface-2">
+              <tr className="bg-sand">
                 {columns.map((c) => (
                   <th
                     key={c.key}
                     scope="col"
                     className={cn(
-                      'px-3 py-2 text-[13px] font-semibold text-ink',
+                      'px-3 py-2.5 text-[13px] font-semibold text-ink',
                       c.numeric ? 'text-right tabular-nums' : 'text-left',
-                      stickyHeader && 'sticky top-0 bg-surface-2',
                     )}
                   >
                     {c.header}
@@ -70,23 +66,18 @@ export function DataTable({
               {rows.map((r, i) => (
                 <tr
                   key={i}
-                  className={cn(
-                    'border-t border-border hover:bg-bg',
-                    r.highlight && 'bg-[#F2C46B59] hover:bg-[#F2C46B59]',
-                  )}
+                  className={cn('border-t border-line', r.highlight && 'bg-lime')}
                 >
                   {columns.map((c, ci) => (
                     <td
                       key={c.key}
                       className={cn(
-                        'px-3',
-                        textHeavy ? 'text-[16px]' : 'text-[14px]',
-                        'min-h-[40px] py-2 text-text',
+                        'h-11 px-3 py-2 text-[15px] text-ink',
                         c.numeric ? 'text-right tabular-nums' : 'text-left',
                       )}
                     >
                       {ci === 0 && r.tag && (
-                        <span className="mr-2 text-[12px] font-semibold text-accent-ink">
+                        <span className="mr-2 inline-flex items-center rounded-full bg-white px-2 py-0.5 text-[11px] font-semibold text-ink">
                           {r.tag}
                         </span>
                       )}
@@ -99,8 +90,11 @@ export function DataTable({
           </table>
         </div>
       </div>
+      {footnote && (
+        <figcaption className="mt-2 text-[13px] text-muted">{footnote}</figcaption>
+      )}
       {source && (
-        <figcaption className="mt-2 text-[13px] text-muted">{source}</figcaption>
+        <figcaption className="mt-1 text-[13px] text-muted">{source}</figcaption>
       )}
     </figure>
   );

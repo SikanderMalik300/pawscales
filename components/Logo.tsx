@@ -1,9 +1,9 @@
 import { cn } from '@/lib/cn';
 
 /**
- * Wordmark "PawScales" in Newsreader 600, "Scales" in brand green, with an
- * optional small brand square holding three white ruler ticks (design.md 9).
- * No paw-print clip art, no animal silhouette.
+ * Wordmark "PawScales" in Figtree 600, ink, letter-spacing -0.02em, with an
+ * optional 24px brand square holding three white ticks of rising height (a
+ * scale) (design.md v2 section 9). No paw clip art.
  */
 export function Logo({
   className,
@@ -17,17 +17,17 @@ export function Logo({
       {withMark && (
         <span
           aria-hidden="true"
-          className="inline-flex h-7 w-7 items-center justify-center rounded-[6px] bg-brand"
+          className="inline-flex h-6 w-6 items-center justify-center rounded-[6px] bg-brand"
         >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <rect x="2.5" y="7" width="1.6" height="6" rx="0.4" fill="#fff" />
-            <rect x="7.2" y="3.5" width="1.6" height="9.5" rx="0.4" fill="#fff" />
-            <rect x="11.9" y="5.5" width="1.6" height="7.5" rx="0.4" fill="#fff" />
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <rect x="2" y="8" width="1.6" height="4" rx="0.4" fill="#fff" />
+            <rect x="6.2" y="5" width="1.6" height="7" rx="0.4" fill="#fff" />
+            <rect x="10.4" y="2.5" width="1.6" height="9.5" rx="0.4" fill="#fff" />
           </svg>
         </span>
       )}
-      <span className="font-heading text-[20px] font-semibold leading-none text-ink">
-        Paw<span className="text-brand">Scales</span>
+      <span className="text-[20px] font-semibold leading-none tracking-[-0.02em] text-ink">
+        PawScales
       </span>
     </span>
   );

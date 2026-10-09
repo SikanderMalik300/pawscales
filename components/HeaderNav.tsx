@@ -3,17 +3,22 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { Search, Menu, X } from 'lucide-react';
-import { REGISTRY, HUBS } from '@/lib/registry';
-import { cn } from '@/lib/cn';
+import { REGISTRY, HUBS, type Category } from '@/lib/registry';
+import { Logo } from '@/components/Logo';
 
-const NAV = [
-  { href: '/dog-calculators/', label: 'Dog tools' },
-  { href: '/cat-calculators/', label: 'Cat tools' },
-  { href: '/dog-size-charts/', label: 'Size charts' },
-  { href: '/about/', label: 'About' },
+const HUB_LINKS: { href: string; label: string; cat: Category }[] = [
+  { href: '/dog-calculators/', label: 'Dog tools', cat: 'dog-calculators' },
+  { href: '/cat-calculators/', label: 'Cat tools', cat: 'cat-calculators' },
+  { href: '/dog-size-charts/', label: 'Size charts', cat: 'dog-size-charts' },
 ];
 
-const hubName = (slug: string) =>
+const hubColor: Record<Category, string> = {
+  'dog-calculators': 'bg-sage',
+  'cat-calculators': 'bg-sky',
+  'dog-size-charts': 'bg-butter',
+};
+
+const hubName = (slug: Category) =>
   HUBS.find((h) => h.slug === slug)?.shortName ?? slug;
 
 export function HeaderNav() {
@@ -36,8 +41,13 @@ export function HeaderNav() {
         setMenuOpen(false);
       }
     };
+    const openSearch = () => setSearchOpen(true);
     window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    window.addEventListener('pawscales:search', openSearch);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('pawscales:search', openSearch);
+    };
   }, [searchOpen]);
 
   useEffect(() => {
@@ -54,35 +64,51 @@ export function HeaderNav() {
 
   return (
     <>
-      <nav className="hidden items-center gap-5 md:flex" aria-label="Primary">
-        {NAV.map((n) => (
-          <Link
-            key={n.href}
-            href={n.href}
-            prefetch={false}
-            className="text-[14px] font-semibold text-text hover:text-brand"
-          >
-            {n.label}
+      {/* Desktop bar: hub links left, logo center, About + search right */}
+      <div className="hidden w-full grid-cols-3 items-center md:grid">
+        <nav className="flex items-center gap-6" aria-label="Primary">
+          {HUB_LINKS.map((n) => (
+            <Link
+              key={n.href}
+              href={n.href}
+              prefetch={false}
+              className="text-[14px] font-medium text-ink hover:underline"
+            >
+              {n.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="flex justify-center">
+          <Link href="/" aria-label="PawScales home">
+            <Logo />
           </Link>
-        ))}
-        <button
-          type="button"
-          onClick={() => setSearchOpen(true)}
-          aria-label="Search (press /)"
-          className="inline-flex h-9 items-center gap-2 rounded-[6px] border border-border-strong px-3 text-[14px] text-muted hover:bg-surface-2"
-        >
-          <Search size={16} strokeWidth={1.75} />
-          Search
-          <kbd className="rounded-[4px] border border-border px-1 text-[12px]">/</kbd>
-        </button>
-      </nav>
+        </div>
+        <div className="flex items-center justify-end gap-5">
+          <Link
+            href="/about/"
+            prefetch={false}
+            className="text-[14px] font-medium text-ink hover:underline"
+          >
+            About
+          </Link>
+          <button
+            type="button"
+            onClick={() => setSearchOpen(true)}
+            aria-label="Search (press /)"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink hover:bg-sand"
+          >
+            <Search size={18} strokeWidth={1.75} />
+          </button>
+        </div>
+      </div>
 
-      <div className="flex items-center gap-2 md:hidden">
+      {/* Mobile controls (logo is in SiteHeader) */}
+      <div className="flex items-center gap-1 md:hidden">
         <button
           type="button"
           onClick={() => setSearchOpen(true)}
           aria-label="Search"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-[6px] text-ink"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full text-ink"
         >
           <Search size={20} strokeWidth={1.75} />
         </button>
@@ -90,54 +116,63 @@ export function HeaderNav() {
           type="button"
           onClick={() => setMenuOpen(true)}
           aria-label="Open menu"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-[6px] text-ink"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full text-ink"
         >
           <Menu size={20} strokeWidth={1.75} />
         </button>
       </div>
 
       {menuOpen && (
-        <div className="fixed inset-0 z-50 bg-surface md:hidden">
-          <div className="container-page flex h-14 items-center justify-between border-b border-border">
-            <span className="text-[14px] font-semibold text-muted">Menu</span>
+        <div className="fixed inset-0 z-50 bg-white md:hidden">
+          <div className="container-page flex h-14 items-center justify-between border-b border-line">
+            <Logo />
             <button
               type="button"
               onClick={() => setMenuOpen(false)}
               aria-label="Close menu"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-[6px] text-ink"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full text-ink"
             >
               <X size={20} strokeWidth={1.75} />
             </button>
           </div>
           <nav className="container-page flex flex-col py-2" aria-label="Mobile">
-            {NAV.map((n) => (
+            {HUB_LINKS.map((n) => (
               <Link
                 key={n.href}
                 href={n.href}
                 prefetch={false}
                 onClick={() => setMenuOpen(false)}
-                className="border-b border-border py-3 text-[16px] font-semibold text-ink"
+                className="flex items-center gap-3 border-b border-line py-3 text-[16px] font-medium text-ink"
               >
+                <span className={`h-4 w-4 rounded-full ${hubColor[n.cat]}`} aria-hidden="true" />
                 {n.label}
               </Link>
             ))}
+            <Link
+              href="/about/"
+              prefetch={false}
+              onClick={() => setMenuOpen(false)}
+              className="py-3 text-[16px] font-medium text-ink"
+            >
+              About
+            </Link>
           </nav>
         </div>
       )}
 
       {searchOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-start justify-center bg-[rgba(20,24,22,0.35)] p-4 pt-[10vh]"
+          className="fixed inset-0 z-50 flex items-start justify-center bg-[rgba(17,19,18,0.35)] p-4 pt-[10vh]"
           onClick={() => setSearchOpen(false)}
         >
           <div
             role="dialog"
             aria-label="Search tools"
             aria-modal="true"
-            className="w-full max-w-[560px] overflow-hidden rounded-[10px] border border-border bg-surface shadow-card"
+            className="w-full max-w-[560px] overflow-hidden rounded-lg border border-line bg-white shadow-card"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center gap-2 border-b border-border px-3">
+            <div className="flex items-center gap-2 border-b border-line px-4">
               <Search size={18} strokeWidth={1.75} className="text-muted" />
               <input
                 ref={inputRef}
@@ -151,7 +186,7 @@ export function HeaderNav() {
                 type="button"
                 onClick={() => setSearchOpen(false)}
                 aria-label="Close search"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-[6px] text-muted hover:bg-surface-2"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full text-muted hover:bg-sand"
               >
                 <X size={18} strokeWidth={1.75} />
               </button>
@@ -163,20 +198,23 @@ export function HeaderNav() {
                     href={`/${t.slug}/`}
                     prefetch={false}
                     onClick={() => setSearchOpen(false)}
-                    className={cn(
-                      'flex items-center justify-between gap-3 px-3 py-2',
-                      'hover:bg-surface-2',
-                    )}
+                    className="flex items-center gap-3 px-4 py-2 hover:bg-sand"
                   >
-                    <span className="text-[16px] font-semibold text-ink">
+                    <span
+                      className={`h-3 w-3 shrink-0 rounded-full ${hubColor[t.category]}`}
+                      aria-hidden="true"
+                    />
+                    <span className="text-[16px] font-medium text-ink">
                       {t.shortName}
                     </span>
-                    <span className="text-[13px] text-muted">{hubName(t.category)}</span>
+                    <span className="ml-auto text-[13px] text-muted">
+                      {hubName(t.category)}
+                    </span>
                   </Link>
                 </li>
               ))}
               {results.length === 0 && (
-                <li className="px-3 py-3 text-[14px] text-muted">No tools match.</li>
+                <li className="px-4 py-3 text-[14px] text-muted">No tools match.</li>
               )}
             </ul>
           </div>

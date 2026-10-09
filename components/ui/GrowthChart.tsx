@@ -2,138 +2,133 @@ import * as React from 'react';
 
 export interface ChartPoint {
   x: number; // weeks
-  mid: number; // median curve value (display units)
-  low?: number; // p25
-  high?: number; // p75
+  mid: number;
+  low?: number;
+  high?: number;
+}
+
+/** Nice round step for an axis max, so ticks read 0,10,20... not 0,15.3,... */
+function niceStep(max: number, targetTicks = 4): number {
+  const raw = max / targetTicks;
+  const mag = 10 ** Math.floor(Math.log10(raw || 1));
+  const norm = raw / mag;
+  const step = norm >= 5 ? 5 : norm >= 2 ? 2 : 1;
+  return step * mag;
 }
 
 /**
- * Lightweight inline SVG chart (design.md 7.7): horizontal 1px grid lines only,
- * 12px muted tabular axis labels, 2.5px brand median line, brand-tint P25-P75
- * band, the user's point as an 8px accent dot with a 1.5px ink outline. Server-
- * rendered with the default example. A text equivalent must accompany it.
+ * Inline SVG chart (design.md v2 7.7): horizontal grid only, 12px muted round
+ * tick values, 2.5px brand median line, rgba brand P25-P75 band, 10px accent
+ * user dot with a 2px white ring and a white label pill offset to whichever side
+ * has more room so it never overlaps the line. Text equivalent lives beside it.
  */
 export function GrowthChart({
   points,
   userPoint,
-  yLabel = 'weight',
   yUnit = 'lb',
-  xLabel = 'age (weeks)',
   width = 560,
-  height = 220,
+  height = 230,
 }: {
   points: ChartPoint[];
   userPoint?: { x: number; y: number; label?: string };
-  yLabel?: string;
   yUnit?: string;
-  xLabel?: string;
   width?: number;
   height?: number;
 }) {
-  const padL = 44;
-  const padR = 12;
-  const padT = 12;
+  const padL = 40;
+  const padR = 14;
+  const padT = 16;
   const padB = 28;
   const w = width;
   const h = height;
+
   const xs = points.map((p) => p.x);
-  const highs = points.map((p) => p.high ?? p.mid);
   const xMin = Math.min(...xs);
   const xMax = Math.max(...xs, userPoint?.x ?? -Infinity);
-  const yMax = Math.max(...highs, userPoint?.y ?? 0) * 1.05;
-  const yMin = 0;
+  const dataMax = Math.max(
+    ...points.map((p) => p.high ?? p.mid),
+    userPoint?.y ?? 0,
+  );
+  const step = niceStep(dataMax);
+  const yMax = Math.ceil(dataMax / step) * step;
 
   const sx = (x: number) =>
     padL + ((x - xMin) / (xMax - xMin || 1)) * (w - padL - padR);
-  const sy = (y: number) =>
-    h - padB - ((y - yMin) / (yMax - yMin || 1)) * (h - padT - padB);
+  const sy = (y: number) => h - padB - (y / (yMax || 1)) * (h - padT - padB);
 
-  const line = (key: 'mid' | 'low' | 'high') =>
+  const path = (key: 'mid' | 'low' | 'high') =>
     points
-      .map((p, i) => `${i ? 'L' : 'M'}${sx(p.x).toFixed(1)},${sy((p[key] ?? p.mid)).toFixed(1)}`)
+      .map((p, i) => `${i ? 'L' : 'M'}${sx(p.x).toFixed(1)},${sy(p[key] ?? p.mid).toFixed(1)}`)
       .join(' ');
 
-  const band =
-    points.every((p) => p.low != null && p.high != null)
-      ? [
-          ...points.map((p, i) => `${i ? 'L' : 'M'}${sx(p.x).toFixed(1)},${sy(p.high!).toFixed(1)}`),
-          ...points
-            .slice()
-            .reverse()
-            .map((p) => `L${sx(p.x).toFixed(1)},${sy(p.low!).toFixed(1)}`),
-          'Z',
-        ].join(' ')
-      : null;
+  const band = points.every((p) => p.low != null && p.high != null)
+    ? [
+        ...points.map((p, i) => `${i ? 'L' : 'M'}${sx(p.x).toFixed(1)},${sy(p.high!).toFixed(1)}`),
+        ...points.slice().reverse().map((p) => `L${sx(p.x).toFixed(1)},${sy(p.low!).toFixed(1)}`),
+        'Z',
+      ].join(' ')
+    : null;
 
-  const yTicks = 4;
-  const ticks = Array.from({ length: yTicks + 1 }, (_, i) => (yMax / yTicks) * i);
-  const xTickVals = [xMin, Math.round((xMin + xMax) / 2), xMax];
+  const yTicks: number[] = [];
+  for (let t = 0; t <= yMax + 1e-6; t += step) yTicks.push(t);
+
+  // x ticks: round weeks across the range
+  const xStep = niceStep(xMax - xMin, 4);
+  const xTicks: number[] = [];
+  for (let t = Math.ceil(xMin / xStep) * xStep; t <= xMax + 1e-6; t += xStep) {
+    xTicks.push(Math.round(t));
+  }
+
+  // user label pill: place on the side with more room, above the dot
+  let labelBox: React.ReactNode = null;
+  if (userPoint?.label) {
+    const dotX = sx(userPoint.x);
+    const dotY = sy(userPoint.y);
+    const placeLeft = dotX > (padL + (w - padR)) / 2;
+    const text = userPoint.label;
+    const boxW = Math.max(54, text.length * 6.6 + 14);
+    const boxH = 20;
+    let bx = placeLeft ? dotX - boxW - 12 : dotX + 12;
+    bx = Math.max(padL, Math.min(bx, w - padR - boxW));
+    let by = dotY - boxH - 10;
+    if (by < padT) by = dotY + 10;
+    labelBox = (
+      <g>
+        <rect x={bx} y={by} width={boxW} height={boxH} rx={10} fill="#fff" stroke="var(--line)" />
+        <text x={bx + boxW / 2} y={by + 14} textAnchor="middle" fontSize="12" fontWeight={600} fill="var(--ink)">
+          {text}
+        </text>
+      </g>
+    );
+  }
 
   return (
     <svg
       viewBox={`0 0 ${w} ${h}`}
       width="100%"
       role="img"
-      aria-label={`Growth curve of ${yLabel} in ${yUnit} by ${xLabel}`}
+      aria-label={`Growth curve of weight in ${yUnit} by age in weeks`}
       className="tabular-nums"
     >
-      {ticks.map((t, i) => (
+      {yTicks.map((t, i) => (
         <g key={i}>
-          <line
-            x1={padL}
-            x2={w - padR}
-            y1={sy(t)}
-            y2={sy(t)}
-            stroke="var(--border)"
-            strokeWidth={1}
-          />
-          <text
-            x={padL - 6}
-            y={sy(t) + 4}
-            textAnchor="end"
-            fontSize="12"
-            fill="var(--muted)"
-          >
-            {Math.round(t)}
+          <line x1={padL} x2={w - padR} y1={sy(t)} y2={sy(t)} stroke="var(--line)" strokeWidth={1} />
+          <text x={padL - 6} y={sy(t) + 4} textAnchor="end" fontSize="12" fill="var(--muted)">
+            {t}
           </text>
         </g>
       ))}
-      {xTickVals.map((xv, i) => (
-        <text
-          key={i}
-          x={sx(xv)}
-          y={h - padB + 18}
-          textAnchor="middle"
-          fontSize="12"
-          fill="var(--muted)"
-        >
+      {xTicks.map((xv, i) => (
+        <text key={i} x={sx(xv)} y={h - padB + 18} textAnchor="middle" fontSize="12" fill="var(--muted)">
           {xv}
         </text>
       ))}
-      {band && <path d={band} fill="var(--brand-tint)" stroke="none" />}
-      <path d={line('mid')} fill="none" stroke="var(--brand)" strokeWidth={2.5} />
+      {band && <path d={band} fill="rgba(31,92,69,.12)" stroke="none" />}
+      <path d={path('mid')} fill="none" stroke="var(--brand)" strokeWidth={2.5} strokeLinejoin="round" />
       {userPoint && (
         <>
-          <circle
-            cx={sx(userPoint.x)}
-            cy={sy(userPoint.y)}
-            r={8}
-            fill="var(--accent)"
-            stroke="var(--ink)"
-            strokeWidth={1.5}
-          />
-          {userPoint.label && (
-            <text
-              x={sx(userPoint.x)}
-              y={sy(userPoint.y) - 12}
-              textAnchor="middle"
-              fontSize="12"
-              fontWeight={600}
-              fill="var(--ink)"
-            >
-              {userPoint.label}
-            </text>
-          )}
+          <circle cx={sx(userPoint.x)} cy={sy(userPoint.y)} r={10} fill="var(--accent)" stroke="#fff" strokeWidth={2} />
+          {labelBox}
         </>
       )}
     </svg>

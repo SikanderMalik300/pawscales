@@ -6,16 +6,16 @@ export interface FaqItem {
 }
 
 /**
- * FAQ list (design.md 7.5): each question a native <details> row, 1px top border
- * (and bottom on the last) as a complete list divider, plus/minus on the right,
- * all answer text in the DOM. The FAQ JSON-LD text must match this visible text.
+ * FAQ (design.md v2 7.8): <details> rows, 1px --line dividers top and bottom of
+ * the group, question 17/500, plus/minus icon right. All answers in the DOM.
+ * The FAQ JSON-LD text must match this visible text.
  */
 export function Faq({ items }: { items: FaqItem[] }) {
   return (
-    <div className="border-b border-border">
+    <div className="border-b border-line">
       {items.map((item, i) => (
-        <details key={i} className="group border-t border-border">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-3 text-[16px] font-semibold text-ink marker:hidden [&::-webkit-details-marker]:hidden">
+        <details key={i} className="group border-t border-line">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-3.5 text-[17px] font-medium text-ink marker:hidden [&::-webkit-details-marker]:hidden">
             <span>{item.q}</span>
             <Plus
               size={20}
@@ -30,7 +30,7 @@ export function Faq({ items }: { items: FaqItem[] }) {
               className="hidden shrink-0 text-muted group-open:block"
             />
           </summary>
-          <div className="pb-3 text-[16px] leading-[1.6] text-text">{item.a}</div>
+          <div className="pb-4 text-[16px] leading-[1.6] text-ink">{item.a}</div>
         </details>
       ))}
     </div>

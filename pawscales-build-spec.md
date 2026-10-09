@@ -5,7 +5,7 @@
 - Written: 2026-10-10 by the browser agent
 - Repo: https://github.com/SikanderMalik300/pawscales (branch `main`, auto-deploys to Cloudflare Pages)
 - Design: `design.md` in the repo root. This file covers content, SEO and maths; `design.md` covers look and feel (colors, fonts, layout, components, photos). Where they overlap, this file wins on content and `design.md` wins on visuals.
-- Updated: 2026-10-10 (v3): A6.1 body-condition filter corrected to a per-dog filter (Policy C with per-band Policy B fallback). v2: design system added, photos, /design/ and /photo-credits/ pages, visual QA.
+- Updated: 2026-10-10 (v6): design.md v2 (Wild One-inspired, photo-led, Figtree). (v5): A6.1 curves normalized to each band's 2-year plateau. (v4): A6.1 uses Policy C for all bands with coarser bins in the adolescent gap. (v3): A6.1 body-condition filter corrected to a per-dog filter (Policy C with per-band Policy B fallback). v2: design system added, photos, /design/ and /photo-credits/ pages, visual QA.
 
 Part A is for the coding agent. Part B is the browser agent's checklist.
 
@@ -29,7 +29,7 @@ Words used below: **MUST** = required for Definition of Done. **VERIFY** = check
 
 ## A1. Stack
 
-- Next.js (App Router), TypeScript `strict`, Tailwind + shadcn/ui, `next/font` with exactly the two variable families in design.md section 4 (Newsreader, Public Sans), Vitest, Playwright (screenshots/QA only, dev dependency).
+- Next.js (App Router), TypeScript `strict`, Tailwind + shadcn/ui, `next/font` with the single variable family in design.md section 4 (Figtree), Vitest, Playwright (screenshots/QA only, dev dependency).
 - `next.config`: `output: 'export'`, `trailingSlash: true`, `images: { unoptimized: true }`.
 - Host: Cloudflare Pages. Build command `npm run build`, output dir `out`. Node 22.
 - Env vars (read at build time): `NEXT_PUBLIC_WEB3FORMS_KEY`, `NEXT_PUBLIC_GA_ID` (may be empty; render nothing GA-related if empty), `NEXT_PUBLIC_ADSENSE_ID` (empty for now).
@@ -109,10 +109,10 @@ Write `scripts/build_growth_table.py` (pandas). Do not commit the raw data; add 
    **Body condition is a per-dog filter, not a per-visit filter** (this matches the paper; corrected 2026-10-10, v3):
    - a. Drop every dog that has any visit (any age) with BCS_RECORDED of Thin or Heavy.
    - b. Policy C (primary): keep dogs whose body condition at 2–3 years of age (BCS_RECORDED, else BCS_PREDICTED, at their visit(s) with 2.0 <= VISIT_AGE < 3.0) is Normal. Keep ALL of that dog's growth visits from 0.20 to 2.25 years, whether or not those visits were assessed.
-   - c. Policy B (fallback, per size band): dogs with no Thin/Heavy recorded anywhere, unassessed visits allowed.
-   - d. Use Policy C for a size band if every age bin from 12 to 100 weeks has n >= 200 under C. Otherwise use Policy B for that band only, and say so on the page and in `/how-we-calculate/`.
-   - e. Sensitivity check, report it: for every band and bin where both C and B have n >= 200, the % difference between their medians. If any difference is over 3%, stop and report before choosing.
-   - f. Record in `data/growth-ratios.json` which policy each band used, and the dog/visit counts per band and policy.
+   - c. (Decided 2026-10-10, v4) Policy C for ALL bands. No Policy B fallback (B ran 4–5% heavier-for-age than C).
+   - d. Adolescent visit gap (~27–51 weeks): re-bin that range with 8-week, then 12-week bins and keep any bin with n >= 200 as observed data; bridge only the remaining gaps with the isotonic fit. Mark each point `observed` or `interpolated` and store the bin width.
+   - e. Page and `/how-we-calculate/`: state the population (~60,800 dogs confirmed lean at 2–3 years, update to the real count) and footnote interpolated ages in tables.
+   - f. Record in `data/growth-ratios.json` the dog/visit counts per band and the observed/interpolated flag per point.
 3. Size category from AV_BREED-WEIGHT exactly as the paper: I < 6.5 kg; II 6.5–<9; III 9–<15; IV 15–<30; V 30–<40. Drop ≥ 40 kg (the paper's charts do not cover them).
 4. `ratio = WEIGHT / AV_BREED-WEIGHT`. For each category and each age bin (weekly bins from 12 to 52 weeks, then 4-weekly to 104 weeks), compute n, P25, median, P75 of ratio. Drop bins with n < 200 and report them.
 5. Smooth the median series per category with a monotone non-decreasing fit (isotonic regression) and cap at 1.0.
@@ -122,7 +122,8 @@ Write `scripts/build_growth_table.py` (pandas). Do not commit the raw data; add 
 **Calculator logic** (`lib/calc/puppyWeight.ts`):
 
 - Inputs: age (weeks, 8–104, or months), current weight (lb/kg), optional "expected adult size" (Toy/Small/Medium/Large/X-Large = categories I–V; default "Not sure").
-- `ratioAt(cat, weeks)`: linear interpolation of `medianSmoothed` between points; clamp to the table range.
+- (v5) Normalize each band: `plateau = median ratio over observed bins 96–104 weeks`; `normalized = medianSmoothed / plateau` (same for p25/p75). Adult weight means the typical weight of healthy-weight dogs at 2 years, not the breed average (which includes older, heavier dogs).
+- `ratioAt(cat, weeks)`: linear interpolation of `normalized` between points; clamp to the table range.
 - If category given: `adult = weight / ratioAt(cat, weeks)`.
 - If "Not sure": compute the estimate for each category; choose the category whose kg band contains its own estimate; if none or more than one qualifies, choose the qualifying one closest to its band midpoint, else the one whose band edge is nearest. Return the chosen category in the result ("Based on dogs that grow to 15–30 kg").
 - Range: `weight / ratioP75` to `weight / ratioP25` (interpolated the same way), shown as "most puppies like yours end up between X and Y".

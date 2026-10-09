@@ -33,3 +33,9 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+
+# Photo source originals (regenerate derivatives via scripts/process_photos.mjs)
+/scripts/photo-src/
+
+# Local Claude settings
+.claude/settings.local.json

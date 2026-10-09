@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
-import { heading, body } from './fonts';
+import { sans } from './fonts';
 import './globals.css';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
+import { JsonLd } from '@/components/JsonLd';
+import { organizationSchema, websiteSchema } from '@/lib/schema';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://pawscales.com'),
@@ -20,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${heading.variable} ${body.variable}`}>
+    <html lang="en" className={sans.variable}>
       <body>
         <a
           href="#main"
@@ -28,6 +30,8 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <JsonLd data={organizationSchema()} />
+        <JsonLd data={websiteSchema()} />
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />

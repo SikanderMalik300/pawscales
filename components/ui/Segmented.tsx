@@ -7,8 +7,10 @@ export interface SegmentedProps<T extends string> {
   value: T;
   onChange: (v: T) => void;
   label: string;
-  /** Pill style for the 2-segment unit toggle (design.md 7.2). */
-  pill?: boolean;
+  /** Small 28px pill pair for the unit switch on the label row. */
+  compact?: boolean;
+  /** Option groups: horizontally scrollable on mobile, never wrapping. */
+  scroll?: boolean;
   className?: string;
 }
 
@@ -17,7 +19,8 @@ export function Segmented<T extends string>({
   value,
   onChange,
   label,
-  pill = false,
+  compact = false,
+  scroll = false,
   className,
 }: SegmentedProps<T>) {
   return (
@@ -25,8 +28,9 @@ export function Segmented<T extends string>({
       role="radiogroup"
       aria-label={label}
       className={cn(
-        'inline-flex flex-wrap gap-1 border border-border-strong bg-surface p-1',
-        pill ? 'rounded-full' : 'rounded-[6px]',
+        'inline-flex items-center gap-1 rounded-full border border-line bg-sand p-1',
+        compact ? 'h-7' : 'h-10',
+        scroll && 'no-scrollbar max-w-full overflow-x-auto',
         className,
       )}
     >
@@ -40,10 +44,11 @@ export function Segmented<T extends string>({
             aria-checked={selected}
             onClick={() => onChange(o.value)}
             className={cn(
-              'seg-btn px-3 text-[14px] font-semibold',
-              pill ? 'h-8 rounded-full' : 'h-9 rounded-[4px]',
-              'min-h-[36px]',
-              selected ? 'bg-brand-tint text-brand' : 'text-text hover:bg-surface-2',
+              'seg-btn shrink-0 whitespace-nowrap rounded-full font-medium',
+              compact ? 'h-6 px-2.5 text-[12px]' : 'h-8 px-3.5 text-[14px]',
+              selected
+                ? 'bg-white text-ink shadow-[0_1px_2px_rgba(17,19,18,.08)]'
+                : 'text-muted hover:text-ink',
             )}
           >
             {o.label}

@@ -57,6 +57,7 @@ const server = createServer(async (req, res) => {
 const WIDTHS = [360, 768, 1280];
 const PAGES = [
   { name: 'home', path: '/' },
+  { name: 'puppy', path: '/puppy-weight-calculator/' },
   { name: 'design', path: '/design/' },
 ];
 
@@ -88,7 +89,17 @@ for (const pg of PAGES) {
 
     const url = `http://localhost:${PORT}${pg.path}`;
     await page.goto(url, { waitUntil: 'networkidle' });
-    await page.waitForTimeout(250);
+    // Scroll through the page to trigger lazy-loaded images, then return to top.
+    await page.evaluate(async () => {
+      const step = window.innerHeight;
+      for (let y = 0; y < document.body.scrollHeight; y += step) {
+        window.scrollTo(0, y);
+        await new Promise((r) => setTimeout(r, 120));
+      }
+      window.scrollTo(0, 0);
+    });
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(300);
     const file = join(SHOTS, `${pg.name}-${width}.png`);
     await page.screenshot({ path: file, fullPage: true });
     shots.push(`qa/screenshots/${pg.name}-${width}.png`);

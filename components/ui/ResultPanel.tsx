@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { cn } from '@/lib/cn';
 
-/** Result panel pieces (design.md 7.3). */
+/** Result panel pieces (design.md v2 7.3): sand bg, radius 12, padding 24. */
 
 export function Overline({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-[12px] font-semibold uppercase leading-[1.3] tracking-[0.06em] text-muted">
+    <p className="text-[12px] font-semibold uppercase leading-[1.3] tracking-[0.04em] text-muted">
       {children}
     </p>
   );
@@ -23,13 +23,13 @@ export function ResultNumber({
   return (
     <p
       className={cn(
-        'result-number font-semibold leading-[1.1] text-ink tabular-nums',
-        'text-[34px] sm:text-[40px]',
+        'result-number font-medium leading-[1.05] text-ink tabular-nums',
+        'text-[36px] sm:text-[44px]',
         className,
       )}
     >
       {value}
-      {unit && <span className="ml-1 text-[20px] font-semibold text-muted">{unit}</span>}
+      {unit && <span className="ml-1.5 text-[22px] font-medium text-muted">{unit}</span>}
     </p>
   );
 }
@@ -43,14 +43,14 @@ export function SecondaryRow({
 }) {
   return (
     <div className="flex items-baseline justify-between gap-4 py-1 text-[16px]">
-      <span className="text-text">{label}</span>
-      <span className="font-semibold tabular-nums text-ink">{value}</span>
+      <span className="text-muted">{label}</span>
+      <span className="font-medium tabular-nums text-ink">{value}</span>
     </div>
   );
 }
 
 export function ResultDivider() {
-  return <hr className="my-3 border-0 border-t border-border" />;
+  return <hr className="my-3 border-0 border-t border-line" />;
 }
 
 export function ResultPanel({
@@ -66,7 +66,7 @@ export function ResultPanel({
     <div
       aria-live="polite"
       aria-label={ariaLabel}
-      className={cn('flex flex-col', className)}
+      className={cn('rounded-[12px] bg-sand p-6', className)}
     >
       {children}
     </div>

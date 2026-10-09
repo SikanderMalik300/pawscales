@@ -3,15 +3,16 @@ import { Logo } from '@/components/Logo';
 import { HeaderNav } from '@/components/HeaderNav';
 
 /**
- * Global header (design.md 6.1): 56px tall, white, 1px bottom border. Logo left,
- * nav + search right. Sticky on desktop, not on mobile. The interactive bits
- * (menu sheet, search dialog) live in the client HeaderNav.
+ * Header (design.md v2 6.1): 64px desktop / 56px mobile, white, 1px line bottom
+ * border, sticky on desktop. Desktop: hub links left, logo centered, About +
+ * search right. Mobile: logo left, search + menu right (handled in HeaderNav).
  */
 export function SiteHeader() {
   return (
-    <header className="border-b border-border bg-surface md:sticky md:top-0 md:z-40">
-      <div className="container-page flex h-14 items-center justify-between gap-4">
-        <Link href="/" aria-label="PawScales home" className="shrink-0">
+    <header className="border-b border-line bg-white md:sticky md:top-0 md:z-40">
+      <div className="container-page flex h-14 items-center justify-between gap-4 md:h-16">
+        {/* Mobile logo (left). Desktop logo is centered inside HeaderNav. */}
+        <Link href="/" aria-label="PawScales home" className="shrink-0 md:hidden">
           <Logo />
         </Link>
         <HeaderNav />

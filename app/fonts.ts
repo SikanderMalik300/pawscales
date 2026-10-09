@@ -1,15 +1,8 @@
-import { Newsreader, Public_Sans } from 'next/font/google';
+import { Figtree } from 'next/font/google';
 
-// design.md section 4: exactly two variable families, one file each.
-export const heading = Newsreader({
+// design.md v2 section 4: ONE family for everything, Figtree variable.
+export const sans = Figtree({
   subsets: ['latin'],
   display: 'swap',
-  axes: ['opsz'],
-  variable: '--font-heading',
-});
-
-export const body = Public_Sans({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-body',
+  variable: '--font-sans',
 });
