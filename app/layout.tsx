@@ -15,6 +15,15 @@ export const metadata: Metadata = {
   description:
     'Free calculators and charts for dog and cat owners, built from published veterinary research and open data. Every number has a source.',
   alternates: { canonical: 'https://pawscales.com/' },
+  manifest: '/site.webmanifest',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+    other: [{ rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#1F5C45' }],
+  },
   openGraph: {
     type: 'website',
     siteName: 'PawScales',
@@ -22,6 +31,10 @@ export const metadata: Metadata = {
     images: [{ url: '/og/default.png', width: 1200, height: 630 }],
   },
   twitter: { card: 'summary_large_image', images: ['/og/default.png'] },
+};
+
+export const viewport = {
+  themeColor: '#1F5C45',
 };
 
 export default function RootLayout({

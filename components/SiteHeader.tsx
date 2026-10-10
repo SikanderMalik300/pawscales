@@ -13,7 +13,7 @@ export function SiteHeader() {
       <div className="container-page flex h-14 items-center justify-between gap-4 md:h-16">
         {/* Mobile logo (left). Desktop logo is centered inside HeaderNav. */}
         <Link href="/" aria-label="PawScales home" className="shrink-0 md:hidden">
-          <Logo />
+          <Logo className="h-6" />
         </Link>
         <HeaderNav />
       </div>

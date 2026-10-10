@@ -10,7 +10,7 @@ export function organizationSchema() {
     '@type': 'Organization',
     name: SITE.name,
     url: SITE.url + '/',
-    logo: `${SITE.url}/logo-square.png`,
+    logo: `${SITE.url}/logo-square-512.png`,
     email: SITE.email,
     founder: { '@id': PERSON_ID },
   };

@@ -1,6 +1,6 @@
 // Build-time OG images (design.md v2 section 8): 1200x630, left hub-color block
 // with the page title, right the page photo. No gradient, no emoji.
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import sharp from 'sharp';
@@ -55,13 +55,16 @@ function leftSvg(title, color) {
   <svg width="600" height="630" viewBox="0 0 600 630" xmlns="http://www.w3.org/2000/svg">
     <rect width="600" height="630" fill="${color}"/>
     <g font-family="Helvetica, Arial, sans-serif">
-      <rect x="64" y="60" width="26" height="26" rx="6" fill="#1F5C45"/>
-      <text x="100" y="80" font-size="24" font-weight="600" fill="#111312" letter-spacing="-0.5">PawScales</text>
+      <text x="120" y="82" font-size="26" font-weight="600" fill="#111312" letter-spacing="-0.5">PawScales</text>
       <text font-size="54" font-weight="500" fill="#111312" letter-spacing="-1">${tspans}</text>
       <text x="64" y="570" font-size="22" fill="#5E6360">pawscales.com · built on real data</text>
     </g>
   </svg>`);
 }
+
+// The brand mark (pawscales-mark.svg), rendered once and composited top-left.
+const markSvg = await readFile(join(process.cwd(), 'public', 'pawscales-mark.svg'));
+const markPng = await sharp(markSvg, { density: 300 }).resize(44, 44).png().toBuffer();
 
 await mkdir(OUT, { recursive: true });
 let n = 0;
@@ -74,6 +77,7 @@ for (const p of PAGES) {
   await sharp({ create: { width: 1200, height: 630, channels: 3, background: '#FFFFFF' } })
     .composite([
       { input: leftSvg(p.title, p.color), top: 0, left: 0 },
+      { input: markPng, top: 50, left: 64 },
       { input: right, top: 0, left: 600 },
     ])
     .png()

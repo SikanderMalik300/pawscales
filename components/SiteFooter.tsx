@@ -35,7 +35,7 @@ export function SiteFooter() {
     <footer className="mt-16 border-t border-line bg-sand">
       <div className="container-page flex flex-col gap-3 py-8">
         <div>
-          <Logo />
+          <Logo className="h-7" />
           <p className="mt-1.5 text-[14px] text-muted">
             Free dog and cat calculators, built on real data.
           </p>

@@ -20,6 +20,7 @@ import { AuthorBox } from '@/components/ui/AuthorBox';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { ShowMath } from '@/components/ui/ShowMath';
 import { PhotoTile } from '@/components/ui/PhotoTile';
+import { Logo } from '@/components/Logo';
 import growth from '@/data/growth-ratios.json';
 
 const TOKENS = [
@@ -56,6 +57,39 @@ export default function DesignPage() {
         Internal showcase of tokens and components. Not indexed, not in the nav or
         sitemap.
       </p>
+
+      <Section title="Logo">
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-wrap items-center gap-x-10 gap-y-6">
+            <div>
+              <Logo className="h-7" />
+              <p className="mt-2 text-[13px] text-muted">Header, light background (28px)</p>
+            </div>
+            <div className="rounded-[16px] bg-ink p-5">
+              <Logo className="h-7" white />
+              <p className="mt-2 text-[13px]" style={{ color: '#BFE0CC' }}>On dark background</p>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-end gap-8">
+            <div className="text-center">
+              <img src="/pawscales-mark.svg" alt="PawScales mark" width={64} height={64} className="h-16 w-16" />
+              <p className="mt-2 text-[13px] text-muted">Mark 64px</p>
+            </div>
+            <div className="text-center">
+              <img src="/apple-touch-icon.png" alt="App icon" width={48} height={48} className="h-12 w-12 rounded-[10px]" />
+              <p className="mt-2 text-[13px] text-muted">App icon</p>
+            </div>
+            <div className="text-center">
+              <img src="/favicon.svg" alt="Favicon" width={32} height={32} className="h-8 w-8" />
+              <p className="mt-2 text-[13px] text-muted">Favicon 32px</p>
+            </div>
+            <div className="text-center">
+              <img src="/favicon-16.png" alt="Favicon 16" width={16} height={16} className="h-4 w-4" />
+              <p className="mt-2 text-[13px] text-muted">Favicon 16px</p>
+            </div>
+          </div>
+        </div>
+      </Section>
 
       <Section title="Color tokens">
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">

@@ -80,7 +80,7 @@ export function HeaderNav() {
         </nav>
         <div className="flex justify-center">
           <Link href="/" aria-label="PawScales home">
-            <Logo />
+            <Logo className="h-7" />
           </Link>
         </div>
         <div className="flex items-center justify-end gap-5">
@@ -125,7 +125,7 @@ export function HeaderNav() {
       {menuOpen && (
         <div className="fixed inset-0 z-50 bg-white md:hidden">
           <div className="container-page flex h-14 items-center justify-between border-b border-line">
-            <Logo />
+            <Logo className="h-6" />
             <button
               type="button"
               onClick={() => setMenuOpen(false)}
