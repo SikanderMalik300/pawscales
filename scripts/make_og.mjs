@@ -66,12 +66,31 @@ function leftSvg(title, color) {
 const markSvg = await readFile(join(process.cwd(), 'public', 'pawscales-mark.svg'));
 const markPng = await sharp(markSvg, { density: 300 }).resize(44, 44).png().toBuffer();
 
+// Focal points (id -> {fx, fy}) read from lib/data/photos.ts so OG crops match
+// the on-page crops. The OG photo panel is 600x630; we crop around the focal point.
+const photosSrc = await readFile(join(process.cwd(), 'lib', 'data', 'photos.ts'), 'utf8');
+const FOCAL = {};
+for (const m of photosSrc.matchAll(/id:\s*'([^']+)',[\s\S]*?focalX:\s*([0-9.]+),\s*focalY:\s*([0-9.]+),/g)) {
+  FOCAL[m[1]] = { fx: Number(m[2]), fy: Number(m[3]) };
+}
+
+async function focalCrop(path, fx, fy, W = 600, H = 630) {
+  const meta = await sharp(path).metadata();
+  const scale = Math.max(W / meta.width, H / meta.height);
+  const sw = Math.round(meta.width * scale);
+  const sh = Math.round(meta.height * scale);
+  const left = Math.round(Math.min(Math.max(fx * sw - W / 2, 0), sw - W));
+  const top = Math.round(Math.min(Math.max(fy * sh - H / 2, 0), sh - H));
+  return sharp(path).resize(sw, sh).extract({ left, top, width: W, height: H }).toBuffer();
+}
+
 await mkdir(OUT, { recursive: true });
 let n = 0;
 for (const p of PAGES) {
   const photoPath = join(SRC, `${p.photo}.jpg`);
+  const focal = FOCAL[p.photo] ?? { fx: 0.5, fy: 0.5 };
   const right = existsSync(photoPath)
-    ? await sharp(photoPath).resize(600, 630, { fit: 'cover', position: 'attention' }).toBuffer()
+    ? await focalCrop(photoPath, focal.fx, focal.fy)
     : await sharp({ create: { width: 600, height: 630, channels: 3, background: '#F5F3EF' } }).jpeg().toBuffer();
 
   await sharp({ create: { width: 1200, height: 630, channels: 3, background: '#FFFFFF' } })
