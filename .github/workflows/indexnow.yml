@@ -1,0 +1,27 @@
+name: IndexNow
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      all:
+        description: Submit every sitemap URL (not just today's changes)
+        type: boolean
+        default: false
+
+jobs:
+  indexnow:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Submit changed URLs to IndexNow
+        env:
+          INDEXNOW_ALL: ${{ inputs.all }}
+        run: node scripts/indexnow.mjs
