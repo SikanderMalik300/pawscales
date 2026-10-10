@@ -66,6 +66,16 @@ describe('dog collar size', () => {
     expect(r.collarIn).toBe(42);
     expect(r.genericSize).toBeNull();
   });
+  it('a small 9 in neck maps to XS and a 12 in collar', () => {
+    const r = sizeCollar(9)!;
+    expect(r.genericSize).toBe('XS');
+    expect(r.collarIn).toBe(11);
+  });
+  it('cm input and in input agree for the same neck', () => {
+    const inch = sizeCollar(16)!;
+    const cm = sizeCollar(16 * 2.54)!;
+    expect(cm.collarCm).toBe(inch.collarCm);
+  });
 });
 
 describe('dog harness size', () => {
