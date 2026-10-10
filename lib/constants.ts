@@ -22,6 +22,7 @@ const CORNELL =
 const MERCK =
   'https://www.merckvetmanual.com/dog-owners/reproductive-disorders-of-dogs/management-of-reproduction-in-dogs';
 const PNA = 'https://petnutritionalliance.org/wp-content/uploads/2023/03/MER.RER_.PNA_.pdf';
+const AKC_WHELP = 'https://www.akc.org/expert-advice/dog-breeding/whelping-and-caring-for-newborn-puppies/';
 
 // ---- Dog pregnancy (A6.2) ----
 export const PREGNANCY = {
@@ -34,9 +35,9 @@ export const PREGNANCY = {
   normalTempHighF: S(102.5, 'Cornell Riney Canine Health Center', CORNELL),
   merckRange: S('62 to 64 days', 'Merck Veterinary Manual (owner), Management of reproduction in dogs', MERCK),
   xrayAfterDay: S(55, 'Merck Veterinary Manual (owner)', MERCK, 'X-rays after day 55 are best for counting puppies'),
-  // Derived from the 63-day due date: prepare ~1 week before; monitor temperature ~6 days before.
-  whelpBoxDay: S(55, 'Derived from the 63-day due date (about a week before)', CORNELL),
-  tempTwiceDailyDay: S(57, 'Derived from the 63-day due date (about 6 days before)', CORNELL),
+  // AKC: introduce the dam to the whelping box at least 5 days before her due date.
+  // We show that deadline as a date (due date minus 5 days = day 58 from breeding).
+  whelpBoxDaysBeforeDue: S(5, 'American Kennel Club, whelping and caring for newborn puppies', AKC_WHELP, 'introduce the dam to the whelping box at least 5 days before her delivery date'),
 };
 
 // ---- Dog heat cycle (A6.11) ----

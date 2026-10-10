@@ -61,8 +61,11 @@ export function PregnancyCalculator() {
                 ) : (
                   <SecondaryRow label="Length" value="About 63 days" />
                 )}
-                <SecondaryRow label="Prepare the whelping box by" value={fmtLong(r.whelpBox)} />
-                <SecondaryRow label="Start temperature twice daily from" value={fmtLong(r.tempWatch)} />
+                <SecondaryRow label="Have the whelping box ready by" value={fmtLong(r.whelpBox)} />
+                <p className="mt-2 text-[14px] text-muted">
+                  Check her temperature twice a day as the due date nears. A drop below
+                  99°F usually means whelping within about 24 hours.
+                </p>
               </>
             )}
           </ResultPanel>

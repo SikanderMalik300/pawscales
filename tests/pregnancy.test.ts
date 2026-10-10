@@ -35,10 +35,11 @@ describe('dog pregnancy calculator', () => {
     expect(toISO(r.latest)).toBe('2027-01-05');
   });
 
-  it('whelping box day 55 and temperature day 57', () => {
+  it('whelping box ready at least 5 days before the due date (AKC)', () => {
     const r = predictPregnancy(iso('2026-11-01'), false);
-    expect(toISO(r.whelpBox)).toBe(toISO(addDays(iso('2026-11-01'), 55)));
-    expect(toISO(r.tempWatch)).toBe(toISO(addDays(iso('2026-11-01'), 57)));
+    // due 2027-01-03 minus 5 days = 2026-12-29
+    expect(toISO(r.whelpBox)).toBe('2026-12-29');
+    expect(toISO(r.whelpBox)).toBe(toISO(addDays(r.due, -5)));
   });
 
   it('today inside pregnancy gives day, week and days to go', () => {

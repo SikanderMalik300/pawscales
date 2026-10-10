@@ -18,6 +18,7 @@ const rows: Row[] = [
   { label: 'Dog gestation from ovulation', value: `${PREGNANCY.gestationFromOvulation.value} days ±${PREGNANCY.ovulationRangeDays.value}`, s: PREGNANCY.gestationFromOvulation },
   { label: 'Pre-labor temperature drop', value: `below ${PREGNANCY.tempDropF.value}°F (normal ${PREGNANCY.normalTempLowF.value}–${PREGNANCY.normalTempHighF.value}°F)`, s: PREGNANCY.tempDropF },
   { label: 'X-ray to count puppies', value: `after day ${PREGNANCY.xrayAfterDay.value}`, s: PREGNANCY.xrayAfterDay },
+  { label: 'Whelping box ready', value: `at least ${PREGNANCY.whelpBoxDaysBeforeDue.value} days before the due date`, s: PREGNANCY.whelpBoxDaysBeforeDue },
   { label: 'Heat interval (interestrous)', value: `${HEAT.interestrousMonths.value} months (${HEAT.intervalMinMonths.value}–${HEAT.intervalMaxMonths.value})`, s: HEAT.interestrousMonths },
   { label: 'Proestrus / estrus length', value: `about ${HEAT.proestrusDays.value} days each`, s: HEAT.proestrusDays },
   { label: 'Resting energy requirement', value: `RER = ${ENERGY.rerCoefficient.value} × kg^${ENERGY.rerExponent.value}`, s: ENERGY.rerCoefficient },

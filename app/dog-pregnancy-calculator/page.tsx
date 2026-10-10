@@ -51,8 +51,8 @@ export default function Page() {
         </ul>
       }
       tips={[
-        'Start taking her temperature twice a day from about day 57. A drop below 99°F usually means whelping within 24 hours.',
-        'Have the whelping box ready and familiar by day 55 so she settles in before labor.',
+        'Start checking her temperature twice a day as the due date nears. A drop below 99°F usually means whelping within 24 hours.',
+        'Have the whelping box ready at least 5 days before the due date so she settles in before labor.',
         'Ask your vet about an X-ray after day 55 to count the puppies and plan.',
         'Normal temperature is 100–102.5°F, so learn her baseline before the pre-labor drop.',
       ]}
@@ -68,6 +68,7 @@ export default function Page() {
       sources={[
         { name: 'Cornell Riney Canine Health Center, Normal whelping process.', url: 'https://www.vet.cornell.edu/departments/riney-canine-health-center/canine-health-information/normal-whelping-process' },
         { name: 'Merck Veterinary Manual (owner), Management of reproduction in dogs.', url: 'https://www.merckvetmanual.com/dog-owners/reproductive-disorders-of-dogs/management-of-reproduction-in-dogs' },
+        { name: 'American Kennel Club, Whelping and caring for newborn puppies (set up the whelping box at least 5 days before the due date).', url: 'https://www.akc.org/expert-advice/dog-breeding/whelping-and-caring-for-newborn-puppies/' },
       ]}
     />
   );

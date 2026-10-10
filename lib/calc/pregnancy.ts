@@ -8,8 +8,7 @@ export interface PregnancyResult {
   due: Date;
   earliest: Date;
   latest: Date;
-  whelpBox: Date; // prepare by
-  tempWatch: Date; // start temperature twice daily
+  whelpBox: Date; // have the whelping box ready by (AKC: at least 5 days before the due date)
   rangeDays: number;
   dayOfPregnancy: number | null; // relative to today, if provided
   week: number | null;
@@ -27,8 +26,8 @@ export function predictPregnancy(
   const due = addDays(breeding, GESTATION);
   const earliest = addDays(due, -range);
   const latest = addDays(due, range);
-  const whelpBox = addDays(breeding, PREGNANCY.whelpBoxDay.value);
-  const tempWatch = addDays(breeding, PREGNANCY.tempTwiceDailyDay.value);
+  // AKC: have the whelping box ready at least 5 days before the due date.
+  const whelpBox = addDays(due, -PREGNANCY.whelpBoxDaysBeforeDue.value);
 
   let dayOfPregnancy: number | null = null;
   let week: number | null = null;
@@ -42,7 +41,7 @@ export function predictPregnancy(
     }
   }
 
-  return { due, earliest, latest, whelpBox, tempWatch, rangeDays: range, dayOfPregnancy, week, daysToGo };
+  return { due, earliest, latest, whelpBox, rangeDays: range, dayOfPregnancy, week, daysToGo };
 }
 
 // Week-by-week milestones (day ranges). Sources: Cornell whelping, Merck
@@ -55,6 +54,6 @@ export const TIMELINE: { week: number; days: string; milestone: string }[] = [
   { week: 5, days: 'Days 29–35', milestone: 'Abdominal palpation window (about days 28–35). Fetuses develop quickly.' },
   { week: 6, days: 'Days 36–42', milestone: 'Belly starts to show. Appetite and weight rise.' },
   { week: 7, days: 'Days 43–49', milestone: 'Fetal skeletons begin to show on X-ray after about day 45.' },
-  { week: 8, days: 'Days 50–56', milestone: 'Prepare the whelping box. X-rays after day 55 are best for counting puppies.' },
-  { week: 9, days: 'Days 57–63', milestone: 'Take temperature twice daily. A drop below 99°F signals whelping within about 24 hours.' },
+  { week: 8, days: 'Days 50–56', milestone: 'Set up the whelping box (AKC: at least 5 days before the due date). X-rays after day 55 are best for counting puppies.' },
+  { week: 9, days: 'Days 57–63', milestone: 'Check her temperature twice a day. A drop below 99°F signals whelping within about 24 hours.' },
 ];
