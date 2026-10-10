@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { bySlug, SITE } from '@/lib/registry';
+import { toolMetadata } from '@/lib/seo';
 import { getPhoto } from '@/lib/data/photos';
 import { ratioAt, CATS, SIZE_LABELS, type Cat } from '@/lib/calc/puppyWeight';
 import { Band } from '@/components/ui/Band';
@@ -25,18 +26,7 @@ const photo = getPhoto('puppy-weight-calculator')!;
 const url = `${SITE.url}/${tool.slug}/`;
 const UPDATED = 'October 10, 2026';
 
-export const metadata: Metadata = {
-  title: tool.title,
-  description: tool.metaDescription,
-  alternates: { canonical: url },
-  openGraph: {
-    title: tool.title,
-    description: tool.metaDescription,
-    url,
-    type: 'website',
-  },
-  twitter: { card: 'summary_large_image' },
-};
+export const metadata: Metadata = toolMetadata(tool);
 
 const REF_WEEKS = [12, 16, 20, 24, 32, 40, 52, 78];
 const INTERP = new Set([32, 40, 78]);

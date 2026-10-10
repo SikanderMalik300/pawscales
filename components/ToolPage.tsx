@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { bySlug, SITE, HUBS, type ToolEntry } from '@/lib/registry';
+import { bySlug, SITE, HUBS } from '@/lib/registry';
 import { getPhoto } from '@/lib/data/photos';
 import { Band } from '@/components/ui/Band';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
@@ -194,16 +194,4 @@ function faqText(a: ReactNode): string {
   return typeof a === 'string' ? a : '';
 }
 
-export function toolMetadata(tool: ToolEntry) {
-  const url = `${SITE.url}/${tool.slug}/`;
-  return {
-    title: tool.title,
-    description: tool.metaDescription,
-    alternates: { canonical: url },
-    openGraph: {
-      title: tool.title, description: tool.metaDescription, url, type: 'website' as const,
-      images: [{ url: `/og/${tool.slug}.png`, width: 1200, height: 630 }],
-    },
-    twitter: { card: 'summary_large_image' as const, images: [`/og/${tool.slug}.png`] },
-  };
-}
+export { toolMetadata } from '@/lib/seo';
