@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { Logo } from '@/components/Logo';
+import { CookieSettings } from '@/components/CookieSettings';
+import { isAnalyticsConfigured } from '@/lib/ga';
 
 /**
  * Compact footer (design.md v2 6.6): sand background, logo + one line, three
@@ -68,9 +70,12 @@ export function SiteFooter() {
             { href: '/photo-credits/', label: 'Photo credits' },
           ]}
         />
-        <p className="mt-1 border-t border-line pt-3 text-[13px] text-muted">
-          © 2026 PawScales. Estimates only, not veterinary advice.
-        </p>
+        <div className="mt-1 flex flex-wrap items-center justify-between gap-2 border-t border-line pt-3">
+          <p className="text-[13px] text-muted">
+            © 2026 PawScales. Estimates only, not veterinary advice.
+          </p>
+          {isAnalyticsConfigured() && <CookieSettings />}
+        </div>
       </div>
     </footer>
   );

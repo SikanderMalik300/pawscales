@@ -18,7 +18,7 @@ export default function Page() {
       <h2>Who processes data for us</h2>
       <ul>
         <li><strong>Cloudflare</strong> hosts the site and provides privacy-friendly Web Analytics (aggregate page views, no cookies, no cross-site tracking).</li>
-        <li><strong>Google Analytics 4</strong> is used only if enabled, to understand which tools are useful. When active, it respects the consent choice described below.</li>
+        <li><strong>Google Analytics 4</strong>, to understand which tools are useful. It respects the consent choice described below, and you can opt out with Google&rsquo;s <a className="link" href="https://tools.google.com/dlpage/gaoptout">browser opt-out add-on</a>.</li>
         <li><strong>Web3Forms</strong> delivers the contact form. If you email us through the form, your name, email and message are sent so we can reply.</li>
       </ul>
       <h2>Cookies and consent</h2>
