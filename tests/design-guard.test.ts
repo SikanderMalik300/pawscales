@@ -60,4 +60,19 @@ describe('design guardrails', () => {
     const hits = files.filter((f) => emoji.test(readFileSync(f, 'utf8')));
     expect(hits, `emoji in:\n${hits.join('\n')}`).toEqual([]);
   });
+
+  // A13 / design.md: no em dashes in visible text. Allowed only in the <title>
+  // metadata (the `title:` property) and in a source citation name.
+  it('no em dash (—) in page body text', () => {
+    const violations: string[] = [];
+    for (const f of files) {
+      readFileSync(f, 'utf8').split('\n').forEach((line, i) => {
+        if (!line.includes('—')) return;
+        if (/\btitle:/.test(line)) return; // <title> metadata
+        if (/\bname:\s*['"`].*—/.test(line) || /citation/.test(line)) return; // source titles
+        violations.push(`${f}:${i + 1}  ${line.trim().slice(0, 80)}`);
+      });
+    }
+    expect(violations, `em dash in body text:\n${violations.join('\n')}`).toEqual([]);
+  });
 });

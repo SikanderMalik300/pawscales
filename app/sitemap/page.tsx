@@ -29,7 +29,8 @@ function Group({ heading, items }: { heading: string; items: { href: string; lab
       <ul>
         {items.map((i) => (
           <li key={i.href}>
-            <Link className="link" href={i.href}>{i.label}</Link> — {i.d}
+            <Link className="link" href={i.href}>{i.label}</Link>
+            <span className="block text-[14px] text-muted">{i.d}</span>
           </li>
         ))}
       </ul>
