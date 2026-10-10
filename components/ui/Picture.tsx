@@ -11,13 +11,17 @@ const CROPS: Record<Crop, { widths: number[]; w: number; h: number }> = {
 /**
  * Responsive <picture> (design.md v2 section 8): AVIF + WebP + JPEG fallback,
  * explicit width/height, object-position from the photo's focal point.
- * `priority` sets eager + high fetchpriority; otherwise lazy + low.
+ * - `priority` (hero): loading eager + fetchpriority high.
+ * - `eager` (above-the-fold band photo): loading eager, fetchpriority default,
+ *   so it loads immediately without competing with the H1 for LCP.
+ * - otherwise: lazy + low.
  */
 export function Picture({
   photo,
   crop = 'ld',
   sizes = '100vw',
   priority = false,
+  eager = false,
   className,
   rounded = 'rounded-[16px]',
 }: {
@@ -25,6 +29,7 @@ export function Picture({
   crop?: Crop;
   sizes?: string;
   priority?: boolean;
+  eager?: boolean;
   className?: string;
   rounded?: string;
 }) {
@@ -32,6 +37,10 @@ export function Picture({
   const base = `/photos/${photo.id}-${crop}`;
   const srcset = (fmt: string) =>
     c.widths.map((w) => `${base}-${w}.${fmt} ${w}w`).join(', ');
+
+  const loading = priority || eager ? 'eager' : 'lazy';
+  // fetchpriority: high only for the hero; default (omit) for band photos; low for the rest.
+  const fetchPriority = priority ? 'high' : eager ? undefined : 'low';
 
   return (
     <picture>
@@ -44,9 +53,9 @@ export function Picture({
         width={c.w}
         height={c.h}
         alt={photo.alt}
-        loading={priority ? 'eager' : 'lazy'}
+        loading={loading}
         // @ts-expect-error fetchpriority is valid HTML, not yet in React types
-        fetchpriority={priority ? 'high' : 'low'}
+        fetchpriority={fetchPriority}
         decoding="async"
         className={`${rounded} h-full w-full object-cover ${className ?? ''}`}
         style={{ objectPosition: `${photo.focalX * 100}% ${photo.focalY * 100}%` }}
