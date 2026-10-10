@@ -1,0 +1,29 @@
+# PawScales
+
+> Free dog and cat calculators and charts, built from published veterinary
+> research and open data. Every number has a source, the maths runs in the
+> browser, and nothing is behind a login. Author: Sikander Malik. Not veterinary
+> advice.
+
+## Dog calculators
+- [Puppy Weight Calculator](https://pawscales.com/puppy-weight-calculator/): Predict a puppy's adult weight from age and current weight, using growth data on 60,000+ dogs.
+- [Dog Pregnancy Calculator](https://pawscales.com/dog-pregnancy-calculator/): Due date and week-by-week timeline from the breeding date (about 63 days).
+- [Dog Years Calculator](https://pawscales.com/dog-years-calculator/): Dog age in human years by size, plus the 2020 DNA-based formula.
+- [Dog Food Calculator](https://pawscales.com/dog-food-calculator/): Daily calories and cups from weight and life stage (RER = 70 × kg^0.75).
+- [Raw Dog Food Calculator](https://pawscales.com/raw-dog-food-calculator/): Grams of raw food per day from calorie needs and the food's energy density.
+- [Dog Heat Cycle Calculator](https://pawscales.com/dog-heat-cycle-calculator/): Next heat and fertile window from the last heat date.
+
+## Cat calculators
+- [Cat Years Calculator](https://pawscales.com/cat-years-calculator/): Cat age in human years (first year ~15, then ~4 per year).
+- [Kitten Age Chart](https://pawscales.com/kitten-age-chart/): Estimate a kitten's age from weight, teeth, eyes and ears.
+- [Cat Food Calculator](https://pawscales.com/cat-food-calculator/): Daily calories and cans or cups, split between wet and dry.
+
+## Dog size charts
+- [Dog Crate Size Chart](https://pawscales.com/dog-crate-size-chart/): Find the right crate length from your dog's measurements.
+- [Dog Collar Size Chart](https://pawscales.com/dog-collar-size-chart/): Neck measurement to collar size, with a breed chart.
+- [Dog Harness Size Chart](https://pawscales.com/dog-harness-size-chart/): Compare harness sizes across brands from chest girth.
+
+## About
+- [About PawScales](https://pawscales.com/about/)
+- [How we calculate](https://pawscales.com/how-we-calculate/)
+- [Editorial policy](https://pawscales.com/editorial-policy/)

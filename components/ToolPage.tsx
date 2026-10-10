@@ -200,7 +200,10 @@ export function toolMetadata(tool: ToolEntry) {
     title: tool.title,
     description: tool.metaDescription,
     alternates: { canonical: url },
-    openGraph: { title: tool.title, description: tool.metaDescription, url, type: 'website' as const },
-    twitter: { card: 'summary_large_image' as const },
+    openGraph: {
+      title: tool.title, description: tool.metaDescription, url, type: 'website' as const,
+      images: [{ url: `/og/${tool.slug}.png`, width: 1200, height: 630 }],
+    },
+    twitter: { card: 'summary_large_image' as const, images: [`/og/${tool.slug}.png`] },
   };
 }

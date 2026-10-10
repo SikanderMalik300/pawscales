@@ -1,6 +1,18 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { byCategory, HUBS, bySlug } from '@/lib/registry';
+
+export const metadata: Metadata = {
+  title: 'PawScales: Free dog and cat calculators, built on real data',
+  alternates: { canonical: 'https://pawscales.com/' },
+  openGraph: {
+    title: 'Free dog and cat calculators, built on real data',
+    url: 'https://pawscales.com/',
+    images: [{ url: '/og/home.png', width: 1200, height: 630 }],
+  },
+  twitter: { card: 'summary_large_image', images: ['/og/home.png'] },
+};
 import { getPhoto } from '@/lib/data/photos';
 import { Picture } from '@/components/ui/Picture';
 import { PhotoTile } from '@/components/ui/PhotoTile';

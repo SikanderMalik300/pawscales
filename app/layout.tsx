@@ -14,6 +14,14 @@ export const metadata: Metadata = {
   },
   description:
     'Free calculators and charts for dog and cat owners, built from published veterinary research and open data. Every number has a source.',
+  alternates: { canonical: 'https://pawscales.com/' },
+  openGraph: {
+    type: 'website',
+    siteName: 'PawScales',
+    url: 'https://pawscales.com/',
+    images: [{ url: '/og/default.png', width: 1200, height: 630 }],
+  },
+  twitter: { card: 'summary_large_image', images: ['/og/default.png'] },
 };
 
 export default function RootLayout({
