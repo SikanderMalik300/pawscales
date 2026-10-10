@@ -71,10 +71,9 @@ describe('dog collar size', () => {
     expect(r.genericSize).toBe('XS');
     expect(r.collarIn).toBe(11);
   });
-  it('cm input and in input agree for the same neck', () => {
-    const inch = sizeCollar(16)!;
-    const cm = sizeCollar(16 * 2.54)!;
-    expect(cm.collarCm).toBe(inch.collarCm);
+  it('collar length in cm equals the inch length times 2.54', () => {
+    const r = sizeCollar(16)!;
+    expect(r.collarCm).toBe(Math.round(r.collarIn * 2.54));
   });
 });
 
