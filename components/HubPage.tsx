@@ -63,7 +63,7 @@ export function HubPage({
           {photo && (
             <div className="md:col-span-5">
               <div className="aspect-[4/3] overflow-hidden rounded-[16px]">
-                <Picture photo={photo} crop="ld" sizes="(min-width: 960px) 40vw, 100vw" priority />
+                <Picture photo={photo} crop="ld" sizes="(min-width: 960px) 40vw, 100vw" />
               </div>
             </div>
           )}

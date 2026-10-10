@@ -125,7 +125,7 @@ export default function Page() {
           </div>
           <div className="hidden md:col-span-4 md:block">
             <div className="aspect-[4/3] overflow-hidden rounded-[16px]">
-              <Picture photo={photo} crop="ld" sizes="(min-width: 960px) 33vw, 100vw" priority />
+              <Picture photo={photo} crop="ld" sizes="(min-width: 960px) 33vw, 100vw" />
             </div>
             <p className="mt-1 text-[12px] text-muted">
               Photo: {photo.photographer} / {photo.source}
