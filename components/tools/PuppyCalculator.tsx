@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/ResultPanel';
 import { GrowthChart, type ChartPoint } from '@/components/ui/GrowthChart';
 import { ShowMath } from '@/components/ui/ShowMath';
+import { breedPages } from '@/lib/registry';
 import {
   predictPuppyWeight,
   SIZE_LABELS,
@@ -215,6 +216,18 @@ export function PuppyCalculator() {
                   value={`${Math.round(result.pctNow)}%`}
                 />
                 <SecondaryRow label="Based on dogs that grow to" value={bandLabelKg(result.cat)} />
+                {size === 'ns' && (result.cat === 'IV' || result.cat === 'V') && breedPages().length > 0 && (
+                  <p className="mt-1 text-[14px] text-ink">
+                    See breed-specific charts:{' '}
+                    {breedPages().map((b, i) => (
+                      <span key={b.slug}>
+                        {i > 0 && ', '}
+                        <a className="link" href={`/${b.slug}/`}>{b.shortName.replace(' weight chart', '')}</a>
+                      </span>
+                    ))}
+                    .
+                  </p>
+                )}
                 <div className="my-3">
                   <GrowthChart
                     points={chart}

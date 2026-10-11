@@ -24,6 +24,7 @@ export interface ToolEntry {
   fromOwner: string | null; // "From Sikander" note; null renders nothing
   notCovered: string[];
   thumb?: string; // photo id (lib/data/photos.ts)
+  breedPage?: boolean; // breed/size growth chart, shown in its own hub section
 }
 
 export const HUBS: {
@@ -242,11 +243,38 @@ export const REGISTRY: ToolEntry[] = [
   },
 ];
 
+// Breed / size growth-chart pages (grown one per day). Kept out of the main hub
+// tiles and shown in a "Breed growth charts" section instead.
+export const BREED_PAGES: ToolEntry[] = [
+  {
+    slug: 'golden-retriever-weight-chart',
+    title: 'Golden Retriever Weight Chart: Puppy to Adult by Age',
+    metaDescription:
+      'See how much a Golden Retriever should weigh at every month, for males and females. Based on growth data from 60,951 dogs and the AKC breed standard.',
+    h1: 'Golden Retriever Weight Chart',
+    shortName: 'Golden Retriever weight chart',
+    oneLiner: 'Golden Retriever weight by month, male and female.',
+    category: 'dog-size-charts',
+    related: ['puppy-weight-calculator', 'dog-food-calculator', 'dog-crate-size-chart', 'german-shepherd-weight-chart'],
+    lastUpdated: '2026-10-12',
+    sources: [],
+    fromOwner: null,
+    notCovered: [],
+    breedPage: true,
+  },
+];
+
+const ALL = [...REGISTRY, ...BREED_PAGES];
+
 export const bySlug = (slug: string): ToolEntry | undefined =>
-  REGISTRY.find((t) => t.slug === slug);
+  ALL.find((t) => t.slug === slug);
 
 export const byCategory = (cat: Category): ToolEntry[] =>
-  REGISTRY.filter((t) => t.category === cat);
+  REGISTRY.filter((t) => t.category === cat && !t.breedPage);
+
+export const breedPages = (): ToolEntry[] => BREED_PAGES;
+
+export const allPages = (): ToolEntry[] => ALL;
 
 export const SITE = {
   name: 'PawScales',

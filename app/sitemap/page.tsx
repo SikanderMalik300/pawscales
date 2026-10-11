@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { TextPage } from '@/components/TextPage';
-import { HUBS, byCategory } from '@/lib/registry';
+import { HUBS, byCategory, breedPages } from '@/lib/registry';
 
 export const metadata: Metadata = {
   title: 'Sitemap — PawScales',
@@ -51,6 +51,12 @@ export default function Page() {
           ]}
         />
       ))}
+      {breedPages().length > 0 && (
+        <Group
+          heading="Breed growth charts"
+          items={breedPages().map((t) => ({ href: `/${t.slug}/`, label: t.shortName, d: t.oneLiner }))}
+        />
+      )}
       <Group heading="Company" items={COMPANY} />
     </TextPage>
   );

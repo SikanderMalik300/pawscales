@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { bySlug, SITE } from '@/lib/registry';
+import { bySlug, breedPages, SITE } from '@/lib/registry';
 import { toolMetadata } from '@/lib/seo';
 import { getPhoto } from '@/lib/data/photos';
 import { ratioAt, CATS, SIZE_LABELS, type Cat } from '@/lib/calc/puppyWeight';
@@ -275,6 +275,21 @@ export default function Page() {
             })}
           </div>
         </section>
+
+        {breedPages().length > 0 && (
+          <section>
+            <h2 className="text-[22px] sm:text-[26px]">Breed growth charts</h2>
+            <p className="mt-2 text-[16px] text-ink">
+              Want numbers for a specific breed? These charts scale the same growth
+              data to each breed&rsquo;s AKC standard.
+            </p>
+            <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-4">
+              {breedPages().map((b) => (
+                <PhotoTile key={b.slug} href={`/${b.slug}/`} photoId={b.slug} label={b.shortName} description={b.oneLiner} />
+              ))}
+            </div>
+          </section>
+        )}
 
         <section id="sources">
           <h2 className="text-[22px] sm:text-[26px]">Sources</h2>

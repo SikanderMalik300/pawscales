@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { HUBS, byCategory, bySlug, SITE, type Category } from '@/lib/registry';
+import { HUBS, byCategory, bySlug, breedPages, SITE, type Category } from '@/lib/registry';
 import { getPhoto } from '@/lib/data/photos';
 import { Band } from '@/components/ui/Band';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
@@ -36,6 +36,7 @@ export function HubPage({
 }) {
   const hub = HUBS.find((h) => h.slug === slug)!;
   const tools = byCategory(slug);
+  const breedCharts = slug === 'dog-size-charts' ? breedPages() : [];
   const photo = getPhoto(`hub-${slug === 'dog-calculators' ? 'dog' : slug === 'cat-calculators' ? 'cat' : 'size'}`);
   const url = `${SITE.url}/${slug}/`;
 
@@ -76,6 +77,16 @@ export function HubPage({
             <PhotoTile key={t.slug} href={`/${t.slug}/`} photoId={t.slug} label={t.shortName} description={t.oneLiner} />
           ))}
         </div>
+        {slug === 'dog-size-charts' && breedCharts.length > 0 && (
+          <div className="mt-10">
+            <h2 className="mb-5 text-[22px] sm:text-[26px]">Breed growth charts</h2>
+            <div className="grid grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-4">
+              {breedCharts.map((t) => (
+                <PhotoTile key={t.slug} href={`/${t.slug}/`} photoId={t.slug} label={t.shortName} description={t.oneLiner} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="container-page max-w-reading space-y-10 pb-4">

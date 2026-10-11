@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { REGISTRY, HUBS, SITE } from '@/lib/registry';
+import { REGISTRY, BREED_PAGES, HUBS, SITE } from '@/lib/registry';
 
 export const dynamic = 'force-static';
 
@@ -41,6 +41,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: t.lastUpdated,
       changeFrequency: 'monthly' as const,
       priority: 0.8,
+    })),
+    ...BREED_PAGES.map((t) => ({
+      url: u(`/${t.slug}/`),
+      lastModified: t.lastUpdated,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
     })),
   ];
 }
