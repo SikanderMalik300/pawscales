@@ -43,6 +43,21 @@ describe('Golden Retriever worked examples', () => {
   });
 });
 
+describe('German Shepherd worked examples', () => {
+  it('Ex1 male 16 wk 30 lb -> ~69.9 lb, 43% now', () => {
+    const r = predictPuppyWeight({ ageWeeks: 16, weightKg: lbToKg(30), size: bandForSex(gsd.male) });
+    if (r.kind !== 'ok') throw new Error('expected ok');
+    expect(roundTo(kgToLb(r.adultKg), 1)).toBe(69.9);
+    expect(Math.round(r.pctNow)).toBe(43);
+  });
+  it('Ex2 female 8 mo (34.76 wk) 50 lb -> ~55.9 lb, 89% now', () => {
+    const r = predictPuppyWeight({ ageWeeks: 8 * (365.25 / 12 / 7), weightKg: lbToKg(50), size: bandForSex(gsd.female) });
+    if (r.kind !== 'ok') throw new Error('expected ok');
+    expect(roundTo(kgToLb(r.adultKg), 1)).toBe(55.9);
+    expect(Math.round(r.pctNow)).toBe(89);
+  });
+});
+
 describe('expected-by-age tables', () => {
   it('typical weight at 24 months equals the adult midpoint', () => {
     const f = expectedByAge(golden.female.lowLb, golden.female.highLb, bandForSex(golden.female));

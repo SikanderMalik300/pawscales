@@ -262,6 +262,22 @@ export const BREED_PAGES: ToolEntry[] = [
     notCovered: [],
     breedPage: true,
   },
+  {
+    slug: 'german-shepherd-weight-chart',
+    title: 'German Shepherd Weight Chart: Growth by Month',
+    metaDescription:
+      'How much should a German Shepherd weigh? Month-by-month weights for males and females, based on growth data from 60,951 dogs and the AKC standard.',
+    h1: 'German Shepherd Weight Chart',
+    shortName: 'German Shepherd weight chart',
+    oneLiner: 'German Shepherd weight by month, male and female.',
+    category: 'dog-size-charts',
+    related: ['puppy-weight-calculator', 'golden-retriever-weight-chart', 'dog-crate-size-chart', 'dog-food-calculator'],
+    lastUpdated: '2026-10-13',
+    sources: [],
+    fromOwner: null,
+    notCovered: [],
+    breedPage: true,
+  },
 ];
 
 const ALL = [...REGISTRY, ...BREED_PAGES];

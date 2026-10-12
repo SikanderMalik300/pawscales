@@ -29,6 +29,7 @@ const PAGES = [
   { slug: 'cat-calculators', title: 'Cat calculators', color: HUB.cat, photo: 'hub-cat' },
   { slug: 'dog-size-charts', title: 'Dog size charts', color: HUB.size, photo: 'hub-size' },
   { slug: 'golden-retriever-weight-chart', title: 'Golden Retriever Weight Chart', color: HUB.size, photo: 'golden-retriever-weight-chart' },
+  { slug: 'german-shepherd-weight-chart', title: 'German Shepherd Weight Chart', color: HUB.size, photo: 'german-shepherd-weight-chart' },
   { slug: 'default', title: 'Free dog and cat calculators, built on real data', color: HUB.home, photo: 'hero' },
 ];
 

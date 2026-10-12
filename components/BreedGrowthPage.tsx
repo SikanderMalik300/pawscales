@@ -14,8 +14,13 @@ import { BreedGrowthCalculator } from '@/components/tools/BreedGrowthCalculator'
 import { bandForSex, type Breed } from '@/lib/data/breeds';
 import { expectedByAge, TOTAL_DOGS, type BreedRow } from '@/lib/calc/breedGrowth';
 
-const UPDATED = 'October 12, 2026';
 const sizeHub = HUBS.find((h) => h.slug === 'dog-size-charts')!;
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const fmtDate = (iso?: string) => {
+  if (!iso) return '';
+  const [y, m, d] = iso.split('-').map(Number);
+  return `${MONTHS[m - 1]} ${d}, ${y}`;
+};
 
 function H2({ children, id }: { children: ReactNode; id?: string }) {
   return <h2 id={id} className="text-[22px] sm:text-[26px]">{children}</h2>;
@@ -76,6 +81,7 @@ export function BreedGrowthPage(c: BreedGrowthContent) {
   const { breed } = c;
   const photo = getPhoto(breed.photoId)!;
   const url = `${SITE.url}/${breed.slug}/`;
+  const updated = fmtDate(bySlug(breed.slug)?.lastUpdated);
 
   return (
     <>
@@ -103,7 +109,7 @@ export function BreedGrowthPage(c: BreedGrowthContent) {
             <h1 className="text-[30px] sm:text-[40px]">{breed.name} Weight Chart</h1>
             <p className="mt-3 max-w-prose text-[16px] text-ink sm:text-[18px]">{c.quickAnswer}</p>
             <p className="mt-3 text-[13px] text-muted">
-              By {SITE.author} · Updated {UPDATED} · <a href="#sources" className="link">Sources</a>
+              By {SITE.author} · Updated {updated} · <a href="#sources" className="link">Sources</a>
             </p>
           </div>
           <div className="hidden md:col-span-4 md:block">
@@ -184,7 +190,7 @@ export function BreedGrowthPage(c: BreedGrowthContent) {
           </ul>
         </section>
 
-        <AuthorBox updated={UPDATED} />
+        <AuthorBox updated={updated} />
         <p className="text-[13px] text-muted">
           Estimates only, not veterinary advice. Ask your vet about your pet&rsquo;s health.
         </p>
