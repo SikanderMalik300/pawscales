@@ -76,6 +76,20 @@ describe('expected-by-age tables', () => {
   it('uses the real dog count', () => {
     expect(TOTAL_DOGS).toBe(60951);
   });
+  it('no table row is below 12 weeks (data starts at 12 weeks)', () => {
+    for (const breed of Object.values(BREEDS)) {
+      for (const sex of ['male', 'female'] as const) {
+        const rows = expectedByAge(breed[sex].lowLb, breed[sex].highLb, bandForSex(breed[sex]));
+        expect(rows[0].months).toBe(3);
+        expect(rows.every((r) => r.weeks >= 12)).toBe(true);
+      }
+    }
+  });
+  it('rows past the last observed bin are "estimated", not "interpolated"', () => {
+    const rows = expectedByAge(golden.female.lowLb, golden.female.highLb, bandForSex(golden.female));
+    expect(rows[rows.length - 1].months).toBe(24);
+    expect(rows[rows.length - 1].kind).toBe('estimated'); // 24 mo ~104 wk > last observed (~100 wk)
+  });
 });
 
 describe('registry guards (incl. breed pages)', () => {

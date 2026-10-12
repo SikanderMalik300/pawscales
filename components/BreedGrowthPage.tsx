@@ -31,6 +31,9 @@ function sexTable(breed: Breed, sex: 'male' | 'female') {
   const band = bandForSex(spec);
   const rows: BreedRow[] = expectedByAge(spec.lowLb, spec.highLb, band);
   const anyGiant = rows.some((r) => r.giant);
+  const anyInterp = rows.some((r) => r.kind === 'interpolated');
+  const anyEst = rows.some((r) => r.kind === 'estimated');
+  const mark = (k: BreedRow['kind']) => (k === 'interpolated' ? ' *' : k === 'estimated' ? ' ‡' : '');
   return (
     <DataTable
       caption={`${sex === 'male' ? 'Male' : 'Female'} ${breed.name} weight by age (lb)`}
@@ -42,7 +45,7 @@ function sexTable(breed: Breed, sex: 'male' | 'female') {
       ]}
       rows={rows.map((r) => ({
         cells: {
-          age: `${r.months} mo${r.interpolated ? ' *' : ''}`,
+          age: `${r.months} mo${mark(r.kind)}`,
           low: `${r.lowLb}`,
           typ: `${r.typicalLb}`,
           high: `${r.highLb}${r.giant ? ' †' : ''}`,
@@ -52,7 +55,8 @@ function sexTable(breed: Breed, sex: 'male' | 'female') {
         <>
           Low / Typical / High = 25th percentile / median / 75th percentile of the
           growth data, scaled to the {sex} range ({spec.lowLb}–{spec.highLb} lb).
-          * interpolated between observed ages.
+          {anyInterp && ' * interpolated between observed ages.'}
+          {anyEst && ' ‡ estimated beyond the last observed age.'}
           {anyGiant && ' † over 88 lb (40 kg): giant-size dogs keep filling out past 2 years, so treat these as a minimum.'}
         </>
       }
@@ -138,6 +142,9 @@ export function BreedGrowthPage(c: BreedGrowthContent) {
         </section>
         {sexTable(breed, 'female')}
         {sexTable(breed, 'male')}
+        <p className="text-[13px] text-muted">
+          Growth data starts at 12 weeks, so younger ages are not shown.
+        </p>
       </div>
 
       <div className="container-page mt-10 max-w-reading space-y-10">

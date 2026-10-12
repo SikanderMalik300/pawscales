@@ -39,11 +39,22 @@ function interpNorm(band: Cat, weeks: number, field: NormField): number {
   return pts[pts.length - 1][field];
 }
 
-/** An age is "interpolated" when no observed growth bin sits within ~2.5 weeks. */
-export function isInterpolatedAge(band: Cat, weeks: number): boolean {
-  return !CATS[band].points.some(
-    (p) => p.source === 'observed' && Math.abs(p.weeks - weeks) <= 2.5,
-  );
+export type AgeKind = 'observed' | 'interpolated' | 'estimated';
+
+const observedWeeks = (band: Cat) =>
+  CATS[band].points.filter((p) => p.source === 'observed').map((p) => p.weeks);
+
+/** Classify a table age against the observed growth bins for a band:
+ *  - estimated: before the first or after the last observed bin (extrapolated);
+ *  - interpolated: inside the observed range but between bins;
+ *  - observed: within ~2.5 weeks of an observed bin. */
+export function ageKind(band: Cat, weeks: number): AgeKind {
+  const obs = observedWeeks(band);
+  const first = obs[0];
+  const last = obs[obs.length - 1];
+  if (weeks < first - 0.5 || weeks > last + 0.5) return 'estimated';
+  if (obs.some((w) => Math.abs(w - weeks) <= 2.5)) return 'observed';
+  return 'interpolated';
 }
 
 export interface BreedRow {
@@ -52,11 +63,13 @@ export interface BreedRow {
   lowLb: number;
   typicalLb: number;
   highLb: number;
-  interpolated: boolean;
+  kind: AgeKind;
   giant: boolean;
 }
 
-export const TABLE_MONTHS = [2, 3, 4, 5, 6, 8, 10, 12, 15, 18, 24];
+// Start at 3 months: the growth data begins at 12 weeks (~2.76 months), so a
+// 2-month row would be clamped/extrapolated.
+export const TABLE_MONTHS = [3, 4, 5, 6, 8, 10, 12, 15, 18, 24];
 
 /** Expected weight by age: low = adultLow x p25, typical = midpoint x median,
  *  high = adultHigh x p75, all on the normalized curve. */
@@ -76,7 +89,7 @@ export function expectedByAge(
       lowLb: roundTo(adultLowLb * interpNorm(band, weeks, 'normP25'), 1),
       typicalLb: roundTo(mid * interpNorm(band, weeks, 'normMedianSmoothed'), 1),
       highLb: roundTo(highLb, 1),
-      interpolated: isInterpolatedAge(band, weeks),
+      kind: ageKind(band, weeks),
       giant: highLb >= GIANT_LB,
     };
   });
