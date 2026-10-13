@@ -121,7 +121,9 @@ export function predictPuppyWeight(input: PuppyInput): PuppyResult {
   if (ageWeeks < MIN_WEEKS) return { kind: 'too-young' };
 
   const cat = size === 'ns' ? chooseCat(weightKg, ageWeeks) : size;
-  const mid = ratioAt(cat, ageWeeks);
+  // Cap the fraction of adult weight at 1.0 so a near-plateau puppy never reads
+  // over 100% of adult weight or projects an adult below its current weight.
+  const mid = Math.min(1, ratioAt(cat, ageWeeks));
   const p25 = interp(cat, ageWeeks, 'normP25');
   const p75 = interp(cat, ageWeeks, 'normP75');
 

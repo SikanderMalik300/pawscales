@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { SITE, HUBS, bySlug } from '@/lib/registry';
+import { SITE, HUBS, bySlug, relatedGrowthPages } from '@/lib/registry';
 import { getPhoto } from '@/lib/data/photos';
 import { Band } from '@/components/ui/Band';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
@@ -138,31 +138,31 @@ export function DoodlePage(c: DoodlePageContent) {
         <p className="text-[13px] text-muted">
           Growth data starts at 12 weeks, so younger ages are not shown.
         </p>
+        {breed.giantNote && (
+          <p className="text-[14px] text-ink">{breed.giantNote}</p>
+        )}
 
         <DataTable
-          caption="Crate size by Goldendoodle size"
+          caption={`Crate size by ${breed.name} size`}
           columns={[
             { key: 'size', header: 'Size' },
             { key: 'crate', header: 'Typical crate', numeric: true },
-            { key: 'harness', header: 'Harness' },
           ]}
           rows={breed.sizes.map((s) => ({
-            cells: {
-              size: s.size,
-              crate: `${s.crateIn} in`,
-              harness: 'Measure chest girth',
-            },
+            cells: { size: s.size, crate: `${s.crateIn} in` },
           }))}
           footnote={
             <>
               Crate length from our{' '}
-              <a className="link" href="/dog-crate-size-chart/">dog crate size chart</a> by
-              weight. For a harness, measure chest girth and use the{' '}
-              <a className="link" href="/dog-harness-size-chart/">dog harness size chart</a>,
-              since harness fit goes by girth, not weight.
+              <a className="link" href="/dog-crate-size-chart/">dog crate size chart</a>,
+              by weight.
             </>
           }
         />
+        <p className="text-[14px] text-ink">
+          For a harness, measure chest girth. See the{' '}
+          <a className="link" href="/dog-harness-size-chart/">harness size chart</a>.
+        </p>
       </div>
 
       <div className="container-page mt-10 max-w-reading space-y-10">
@@ -188,6 +188,17 @@ export function DoodlePage(c: DoodlePageContent) {
             <a className="link" href="/puppy-weight-calculator/">puppy weight calculator</a>{' '}
             (enter the current weight) gives a tighter estimate.
           </p>
+        </section>
+
+        <section>
+          <H2>Related size charts</H2>
+          <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-[16px]">
+            {relatedGrowthPages(breed.slug).map((r) => (
+              <li key={r.slug}>
+                <a className="link" href={`/${r.slug}/`}>{r.shortName}</a>
+              </li>
+            ))}
+          </ul>
         </section>
 
         <section>

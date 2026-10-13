@@ -256,7 +256,7 @@ export const BREED_PAGES: ToolEntry[] = [
     oneLiner: 'Golden Retriever weight by month, male and female.',
     category: 'dog-size-charts',
     related: ['puppy-weight-calculator', 'dog-food-calculator', 'dog-crate-size-chart', 'german-shepherd-weight-chart'],
-    lastUpdated: '2026-10-12',
+    lastUpdated: '2026-10-14',
     sources: [],
     fromOwner: null,
     notCovered: [],
@@ -272,7 +272,7 @@ export const BREED_PAGES: ToolEntry[] = [
     oneLiner: 'German Shepherd weight by month, male and female.',
     category: 'dog-size-charts',
     related: ['puppy-weight-calculator', 'golden-retriever-weight-chart', 'dog-crate-size-chart', 'dog-food-calculator'],
-    lastUpdated: '2026-10-13',
+    lastUpdated: '2026-10-14',
     sources: [],
     fromOwner: null,
     notCovered: [],
@@ -294,6 +294,22 @@ export const BREED_PAGES: ToolEntry[] = [
     notCovered: [],
     breedPage: true,
   },
+  {
+    slug: 'bernedoodle-size-chart',
+    title: 'Bernedoodle Size Chart: Tiny, Mini & Standard',
+    metaDescription:
+      'Bernedoodle sizes: Tiny, Miniature, Medium and Standard, with SwissRidge height and weight ranges, expected weight by age, and a parent-breed comparison.',
+    h1: 'Bernedoodle Size Chart',
+    shortName: 'Bernedoodle size chart',
+    oneLiner: 'Bernedoodle sizes and weight by age, with a parent comparison.',
+    category: 'dog-size-charts',
+    related: ['goldendoodle-size-chart', 'puppy-weight-calculator', 'dog-crate-size-chart', 'dog-harness-size-chart'],
+    lastUpdated: '2026-10-14',
+    sources: [],
+    fromOwner: null,
+    notCovered: [],
+    breedPage: true,
+  },
 ];
 
 const ALL = [...REGISTRY, ...BREED_PAGES];
@@ -305,6 +321,10 @@ export const byCategory = (cat: Category): ToolEntry[] =>
   REGISTRY.filter((t) => t.category === cat && !t.breedPage);
 
 export const breedPages = (): ToolEntry[] => BREED_PAGES;
+
+/** Other breed/size growth pages to cross-link from a growth page (3-5 links). */
+export const relatedGrowthPages = (slug: string): ToolEntry[] =>
+  BREED_PAGES.filter((p) => p.slug !== slug).slice(0, 5);
 
 export const allPages = (): ToolEntry[] => ALL;
 

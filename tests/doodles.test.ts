@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { GOLDENDOODLE, sizeBand, parentsRange, doodleTypicalByAge } from '@/lib/data/doodles';
+import { GOLDENDOODLE, BERNEDOODLE, sizeBand, parentsRange, doodleTypicalByAge } from '@/lib/data/doodles';
 import { bandForKg } from '@/lib/calc/breedGrowth';
 import { predictPuppyWeight } from '@/lib/calc/puppyWeight';
 import { lbToKg, kgToLb } from '@/lib/units';
@@ -80,5 +80,52 @@ describe('Goldendoodle weight-by-age table', () => {
     expect(last.months).toBe(24);
     expect(last.bySize['Medium']).toBe(43);
     expect(last.bySize['Standard']).toBe(51);
+  });
+  it('no column value exceeds its size representative weight (capped at 1.0)', () => {
+    for (const doodle of [GOLDENDOODLE, BERNEDOODLE]) {
+      for (const r of doodleTypicalByAge(doodle)) {
+        for (const s of doodle.sizes) {
+          expect(r.bySize[s.size], `${doodle.name} ${s.size} ${r.months}mo`).toBeLessThanOrEqual(s.repLb);
+        }
+      }
+    }
+  });
+  it('Goldendoodle Petite at 24 months is not above GANA\'s 25 lb', () => {
+    const last = rows[rows.length - 1];
+    expect(last.bySize['Petite']).toBeLessThanOrEqual(25);
+  });
+});
+
+describe('Bernedoodle (SwissRidge) categories', () => {
+  it('has the four SwissRidge sizes in order', () => {
+    expect(BERNEDOODLE.sizes.map((s) => s.size)).toEqual(['Tiny', 'Miniature', 'Medium', 'Standard']);
+  });
+  it('carries the SwissRidge height and weight wording', () => {
+    const [tiny, mini, medium, standard] = BERNEDOODLE.sizes;
+    expect(tiny.weightLabel).toBe('10–25 lb');
+    expect(tiny.heightLabel).toBe('10–13 in');
+    expect(mini.weightLabel).toBe('26–45 lb');
+    expect(medium.weightLabel).toBe('46–65 lb');
+    expect(standard.weightLabel).toBe('66 lb and up');
+    expect(standard.heightLabel).toBe('22–29 in');
+  });
+  it('is sourced to SwissRidge with a giant note for the open-ended Standard', () => {
+    expect(BERNEDOODLE.sourceUrl).toMatch(/swissridgekennels\.com/);
+    expect(BERNEDOODLE.sizes[3].bound).toBe('at least');
+    expect(BERNEDOODLE.sizes[3].highLb).toBeNull();
+    expect(BERNEDOODLE.giantNote).toMatch(/giant/i);
+  });
+  it('maps Tiny to a small band, larger sizes to bigger bands', () => {
+    const bands = BERNEDOODLE.sizes.map((s) => sizeBand(s));
+    expect(bands[0]).toBe('II'); // Tiny ~17.5 lb
+    expect(bands[1]).toBe('IV'); // Mini ~35.5 lb
+    expect(bands[2]).toBe('IV'); // Medium ~55.5 lb
+  });
+  it('table starts at 3 months and is not identical to Goldendoodle', () => {
+    const bern = doodleTypicalByAge(BERNEDOODLE);
+    expect(bern[0].months).toBe(3);
+    const gold = doodleTypicalByAge(GOLDENDOODLE);
+    // Medium columns differ (Bernedoodle rep 55.5 vs Goldendoodle rep 43)
+    expect(bern[bern.length - 1].bySize['Medium']).not.toBe(gold[gold.length - 1].bySize['Medium']);
   });
 });

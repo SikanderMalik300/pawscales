@@ -44,6 +44,7 @@ const PAGES = [
   ['dog-collar-size-chart', '/dog-collar-size-chart/'],
   ['dog-harness-size-chart', '/dog-harness-size-chart/'],
   ['goldendoodle-size-chart', '/goldendoodle-size-chart/'],
+  ['bernedoodle-size-chart', '/bernedoodle-size-chart/'],
 ];
 const results = [];
 for (const [name, path] of PAGES) {

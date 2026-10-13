@@ -28,15 +28,19 @@ type NormField = 'normP25' | 'normMedianSmoothed' | 'normP75';
 function interpNorm(band: Cat, weeks: number, field: NormField): number {
   const pts = CATS[band].points;
   const w = Math.max(pts[0].weeks, Math.min(weeks, pts[pts.length - 1].weeks));
+  // Cap the fraction of adult weight at 1.0: the normalized Salt curve drifts a
+  // little above 1.0 at the oldest ages, which would push a table value past the
+  // column's adult weight (e.g. Goldendoodle Petite over GANA's "up to 25 lb").
+  const cap = (v: number) => Math.min(1, v);
   for (let i = 0; i < pts.length - 1; i++) {
     const a = pts[i];
     const b = pts[i + 1];
     if (w >= a.weeks && w <= b.weeks) {
       const t = b.weeks === a.weeks ? 0 : (w - a.weeks) / (b.weeks - a.weeks);
-      return a[field] + t * (b[field] - a[field]);
+      return cap(a[field] + t * (b[field] - a[field]));
     }
   }
-  return pts[pts.length - 1][field];
+  return cap(pts[pts.length - 1][field]);
 }
 
 export type AgeKind = 'observed' | 'interpolated' | 'estimated';

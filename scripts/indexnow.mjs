@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { setTimeout as sleep } from 'node:timers/promises';
 
-export const KEY = '75e98a1ac5c3cb5382566ade98c2bf00';
+export const KEY = 'cd83e80597b0e0a9d1e5fab58329ab09';
 export const HOST = 'pawscales.com';
 export const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
 export const ENDPOINT = 'https://api.indexnow.org/indexnow';

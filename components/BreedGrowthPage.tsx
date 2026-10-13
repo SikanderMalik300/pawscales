@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { SITE, HUBS, bySlug } from '@/lib/registry';
+import { SITE, HUBS, bySlug, relatedGrowthPages } from '@/lib/registry';
 import { getPhoto } from '@/lib/data/photos';
 import { Band } from '@/components/ui/Band';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
@@ -172,6 +172,17 @@ export function BreedGrowthPage(c: BreedGrowthContent) {
             tool behind it is the{' '}
             <a className="link" href="/puppy-weight-calculator/">puppy weight calculator</a>.
           </p>
+        </section>
+
+        <section>
+          <H2>Related size charts</H2>
+          <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-[16px]">
+            {relatedGrowthPages(breed.slug).map((r) => (
+              <li key={r.slug}>
+                <a className="link" href={`/${r.slug}/`}>{r.shortName}</a>
+              </li>
+            ))}
+          </ul>
         </section>
 
         <section>

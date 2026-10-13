@@ -83,7 +83,10 @@ describe('puppy weight calculator', () => {
   it('weeks beyond the table clamp to the last point (no NaN)', () => {
     const r = ok(predictPuppyWeight({ ageWeeks: 200, weightKg: 10, size: 'III' }));
     expect(Number.isFinite(r.adultKg)).toBe(true);
-    expect(roundTo(r.pctNow, 1)).toBe(roundTo(ratioAt('III', 104) * 100, 1));
+    // The fraction of adult weight is capped at 1.0, so a past-plateau age reads
+    // 100% (the raw curve drifts a touch over 1.0 at the oldest bins).
+    expect(roundTo(r.pctNow, 1)).toBe(100);
+    expect(r.pctNow).toBeLessThanOrEqual(100);
   });
 
   it('"Not sure" picks a tiny toy band for a very small puppy', () => {

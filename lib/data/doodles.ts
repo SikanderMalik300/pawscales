@@ -25,6 +25,7 @@ export interface DoodleBreed {
   sourceUrl: string;
   sourceNote: string; // plain line about what the source is
   photoId: string;
+  giantNote?: string; // shown under the by-age table (e.g. Standard reaching giant size)
 }
 
 export const GOLDENDOODLE: DoodleBreed = {
@@ -40,6 +41,26 @@ export const GOLDENDOODLE: DoodleBreed = {
     { size: 'Miniature', weightLabel: '26–35 lb', heightLabel: '14–17 in', lowLb: 26, highLb: 35, repLb: 30.5, bound: 'range', crateIn: '30' },
     { size: 'Medium', weightLabel: '36–50 lb', heightLabel: '17–21 in', lowLb: 36, highLb: 50, repLb: 43, bound: 'range', crateIn: '36' },
     { size: 'Standard', weightLabel: '51 lb and up', heightLabel: 'Over 21 in', lowLb: 51, highLb: null, repLb: 51, bound: 'at least', crateIn: '42' },
+  ],
+};
+
+// SwissRidge Kennels (Sherry Rupke created the first Bernedoodle in 2003)
+// publishes a four-size chart by height at the shoulder. Standard is open-ended.
+export const BERNEDOODLE: DoodleBreed = {
+  slug: 'bernedoodle-size-chart',
+  name: 'Bernedoodle',
+  sourceName: 'SwissRidge Kennels (originator of the Bernedoodle)',
+  sourceUrl: 'https://swissridgekennels.com/swissridge/qa/',
+  sourceNote:
+    'Sizes are the SwissRidge Kennels categories, measured by height at the shoulder. SwissRidge created the first Bernedoodle, and notes these ranges are averages, so a pup can fall a little outside its size.',
+  photoId: 'bernedoodle-size-chart',
+  giantNote:
+    'Standard Bernedoodles are open-ended at 66 lb and up, and many reach 70–90 lb or more, past the 88 lb (40 kg) giant mark. Giant-size dogs keep filling out beyond 2 years, so treat the Standard column as a minimum.',
+  sizes: [
+    { size: 'Tiny', weightLabel: '10–25 lb', heightLabel: '10–13 in', lowLb: 10, highLb: 25, repLb: 17.5, bound: 'range', crateIn: '18–22' },
+    { size: 'Miniature', weightLabel: '26–45 lb', heightLabel: '14–17 in', lowLb: 26, highLb: 45, repLb: 35.5, bound: 'range', crateIn: '30' },
+    { size: 'Medium', weightLabel: '46–65 lb', heightLabel: '18–21 in', lowLb: 46, highLb: 65, repLb: 55.5, bound: 'range', crateIn: '36' },
+    { size: 'Standard', weightLabel: '66 lb and up', heightLabel: '22–29 in', lowLb: 66, highLb: null, repLb: 66, bound: 'at least', crateIn: '42' },
   ],
 };
 

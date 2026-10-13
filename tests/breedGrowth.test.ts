@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { BREEDS, bandForSex } from '@/lib/data/breeds';
 import { bandForKg, expectedByAge, TOTAL_DOGS } from '@/lib/calc/breedGrowth';
 import { predictPuppyWeight } from '@/lib/calc/puppyWeight';
-import { allPages, BREED_PAGES } from '@/lib/registry';
+import { allPages, BREED_PAGES, relatedGrowthPages } from '@/lib/registry';
 import { lbToKg, kgToLb } from '@/lib/units';
 import { roundTo } from '@/lib/calc/round';
 
@@ -85,6 +85,20 @@ describe('expected-by-age tables', () => {
       }
     }
   });
+  it('no table value exceeds its column adult weight (ratios capped at 1.0)', () => {
+    for (const breed of Object.values(BREEDS)) {
+      for (const sex of ['male', 'female'] as const) {
+        const spec = breed[sex];
+        const mid = (spec.lowLb + spec.highLb) / 2;
+        const rows = expectedByAge(spec.lowLb, spec.highLb, bandForSex(spec));
+        for (const r of rows) {
+          expect(r.lowLb, `${breed.name} ${sex} ${r.months}mo low`).toBeLessThanOrEqual(spec.lowLb);
+          expect(r.typicalLb, `${breed.name} ${sex} ${r.months}mo typ`).toBeLessThanOrEqual(mid);
+          expect(r.highLb, `${breed.name} ${sex} ${r.months}mo high`).toBeLessThanOrEqual(spec.highLb);
+        }
+      }
+    }
+  });
   it('rows past the last observed bin are "estimated", not "interpolated"', () => {
     const rows = expectedByAge(golden.female.lowLb, golden.female.highLb, bandForSex(golden.female));
     expect(rows[rows.length - 1].months).toBe(24);
@@ -103,6 +117,15 @@ describe('registry guards (incl. breed pages)', () => {
     for (const slug of Object.keys(BREEDS)) {
       expect(BREEDS[slug].akcUrl).toMatch(/akc\.org/);
       expect(BREED_PAGES.some((p) => p.slug === slug), `${slug} registered`).toBe(true);
+    }
+  });
+  it('every growth page links to at least 2 other growth pages', () => {
+    const slugs = new Set(BREED_PAGES.map((p) => p.slug));
+    for (const p of BREED_PAGES) {
+      const rel = relatedGrowthPages(p.slug);
+      expect(rel.length, `${p.slug} related count`).toBeGreaterThanOrEqual(2);
+      expect(rel.every((r) => r.slug !== p.slug), `${p.slug} excludes self`).toBe(true);
+      expect(rel.every((r) => slugs.has(r.slug)), `${p.slug} links growth pages`).toBe(true);
     }
   });
 });
