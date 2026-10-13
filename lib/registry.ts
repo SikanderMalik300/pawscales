@@ -278,6 +278,22 @@ export const BREED_PAGES: ToolEntry[] = [
     notCovered: [],
     breedPage: true,
   },
+  {
+    slug: 'goldendoodle-size-chart',
+    title: 'Goldendoodle Size Chart: Mini, Medium & Standard',
+    metaDescription:
+      'Goldendoodle sizes: Petite, Mini, Medium and Standard, with the official GANA height and weight ranges and expected weight by age. Free size estimator.',
+    h1: 'Goldendoodle Size Chart',
+    shortName: 'Goldendoodle size chart',
+    oneLiner: 'Goldendoodle sizes and weight by age, from GANA.',
+    category: 'dog-size-charts',
+    related: ['bernedoodle-size-chart', 'puppy-weight-calculator', 'dog-crate-size-chart', 'dog-harness-size-chart'],
+    lastUpdated: '2026-10-14',
+    sources: [],
+    fromOwner: null,
+    notCovered: [],
+    breedPage: true,
+  },
 ];
 
 const ALL = [...REGISTRY, ...BREED_PAGES];

@@ -43,6 +43,7 @@ const PAGES = [
   ['dog-crate-size-chart', '/dog-crate-size-chart/'],
   ['dog-collar-size-chart', '/dog-collar-size-chart/'],
   ['dog-harness-size-chart', '/dog-harness-size-chart/'],
+  ['goldendoodle-size-chart', '/goldendoodle-size-chart/'],
 ];
 const results = [];
 for (const [name, path] of PAGES) {

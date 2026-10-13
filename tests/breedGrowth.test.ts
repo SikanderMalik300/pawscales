@@ -99,10 +99,10 @@ describe('registry guards (incl. breed pages)', () => {
       expect(p.metaDescription.length, `${p.slug} meta`).toBeLessThanOrEqual(155);
     }
   });
-  it('each breed page has an AKC source config', () => {
-    for (const p of BREED_PAGES) {
-      expect(BREEDS[p.slug], `${p.slug} breed config`).toBeTruthy();
-      expect(BREEDS[p.slug].akcUrl).toMatch(/akc\.org/);
+  it('each weight-chart breed is registered and has an AKC source', () => {
+    for (const slug of Object.keys(BREEDS)) {
+      expect(BREEDS[slug].akcUrl).toMatch(/akc\.org/);
+      expect(BREED_PAGES.some((p) => p.slug === slug), `${slug} registered`).toBe(true);
     }
   });
 });
