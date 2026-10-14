@@ -32,6 +32,7 @@ export interface ToolPageContent {
   seeVet?: ReactNode; // health-adjacent "see your vet if" list
   aboutData?: ReactNode;
   extraSchema?: object[];
+  updated?: string; // override the default "Updated" date when a tool changes
 }
 
 function H2({ children, id }: { children: ReactNode; id?: string }) {
@@ -47,6 +48,7 @@ export function ToolPage(c: ToolPageContent) {
   const photo = getPhoto(c.slug)!;
   const hub = hubName(tool.category);
   const url = `${SITE.url}/${tool.slug}/`;
+  const updated = c.updated ?? UPDATED;
 
   return (
     <>
@@ -72,7 +74,7 @@ export function ToolPage(c: ToolPageContent) {
             <h1 className="text-[30px] sm:text-[40px]">{tool.h1}</h1>
             <p className="mt-3 max-w-prose text-[16px] text-ink sm:text-[18px]">{c.quickAnswer}</p>
             <p className="mt-3 text-[13px] text-muted">
-              By {SITE.author} · Updated {UPDATED} ·{' '}
+              By {SITE.author} · Updated {updated} ·{' '}
               <a href="#sources" className="link">Sources</a>
             </p>
           </div>
@@ -179,7 +181,7 @@ export function ToolPage(c: ToolPageContent) {
           </ul>
         </section>
 
-        <AuthorBox updated={UPDATED} />
+        <AuthorBox updated={updated} />
 
         <p className="text-[13px] text-muted">
           Estimates only, not veterinary advice. Ask your vet about your pet’s health.

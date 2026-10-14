@@ -55,7 +55,7 @@ export const adultKcal = (kg: number, intact: boolean): number =>
 // ---- the chart: age x expected adult weight ----
 export const CHART_ADULTS_LB = [10, 20, 40, 60, 80];
 export const CHART_AGES = [2, 3, 4, 6, 8, 10, 12];
-export const CHART_KCAL_PER_CUP = 400; // stated example density for cups/day
+export const CHART_KCAL_PER_CUP = 380; // example density; matches the calculator default
 
 export interface ChartCell {
   months: number;

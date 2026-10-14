@@ -10,6 +10,7 @@ export default function Page() {
   return (
     <ToolPage
       slug={tool.slug}
+      updated="October 15, 2026"
       quickAnswer={
         <>A healthy 44 lb (20 kg) neutered adult dog needs about 1,059 kcal a day,
         or roughly 2.8 cups of a 380-kcal-per-cup food. Enter your dog's weight,
@@ -78,6 +79,7 @@ export default function Page() {
         { q: 'How many treats are OK?', a: 'Keep treats to no more than 10% of daily calories. For a dog eating 1,000 kcal a day that is about 100 kcal of treats. Subtract treat calories from meals so the daily total stays the same, and use part of the kibble ration for training.' },
       ]}
       sources={[
+        { name: 'Puppy calories now taper by percent of adult weight (WSAVA/PNA), October 2026.', url: 'https://wsava.org/global-guidelines/global-nutrition-guidelines/' },
         { name: 'Pet Nutrition Alliance, Calculating Calories Based on Pet Needs (RER and MER factors).', url: 'https://petnutritionalliance.org/wp-content/uploads/2023/03/MER.RER_.PNA_.pdf' },
         { name: 'WSAVA Global Nutrition Guidelines (treats under 10% of calories).', url: 'https://wsava.org/global-guidelines/global-nutrition-guidelines/' },
         { name: 'AAHA Weight Management Guidelines for Dogs and Cats.', url: 'https://www.aaha.org/aaha-guidelines/weight-management/weight-management-home/' },

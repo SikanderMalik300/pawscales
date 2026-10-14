@@ -70,7 +70,7 @@ export const REGISTRY: ToolEntry[] = [
     shortName: 'Puppy weight calculator',
     oneLiner: 'Predict adult weight from your puppy’s age and weight.',
     category: 'dog-calculators',
-    related: ['dog-food-calculator', 'dog-crate-size-chart', 'dog-years-calculator', 'dog-harness-size-chart', 'dog-pregnancy-calculator', 'raw-dog-food-calculator'],
+    related: ['puppy-feeding-chart', 'dog-food-calculator', 'dog-crate-size-chart', 'dog-years-calculator', 'dog-harness-size-chart', 'dog-pregnancy-calculator', 'raw-dog-food-calculator'],
     lastUpdated: '2026-10-10',
     sources: [],
     fromOwner: null,

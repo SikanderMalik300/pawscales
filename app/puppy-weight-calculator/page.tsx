@@ -127,6 +127,10 @@ export default function Page() {
       {/* Calculator card overlapping the band */}
       <div className="container-page -mt-14">
         <PuppyCalculator />
+        <p className="mt-2 text-[14px] text-ink">
+          Got the adult weight? See{' '}
+          <Link href="/puppy-feeding-chart/" className="link">how much to feed a puppy of this size</Link>.
+        </p>
         <p className="mt-2 text-[13px] text-muted">
           Estimates only, not veterinary advice. Ask your vet about your pet’s health.
         </p>

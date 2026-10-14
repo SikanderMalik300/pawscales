@@ -161,6 +161,10 @@ export function PuppyFeedingPage(c: PuppyFeedingContent) {
           Food needs peak around 4 to 6 months, while puppies grow fastest, then ease
           off as growth slows.
         </p>
+        <p className="text-[14px] text-ink">
+          Toy and small breeds usually reach adult size by 9 to 12 months; ask your vet
+          when to switch to adult food and amounts.
+        </p>
 
         <NoteBox label="Large-breed puppies († 60 and 80 lb columns)">
           Large and giant breeds grow for longer and are prone to joint problems if
