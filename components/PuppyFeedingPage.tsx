@@ -11,6 +11,7 @@ import { AuthorBox } from '@/components/ui/AuthorBox';
 import { PhotoTile } from '@/components/ui/PhotoTile';
 import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbSchema, faqSchema, datasetSchema } from '@/lib/schema';
+import { fmt1 } from '@/lib/calc/round';
 import {
   feedingChart, CHART_ADULTS_LB, CHART_AGES, CHART_KCAL_PER_CUP, CHART_HANDOFF,
 } from '@/lib/calc/puppyFeeding';
@@ -107,8 +108,8 @@ export function PuppyFeedingPage(c: PuppyFeedingContent) {
             expected adult weight. The main number is calories a day (kcal); cups are
             at an example food density of {CHART_KCAL_PER_CUP} kcal per cup, so check
             your bag and use the calculator for an exact figure. Once a puppy reaches
-            about {handoffPct}% of its adult weight (near the end of the first year for
-            most breeds, later for giant breeds), feed it as an adult.
+            about {handoffPct}% of its adult weight (around the end of the first year,
+            later for large and giant breeds), feed it as an adult.
           </p>
         </section>
 
@@ -132,7 +133,7 @@ export function PuppyFeedingPage(c: PuppyFeedingContent) {
                   `a${lb}`,
                   cell.handoff
                     ? <span className="text-muted">adult*</span>
-                    : <span>{cell.kcal}<span className="block text-[12px] text-muted">{cell.cups} cups</span></span>,
+                    : <span>{cell.kcal}<span className="block text-[12px] text-muted">{fmt1(cell.cups!)} cups</span></span>,
                 ];
               })),
             },
@@ -140,10 +141,10 @@ export function PuppyFeedingPage(c: PuppyFeedingContent) {
           footnote={
             <>
               kcal a day, with cups at {CHART_KCAL_PER_CUP} kcal/cup. *From about{' '}
-              {handoffPct}% of adult weight the amount is essentially adult, so the
-              table defers to the{' '}
-              <a className="link" href="/dog-food-calculator/">dog food calculator</a>.
-              {' '}† large-breed puppies: see the note below.
+              {handoffPct}% of adult weight (usually after the first year) feed as an
+              adult; the{' '}
+              <a className="link" href="/dog-food-calculator/">dog food calculator</a>{' '}
+              covers that. † large-breed puppies: see the note below.
             </>
           }
           source={
@@ -156,6 +157,10 @@ export function PuppyFeedingPage(c: PuppyFeedingContent) {
             </>
           }
         />
+        <p className="text-[14px] text-ink">
+          Food needs peak around 4 to 6 months, while puppies grow fastest, then ease
+          off as growth slows.
+        </p>
 
         <NoteBox label="Large-breed puppies († 60 and 80 lb columns)">
           Large and giant breeds grow for longer and are prone to joint problems if

@@ -17,7 +17,8 @@ import { DOG_GROWTH_TAPER, DOG_MER } from '@/lib/constants';
 import { LB_TO_KG } from '@/lib/units';
 
 export const ADULT_SWITCH = 0.95; // calculator: >= 95% adult weight -> adult
-export const CHART_HANDOFF = 0.8; // chart: >= 80% adult weight -> see calculator
+export const CHART_HANDOFF = 0.95; // chart: >= 95% adult weight -> "Adult: see calculator"
+export const PEAK_EASE = 0.8; // past 80% of adult weight the daily amount eases
 
 /** Growth factor for a puppy at fraction `p` of expected adult weight. Returns
  *  null at/above the adult switch (feed as an adult instead). */

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   feedingChart, puppyKcal, pctAdultAtAge, growthFactor,
-  CHART_ADULTS_LB, CHART_HANDOFF, CHART_KCAL_PER_CUP,
+  CHART_ADULTS_LB, CHART_HANDOFF, CHART_KCAL_PER_CUP, PEAK_EASE,
 } from '@/lib/calc/puppyFeeding';
 import { dogFood } from '@/lib/calc/dogFood';
 import { bySlug } from '@/lib/registry';
@@ -20,18 +20,22 @@ describe('puppy growth taper', () => {
 describe('feeding chart', () => {
   const chart = feedingChart();
 
-  it('kcal never drops from one age to the next while growing', () => {
+  it('kcal never drops before 80% of adult weight (catches the old 4-month cliff)', () => {
     for (const row of chart) {
+      const adultKg = row.adultLb * LB_TO_KG;
       let prev = -Infinity;
       for (const cell of row.cells) {
-        if (cell.handoff) continue; // handed off to the calculator
-        expect(cell.kcal!, `${row.adultLb}lb at ${cell.months}mo`).toBeGreaterThanOrEqual(prev);
+        if (cell.handoff) continue;
+        const pct = pctAdultAtAge(adultKg, cell.months);
+        if (pct < PEAK_EASE) {
+          expect(cell.kcal!, `${row.adultLb}lb at ${cell.months}mo`).toBeGreaterThanOrEqual(prev);
+        }
         prev = cell.kcal!;
       }
     }
   });
 
-  it('hands off to the calculator at >= 80% of adult weight', () => {
+  it('hands off to the calculator only at >= 95% of adult weight', () => {
     for (const row of chart) {
       const adultKg = row.adultLb * LB_TO_KG;
       for (const cell of row.cells) {
@@ -41,11 +45,9 @@ describe('feeding chart', () => {
     }
   });
 
-  it('the 10 lb and 20 lb rows do not rise at 12 months (they hand off)', () => {
-    for (const lb of [10, 20]) {
-      const row = chart.find((r) => r.adultLb === lb)!;
-      const twelve = row.cells.find((c) => c.months === 12)!;
-      expect(twelve.handoff).toBe(true);
+  it('shows numbers through 12 months (no cell reaches 95% that early)', () => {
+    for (const row of chart) {
+      expect(row.cells.every((c) => !c.handoff), `${row.adultLb}lb`).toBe(true);
     }
   });
 
