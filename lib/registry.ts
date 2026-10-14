@@ -93,7 +93,7 @@ export const REGISTRY: ToolEntry[] = [
   },
   {
     slug: 'dog-years-calculator',
-    title: 'Dog Years Calculator: Dog Age in Human Years',
+    title: 'Dog Age Calculator: Dog Years to Human Years',
     metaDescription:
       "Convert your dog's age to human years by size, plus the 2020 DNA-based formula. Includes a full chart from 1 to 16 years.",
     h1: 'Dog Years Calculator',
@@ -343,7 +343,7 @@ export const BREED_PAGES: ToolEntry[] = [
   },
   {
     slug: 'cat-weight-chart',
-    title: 'Cat Weight Chart: Kitten Growth by Month',
+    title: 'Cat Weight Chart: Kitten Weight by Month',
     metaDescription:
       'How much should a cat weigh? Month-by-month weights for neutered domestic shorthair kittens, male and female, from research data on 8,000+ cats.',
     h1: 'Cat Weight Chart',

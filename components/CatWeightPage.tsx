@@ -122,7 +122,7 @@ export function CatWeightPage(c: CatWeightContent) {
 
       <div className="container-page mt-10 max-w-reading space-y-8">
         <section>
-          <H2>Kitten weight by month</H2>
+          <H2>Kitten weight chart by month</H2>
           <p className="mt-2 text-[16px] text-ink">
             These tables show the weight of healthy domestic shorthair cats, by
             month, for females and males. They come from research on more than 8,000

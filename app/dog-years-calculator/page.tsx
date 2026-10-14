@@ -15,9 +15,10 @@ export default function Page() {
     <ToolPage
       slug={tool.slug}
       quickAnswer={
-        <>A 5-year-old medium dog is about 36 in human years; a 2020 DNA study puts
-        it near 57. Dog aging is fast early then slows, and big dogs age quicker
-        than small ones. Enter your dog's age and weight for a size-based number
+        <>This dog age calculator converts your dog&rsquo;s age into human years two
+        ways. A 5-year-old medium dog is about 36 in human years; a 2020 DNA study
+        puts it near 57. Dog aging is fast early then slows, and big dogs age quicker
+        than small ones. Enter your dog&rsquo;s age and weight for a size-based number
         plus the DNA-based estimate.</>
       }
       calculator={<DogYearsCalculator />}
@@ -80,6 +81,7 @@ export default function Page() {
         'The DNA formula was built on Labradors, so treat it as a second opinion next to the size chart.',
       ]}
       faq={[
+        { q: 'How does a dog age calculator work?', a: 'A dog age calculator converts your dog’s age into human years. Ours does it two ways: a size-based chart, where the first year is about 15 human years, the second adds about 9, and later years add 4 to 11 depending on size; and the 2020 DNA formula, human = 16 × ln(dog age) + 31. Enter the age and adult weight and it shows both.' },
         { q: 'Is one dog year really 7 human years?', a: 'No. The 7-year rule is a rough average that gets both ends wrong. A dog’s first year is closer to 15 human years, and the pace then slows and depends on size. Our chart and the DNA formula both show this curve instead of a flat multiplier.' },
         { q: 'How old is a 2-year-old dog in human years?', a: 'About 24 human years for most sizes. The first two years pack in the fastest aging: roughly 15 human years in year one and about 9 more in year two. After that, each dog year adds 4 to 11 human years depending on the dog’s size.' },
         { q: 'Why do big dogs age faster?', a: 'Large and giant breeds grow for longer and tend to have shorter lifespans, so they move through the aging curve more quickly. By 10 years a small dog is about 56 in human years, a large dog about 66, and a giant breed about 79 on the chart.' },
