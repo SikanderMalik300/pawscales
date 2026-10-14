@@ -1,0 +1,452 @@
+{
+  "source": {
+    "mainCitation": "Salt C, Butterwick RF, Henzel KS, German AJ. Comparison of growth in neutered Domestic Shorthair kittens with growth in sexually-intact cats. PLoS ONE 2023;18(3):e0283016.",
+    "mainArticle": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0283016",
+    "mainDataset": "https://datacat.liverpool.ac.uk/1459/",
+    "mainDatasetDoi": "https://doi.org/10.17638/datacat.liverpool.ac.uk/1459",
+    "intactCitation": "Salt C, German AJ, Henzel KS, Butterwick RF. Growth standard charts for monitoring bodyweight in intact domestic shorthair kittens from the USA. PLoS ONE 2022;17(11):e0277531.",
+    "intactArticle": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0277531",
+    "intactDataset": "https://datacat.liverpool.ac.uk/1456/",
+    "intactDatasetDoi": "https://doi.org/10.17638/datacat.liverpool.ac.uk/1456",
+    "license": "CC BY 3.0",
+    "accessed": "2026-10-15"
+  },
+  "generatedAt": "2026-10-15",
+  "units": "lb",
+  "method": "Per sex, visits binned by nearest whole month (age in [m-0.5, m+0.5) months). Each cell is the median and 25th-75th centile of bodyweight, converted to pounds. Each column is lightly isotonic-smoothed so it never decreases with age; raw values kept.",
+  "mainLabel": "Domestic shorthair cats that were neutered (weights from before and after neutering), healthy body condition, USA (Salt et al. 2023)",
+  "mainCounts": {
+    "F": {
+      "2": 4444,
+      "3": 6863,
+      "4": 6225,
+      "5": 3570,
+      "6": 1806,
+      "7": 656,
+      "8": 410,
+      "9": 405,
+      "10": 369,
+      "11": 366,
+      "12": 414,
+      "18": 483
+    },
+    "M": {
+      "2": 3454,
+      "3": 5508,
+      "4": 5129,
+      "5": 2637,
+      "6": 1162,
+      "7": 416,
+      "8": 313,
+      "9": 346,
+      "10": 315,
+      "11": 288,
+      "12": 385,
+      "18": 404
+    }
+  },
+  "main": {
+    "F": [
+      {
+        "month": 2,
+        "n": 4444,
+        "rawP25": 1.6,
+        "rawMedian": 2.1,
+        "rawP75": 2.5,
+        "p25": 1.6,
+        "median": 2.1,
+        "p75": 2.5
+      },
+      {
+        "month": 3,
+        "n": 6863,
+        "rawP25": 2.8,
+        "rawMedian": 3.3,
+        "rawP75": 3.75,
+        "p25": 2.8,
+        "median": 3.3,
+        "p75": 3.8
+      },
+      {
+        "month": 4,
+        "n": 6225,
+        "rawP25": 3.8,
+        "rawMedian": 4.3,
+        "rawP75": 4.8,
+        "p25": 3.8,
+        "median": 4.3,
+        "p75": 4.8
+      },
+      {
+        "month": 5,
+        "n": 3570,
+        "rawP25": 4.6,
+        "rawMedian": 5.2,
+        "rawP75": 5.7,
+        "p25": 4.6,
+        "median": 5.2,
+        "p75": 5.7
+      },
+      {
+        "month": 6,
+        "n": 1806,
+        "rawP25": 5.2,
+        "rawMedian": 5.7,
+        "rawP75": 6.39,
+        "p25": 5.2,
+        "median": 5.7,
+        "p75": 6.4
+      },
+      {
+        "month": 7,
+        "n": 656,
+        "rawP25": 5.6,
+        "rawMedian": 6.25,
+        "rawP75": 6.84,
+        "p25": 5.6,
+        "median": 6.2,
+        "p75": 6.8
+      },
+      {
+        "month": 8,
+        "n": 410,
+        "rawP25": 5.98,
+        "rawMedian": 6.7,
+        "rawP75": 7.58,
+        "p25": 6.0,
+        "median": 6.7,
+        "p75": 7.6
+      },
+      {
+        "month": 9,
+        "n": 405,
+        "rawP25": 6.4,
+        "rawMedian": 7.23,
+        "rawP75": 8.31,
+        "p25": 6.4,
+        "median": 7.2,
+        "p75": 8.3
+      },
+      {
+        "month": 10,
+        "n": 369,
+        "rawP25": 6.72,
+        "rawMedian": 7.72,
+        "rawP75": 8.8,
+        "p25": 6.7,
+        "median": 7.7,
+        "p75": 8.8
+      },
+      {
+        "month": 11,
+        "n": 366,
+        "rawP25": 7.2,
+        "rawMedian": 8.1,
+        "rawP75": 9.04,
+        "p25": 7.0,
+        "median": 8.0,
+        "p75": 9.0
+      },
+      {
+        "month": 12,
+        "n": 414,
+        "rawP25": 6.8,
+        "rawMedian": 7.89,
+        "rawP75": 9.14,
+        "p25": 7.0,
+        "median": 8.0,
+        "p75": 9.1
+      },
+      {
+        "month": 18,
+        "n": 483,
+        "rawP25": 7.43,
+        "rawMedian": 8.58,
+        "rawP75": 9.84,
+        "p25": 7.4,
+        "median": 8.6,
+        "p75": 9.8
+      }
+    ],
+    "M": [
+      {
+        "month": 2,
+        "n": 3454,
+        "rawP25": 1.72,
+        "rawMedian": 2.2,
+        "rawP75": 2.75,
+        "p25": 1.7,
+        "median": 2.2,
+        "p75": 2.8
+      },
+      {
+        "month": 3,
+        "n": 5508,
+        "rawP25": 3.12,
+        "rawMedian": 3.6,
+        "rawP75": 4.37,
+        "p25": 3.1,
+        "median": 3.6,
+        "p75": 4.4
+      },
+      {
+        "month": 4,
+        "n": 5129,
+        "rawP25": 4.4,
+        "rawMedian": 5.1,
+        "rawP75": 5.75,
+        "p25": 4.4,
+        "median": 5.1,
+        "p75": 5.8
+      },
+      {
+        "month": 5,
+        "n": 2637,
+        "rawP25": 5.5,
+        "rawMedian": 6.4,
+        "rawP75": 7.1,
+        "p25": 5.5,
+        "median": 6.4,
+        "p75": 7.1
+      },
+      {
+        "month": 6,
+        "n": 1162,
+        "rawP25": 6.5,
+        "rawMedian": 7.3,
+        "rawP75": 8.1,
+        "p25": 6.5,
+        "median": 7.3,
+        "p75": 8.1
+      },
+      {
+        "month": 7,
+        "n": 416,
+        "rawP25": 7.3,
+        "rawMedian": 8.14,
+        "rawP75": 8.86,
+        "p25": 7.3,
+        "median": 8.1,
+        "p75": 8.9
+      },
+      {
+        "month": 8,
+        "n": 313,
+        "rawP25": 8.05,
+        "rawMedian": 8.8,
+        "rawP75": 9.7,
+        "p25": 8.1,
+        "median": 8.8,
+        "p75": 9.7
+      },
+      {
+        "month": 9,
+        "n": 346,
+        "rawP25": 8.49,
+        "rawMedian": 9.31,
+        "rawP75": 10.27,
+        "p25": 8.5,
+        "median": 9.3,
+        "p75": 10.3
+      },
+      {
+        "month": 10,
+        "n": 315,
+        "rawP25": 8.7,
+        "rawMedian": 9.74,
+        "rawP75": 10.63,
+        "p25": 8.7,
+        "median": 9.7,
+        "p75": 10.6
+      },
+      {
+        "month": 11,
+        "n": 288,
+        "rawP25": 9.08,
+        "rawMedian": 9.9,
+        "rawP75": 10.9,
+        "p25": 8.9,
+        "median": 9.9,
+        "p75": 10.9
+      },
+      {
+        "month": 12,
+        "n": 385,
+        "rawP25": 8.82,
+        "rawMedian": 9.81,
+        "rawP75": 10.91,
+        "p25": 8.9,
+        "median": 9.9,
+        "p75": 10.9
+      },
+      {
+        "month": 18,
+        "n": 404,
+        "rawP25": 9.36,
+        "rawMedian": 10.36,
+        "rawP75": 11.8,
+        "p25": 9.4,
+        "median": 10.4,
+        "p75": 11.8
+      }
+    ]
+  },
+  "intactComparison": {
+    "F": [
+      {
+        "month": 2,
+        "n": 1133,
+        "rawP25": 1.8,
+        "rawMedian": 2.2,
+        "rawP75": 2.6,
+        "p25": 1.8,
+        "median": 2.2,
+        "p75": 2.6
+      },
+      {
+        "month": 3,
+        "n": 1899,
+        "rawP25": 2.8,
+        "rawMedian": 3.3,
+        "rawP75": 3.77,
+        "p25": 2.8,
+        "median": 3.3,
+        "p75": 3.8
+      },
+      {
+        "month": 4,
+        "n": 1642,
+        "rawP25": 3.8,
+        "rawMedian": 4.31,
+        "rawP75": 4.8,
+        "p25": 3.8,
+        "median": 4.3,
+        "p75": 4.8
+      },
+      {
+        "month": 5,
+        "n": 966,
+        "rawP25": 4.6,
+        "rawMedian": 5.25,
+        "rawP75": 5.75,
+        "p25": 4.6,
+        "median": 5.2,
+        "p75": 5.8
+      },
+      {
+        "month": 6,
+        "n": 560,
+        "rawP25": 5.19,
+        "rawMedian": 5.69,
+        "rawP75": 6.4,
+        "p25": 5.2,
+        "median": 5.7,
+        "p75": 6.4
+      },
+      {
+        "month": 12,
+        "n": 206,
+        "rawP25": 5.9,
+        "rawMedian": 6.7,
+        "rawP75": 7.66,
+        "p25": 5.9,
+        "median": 6.7,
+        "p75": 7.7
+      },
+      {
+        "month": 18,
+        "n": 325,
+        "rawP25": 6.37,
+        "rawMedian": 7.3,
+        "rawP75": 8.6,
+        "p25": 6.4,
+        "median": 7.3,
+        "p75": 8.6
+      }
+    ],
+    "M": [
+      {
+        "month": 2,
+        "n": 982,
+        "rawP25": 1.7,
+        "rawMedian": 2.2,
+        "rawP75": 2.7,
+        "p25": 1.7,
+        "median": 2.2,
+        "p75": 2.7
+      },
+      {
+        "month": 3,
+        "n": 1560,
+        "rawP25": 3.11,
+        "rawMedian": 3.6,
+        "rawP75": 4.38,
+        "p25": 3.1,
+        "median": 3.6,
+        "p75": 4.4
+      },
+      {
+        "month": 4,
+        "n": 1365,
+        "rawP25": 4.4,
+        "rawMedian": 5.09,
+        "rawP75": 5.7,
+        "p25": 4.4,
+        "median": 5.1,
+        "p75": 5.7
+      },
+      {
+        "month": 5,
+        "n": 770,
+        "rawP25": 5.5,
+        "rawMedian": 6.4,
+        "rawP75": 7.12,
+        "p25": 5.5,
+        "median": 6.4,
+        "p75": 7.1
+      },
+      {
+        "month": 6,
+        "n": 378,
+        "rawP25": 6.4,
+        "rawMedian": 7.28,
+        "rawP75": 8.14,
+        "p25": 6.4,
+        "median": 7.3,
+        "p75": 8.1
+      },
+      {
+        "month": 12,
+        "n": 188,
+        "rawP25": 8.37,
+        "rawMedian": 9.6,
+        "rawP75": 10.7,
+        "p25": 8.4,
+        "median": 9.6,
+        "p75": 10.7
+      },
+      {
+        "month": 18,
+        "n": 225,
+        "rawP25": 8.82,
+        "rawMedian": 9.9,
+        "rawP75": 11.35,
+        "p25": 8.8,
+        "median": 9.9,
+        "p75": 11.3
+      }
+    ]
+  },
+  "adult": {
+    "F": {
+      "p25": 7.4,
+      "median": 8.6,
+      "p75": 9.8
+    },
+    "M": {
+      "p25": 9.4,
+      "median": 10.4,
+      "p75": 11.8
+    }
+  }
+}

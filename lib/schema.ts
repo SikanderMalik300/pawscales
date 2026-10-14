@@ -87,3 +87,22 @@ export function datasetSchema() {
     isBasedOn: 'https://datacat.liverpool.ac.uk/377/',
   };
 }
+
+export function catDatasetSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Dataset',
+    name: 'Domestic shorthair cat weight by age and sex',
+    description:
+      'Median and 25th-75th centile bodyweight by month for neutered and intact domestic shorthair cats in optimal body condition, from US primary-care veterinary records.',
+    creator: {
+      '@type': 'Organization',
+      name: 'Salt C, German AJ, Butterwick RF, et al. (University of Liverpool / WALTHAM)',
+    },
+    license: 'https://creativecommons.org/licenses/by/3.0/',
+    isBasedOn: [
+      'https://datacat.liverpool.ac.uk/1459/',
+      'https://datacat.liverpool.ac.uk/1456/',
+    ],
+  };
+}

@@ -119,13 +119,15 @@ describe('registry guards (incl. breed pages)', () => {
       expect(BREED_PAGES.some((p) => p.slug === slug), `${slug} registered`).toBe(true);
     }
   });
-  it('every growth page links to at least 2 other growth pages', () => {
+  it('every dog growth page links to at least 2 other growth pages', () => {
     const slugs = new Set(BREED_PAGES.map((p) => p.slug));
-    for (const p of BREED_PAGES) {
+    // Dog weight/size charts cross-link within their category; the cat weight
+    // chart is the only cat-category growth page, so it is exempt.
+    for (const p of BREED_PAGES.filter((b) => b.category === 'dog-size-charts')) {
       const rel = relatedGrowthPages(p.slug);
       expect(rel.length, `${p.slug} related count`).toBeGreaterThanOrEqual(2);
       expect(rel.every((r) => r.slug !== p.slug), `${p.slug} excludes self`).toBe(true);
-      expect(rel.every((r) => slugs.has(r.slug)), `${p.slug} links growth pages`).toBe(true);
+      expect(rel.every((r) => slugs.has(r.slug) && r.category === p.category), `${p.slug} links same-category growth pages`).toBe(true);
     }
   });
 });

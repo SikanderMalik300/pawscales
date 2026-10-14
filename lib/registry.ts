@@ -310,6 +310,22 @@ export const BREED_PAGES: ToolEntry[] = [
     notCovered: [],
     breedPage: true,
   },
+  {
+    slug: 'cat-weight-chart',
+    title: 'Cat Weight Chart: Kitten Growth by Month',
+    metaDescription:
+      'How much should a cat weigh? Month-by-month weights for neutered domestic shorthair kittens, male and female, from research data on 8,000+ cats.',
+    h1: 'Cat Weight Chart',
+    shortName: 'Cat weight chart',
+    oneLiner: 'Kitten weight by month, male and female, from vet data.',
+    category: 'cat-calculators',
+    related: ['kitten-age-chart', 'cat-years-calculator', 'cat-food-calculator'],
+    lastUpdated: '2026-10-15',
+    sources: [],
+    fromOwner: null,
+    notCovered: [],
+    breedPage: true,
+  },
 ];
 
 const ALL = [...REGISTRY, ...BREED_PAGES];
@@ -322,9 +338,14 @@ export const byCategory = (cat: Category): ToolEntry[] =>
 
 export const breedPages = (): ToolEntry[] => BREED_PAGES;
 
-/** Other breed/size growth pages to cross-link from a growth page (3-5 links). */
-export const relatedGrowthPages = (slug: string): ToolEntry[] =>
-  BREED_PAGES.filter((p) => p.slug !== slug).slice(0, 5);
+/** Other growth pages in the same category to cross-link (3-5 links). The cat
+ *  weight chart sits in its own category, so it is not mixed with the dog pages. */
+export const relatedGrowthPages = (slug: string): ToolEntry[] => {
+  const self = BREED_PAGES.find((p) => p.slug === slug);
+  return BREED_PAGES.filter(
+    (p) => p.slug !== slug && (!self || p.category === self.category),
+  ).slice(0, 5);
+};
 
 export const allPages = (): ToolEntry[] => ALL;
 

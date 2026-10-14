@@ -26,12 +26,14 @@ export function GrowthChart({
   points,
   userPoint,
   yUnit = 'lb',
+  xUnit = 'weeks',
   width = 560,
   height = 230,
 }: {
   points: ChartPoint[];
   userPoint?: { x: number; y: number; label?: string };
   yUnit?: string;
+  xUnit?: string;
   width?: number;
   height?: number;
 }) {
@@ -107,7 +109,7 @@ export function GrowthChart({
       viewBox={`0 0 ${w} ${h}`}
       width="100%"
       role="img"
-      aria-label={`Growth curve of weight in ${yUnit} by age in weeks`}
+      aria-label={`Growth curve of weight in ${yUnit} by age in ${xUnit}`}
       className="tabular-nums"
     >
       {yTicks.map((t, i) => (
