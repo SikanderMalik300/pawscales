@@ -13,6 +13,7 @@ import { breadcrumbSchema, faqSchema, datasetSchema } from '@/lib/schema';
 import { BreedGrowthCalculator } from '@/components/tools/BreedGrowthCalculator';
 import { bandForSex, type Breed } from '@/lib/data/breeds';
 import { expectedByAge, TOTAL_DOGS, type BreedRow } from '@/lib/calc/breedGrowth';
+import { fmt1 } from '@/lib/calc/round';
 
 const sizeHub = HUBS.find((h) => h.slug === 'dog-size-charts')!;
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -46,9 +47,9 @@ function sexTable(breed: Breed, sex: 'male' | 'female') {
       rows={rows.map((r) => ({
         cells: {
           age: `${r.months} mo${mark(r.kind)}`,
-          low: `${r.lowLb}`,
-          typ: `${r.typicalLb}`,
-          high: `${r.highLb}${r.giant ? ' †' : ''}`,
+          low: fmt1(r.lowLb),
+          typ: fmt1(r.typicalLb),
+          high: `${fmt1(r.highLb)}${r.giant ? ' †' : ''}`,
         },
       }))}
       footnote={

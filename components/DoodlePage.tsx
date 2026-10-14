@@ -13,6 +13,7 @@ import { breadcrumbSchema, faqSchema, datasetSchema } from '@/lib/schema';
 import { DoodleSizeCalculator } from '@/components/tools/DoodleSizeCalculator';
 import { doodleTypicalByAge, type DoodleBreed } from '@/lib/data/doodles';
 import { TOTAL_DOGS } from '@/lib/calc/breedGrowth';
+import { fmt1 } from '@/lib/calc/round';
 
 const sizeHub = HUBS.find((h) => h.slug === 'dog-size-charts')!;
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -115,7 +116,7 @@ export function DoodlePage(c: DoodlePageContent) {
           rows={ageRows.map((r) => ({
             cells: {
               age: `${r.months} mo${mark(r.kind)}`,
-              ...Object.fromEntries(breed.sizes.map((s) => [s.size, `${r.bySize[s.size]}`])),
+              ...Object.fromEntries(breed.sizes.map((s) => [s.size, fmt1(r.bySize[s.size])])),
             },
           }))}
           footnote={

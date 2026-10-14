@@ -36,7 +36,8 @@ export function HubPage({
 }) {
   const hub = HUBS.find((h) => h.slug === slug)!;
   const tools = byCategory(slug);
-  const breedCharts = slug === 'dog-size-charts' ? breedPages() : [];
+  const breedCharts = breedPages().filter((p) => p.category === slug);
+  const growthHeading = slug === 'dog-size-charts' ? 'Breed growth charts' : 'Growth charts';
   const photo = getPhoto(`hub-${slug === 'dog-calculators' ? 'dog' : slug === 'cat-calculators' ? 'cat' : 'size'}`);
   const url = `${SITE.url}/${slug}/`;
 
@@ -77,9 +78,9 @@ export function HubPage({
             <PhotoTile key={t.slug} href={`/${t.slug}/`} photoId={t.slug} label={t.shortName} description={t.oneLiner} />
           ))}
         </div>
-        {slug === 'dog-size-charts' && breedCharts.length > 0 && (
+        {breedCharts.length > 0 && (
           <div className="mt-10">
-            <h2 className="mb-5 text-[22px] sm:text-[26px]">Breed growth charts</h2>
+            <h2 className="mb-5 text-[22px] sm:text-[26px]">{growthHeading}</h2>
             <div className="grid grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-4">
               {breedCharts.map((t) => (
                 <PhotoTile key={t.slug} href={`/${t.slug}/`} photoId={t.slug} label={t.shortName} description={t.oneLiner} />

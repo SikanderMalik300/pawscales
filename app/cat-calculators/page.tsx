@@ -10,6 +10,7 @@ export default function Page() {
       whichTool={[
         { need: 'Convert your cat’s age to human years', tool: 'cat-years-calculator' },
         { need: 'Estimate a kitten’s age week by week', tool: 'kitten-age-chart' },
+        { need: 'Check a kitten’s weight by month', tool: 'cat-weight-chart' },
         { need: 'Work out daily calories and cans or cups', tool: 'cat-food-calculator' },
       ]}
       faq={[

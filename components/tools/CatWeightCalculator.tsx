@@ -9,6 +9,7 @@ import {
 import { GrowthChart, type ChartPoint } from '@/components/ui/GrowthChart';
 import { CAT_WEIGHT, trackKitten, MIN_MONTH, MAX_MONTH, type Sex } from '@/lib/data/catWeight';
 import { parseNum } from '@/lib/units';
+import { fmt1 } from '@/lib/calc/round';
 
 const POSITION_LABEL: Record<'below' | 'within' | 'above', string> = {
   below: 'below the typical range',
@@ -60,15 +61,19 @@ export function CatWeightCalculator() {
                 <Overline>Your kitten is</Overline>
                 <p className="text-[22px] font-medium leading-tight text-ink">{POSITION_LABEL[result.position]}</p>
                 <p className="mt-1 text-[14px] text-muted">
-                  Typical for a {sex === 'F' ? 'female' : 'male'} at this age: {result.p25}&ndash;{result.p75} lb (middle {result.median} lb).
+                  Typical for a {sex === 'F' ? 'female' : 'male'} at this age: {fmt1(result.p25)}&ndash;{fmt1(result.p75)} lb (middle {fmt1(result.median)} lb).
                 </p>
                 <ResultDivider />
-                <SecondaryRow label="25th-75th centile" value={`${result.p25}-${result.p75} lb`} />
+                <SecondaryRow label="25th-75th centile" value={`${fmt1(result.p25)}-${fmt1(result.p75)} lb`} />
                 <div className="my-3">
                   <GrowthChart points={chart} yUnit="lb" xUnit="months"
                     userPoint={{ x: Math.max(MIN_MONTH, Math.min(ageNum ?? MIN_MONTH, MAX_MONTH)), y: weightNum ?? 0, label: 'your kitten' }} />
                 </div>
                 <p className="text-[13px] text-muted">
+                  By definition, 1 in 4 healthy kittens weigh more than this range and
+                  1 in 4 weigh less.
+                </p>
+                <p className="mt-1 text-[13px] text-muted">
                   This compares weight only, not body condition. A vet&rsquo;s body
                   condition check matters more than the number on the scale.
                 </p>

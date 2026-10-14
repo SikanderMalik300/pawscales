@@ -30,7 +30,9 @@ export default function Page() {
             appears, and weight after 4 weeks follows about 4–6 oz gained per week
             from 1 lb: <strong>weeks ≈ 4 + (weight in oz − 16) ÷ 5</strong>, shown as
             a range using 4 and 6 oz/week. Signs set the lower bound; weight sets the
-            estimate once a kitten passes 4 weeks.
+            estimate once a kitten passes 4 weeks. Past 8 weeks, see the{' '}
+            <a className="link" href="/cat-weight-chart/">cat weight chart</a> for
+            typical weight by month.
           </p>
           <p>
             <strong>Example 1.</strong> A 24 oz kitten with eyes open, ears up, and

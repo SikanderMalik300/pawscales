@@ -23,6 +23,7 @@ export interface Row {
 
 export function DataTable({
   caption,
+  tableCaption,
   columns,
   rows,
   source,
@@ -30,6 +31,7 @@ export function DataTable({
   className,
 }: {
   caption?: React.ReactNode;
+  tableCaption?: string; // real <caption> element (screen readers / SEO)
   columns: Column[];
   rows: Row[];
   source?: React.ReactNode;
@@ -46,6 +48,7 @@ export function DataTable({
       <div className="overflow-hidden rounded-[16px] border border-line">
         <div className="overflow-x-auto">
           <table className="w-full border-collapse text-left">
+            {tableCaption && <caption className="sr-only">{tableCaption}</caption>}
             <thead>
               <tr className="bg-sand">
                 {columns.map((c) => (

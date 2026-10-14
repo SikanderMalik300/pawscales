@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { HUBS } from '@/lib/registry';
 
 export const metadata: Metadata = {
-  title: 'Page not found — PawScales',
+  title: 'Page not found | PawScales',
   robots: { index: false, follow: false },
 };
 

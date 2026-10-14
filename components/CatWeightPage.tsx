@@ -13,6 +13,7 @@ import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbSchema, faqSchema, catDatasetSchema } from '@/lib/schema';
 import { CatWeightCalculator } from '@/components/tools/CatWeightCalculator';
 import { CAT_WEIGHT, SEX_LABEL, type Sex, type CatRow } from '@/lib/data/catWeight';
+import { fmt1 } from '@/lib/calc/round';
 
 const SLUG = 'cat-weight-chart';
 const catHub = HUBS.find((h) => h.slug === 'cat-calculators')!;
@@ -32,6 +33,7 @@ function sexTable(sex: Sex) {
   return (
     <DataTable
       caption={`${SEX_LABEL[sex]} cat weight by age (lb)`}
+      tableCaption={`${sex === 'F' ? 'Female' : 'Male'} kittens (lb)`}
       columns={[
         { key: 'age', header: 'Age' },
         { key: 'low', header: 'Low (25th)', numeric: true },
@@ -41,9 +43,9 @@ function sexTable(sex: Sex) {
       rows={rows.map((r) => ({
         cells: {
           age: r.month === 18 ? '18 mo' : `${r.month} mo`,
-          low: `${r.p25}`,
-          med: `${r.median}`,
-          high: `${r.p75}`,
+          low: fmt1(r.p25),
+          med: fmt1(r.median),
+          high: fmt1(r.p75),
         },
       }))}
       footnote={
@@ -165,8 +167,8 @@ export function CatWeightPage(c: CatWeightContent) {
           </div>
           <p className="mt-4 text-[16px] text-ink">
             For context, by 18 months the cats in this study typically weighed about{' '}
-            <strong>{adultF.median} lb ({adultF.p25}&ndash;{adultF.p75})</strong> for
-            females and <strong>{adultM.median} lb ({adultM.p25}&ndash;{adultM.p75})</strong>{' '}
+            <strong>{fmt1(adultF.median)} lb ({fmt1(adultF.p25)}&ndash;{fmt1(adultF.p75)})</strong> for
+            females and <strong>{fmt1(adultM.median)} lb ({fmt1(adultM.p25)}&ndash;{fmt1(adultM.p75)})</strong>{' '}
             for males. This is the typical weight for domestic shorthair cats in this
             study, not a healthy-weight target: a small cat can be lean at a lower
             weight and a large cat healthy above it. Pedigree breeds differ, so these
@@ -186,13 +188,14 @@ export function CatWeightPage(c: CatWeightContent) {
           <div className="mt-4">
             <DataTable
               caption="Intact domestic shorthair median weight (lb)"
+              tableCaption="Intact cats, median weight (lb)"
               columns={[
                 { key: 'age', header: 'Age' },
                 { key: 'f', header: 'Female median', numeric: true },
                 { key: 'm', header: 'Male median', numeric: true },
               ]}
               rows={intact.F.map((r, i) => ({
-                cells: { age: `${r.month} mo`, f: `${r.median}`, m: `${intact.M[i].median}` },
+                cells: { age: `${r.month} mo`, f: fmt1(r.median), m: fmt1(intact.M[i].median) },
               }))}
               source={
                 <>
