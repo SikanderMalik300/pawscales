@@ -46,6 +46,7 @@ const PAGES = [
   ['goldendoodle-size-chart', '/goldendoodle-size-chart/'],
   ['bernedoodle-size-chart', '/bernedoodle-size-chart/'],
   ['cat-weight-chart', '/cat-weight-chart/'],
+  ['puppy-feeding-chart', '/puppy-feeding-chart/'],
 ];
 const results = [];
 for (const [name, path] of PAGES) {

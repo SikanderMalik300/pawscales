@@ -67,6 +67,17 @@ export const DOG_MER = {
   growth4moToAdult: S(2.0, 'Pet Nutrition Alliance', PNA, 'PNA growth 2-3x RER, decreasing from ~4 months'),
 };
 
+// Puppy growth factors as a taper by % of expected adult weight (WSAVA/AAHA
+// growth guidance, anchored to the PNA 3x->2x RER range). Used by the dog food
+// calculator (puppy mode) and the puppy feeding chart so they agree exactly.
+export const DOG_GROWTH_TAPER = {
+  under50: S(3.0, 'Pet Nutrition Alliance / WSAVA / AAHA', PNA, 'up to 50% of adult weight'),
+  to80: S(2.5, 'Pet Nutrition Alliance / WSAVA / AAHA', PNA, '50-80% of adult weight'),
+  to95: S(2.0, 'Pet Nutrition Alliance / WSAVA / AAHA', PNA, '80-95% of adult weight'),
+  // At >=95% of adult weight, switch to adult maintenance (neuteredAdult /
+  // intactAdult above). AAHA/WSAVA: feed as an adult once near full size.
+};
+
 export const CAT_MER = {
   neuteredAdult: S(1.2, 'Pet Nutrition Alliance', PNA),
   intactAdult: S(1.4, 'Pet Nutrition Alliance', PNA),

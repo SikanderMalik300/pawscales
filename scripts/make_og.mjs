@@ -33,6 +33,7 @@ const PAGES = [
   { slug: 'goldendoodle-size-chart', title: 'Goldendoodle Size Chart', color: HUB.size, photo: 'goldendoodle-size-chart' },
   { slug: 'bernedoodle-size-chart', title: 'Bernedoodle Size Chart', color: HUB.size, photo: 'bernedoodle-size-chart' },
   { slug: 'cat-weight-chart', title: 'Cat Weight Chart', color: HUB.cat, photo: 'cat-weight-chart' },
+  { slug: 'puppy-feeding-chart', title: 'Puppy Feeding Chart', color: HUB.dog, photo: 'puppy-feeding-chart' },
   { slug: 'default', title: 'Free dog and cat calculators, built on real data', color: HUB.home, photo: 'hero' },
 ];
 

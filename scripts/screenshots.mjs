@@ -62,6 +62,7 @@ const PAGES = [
   { name: 'goldendoodle', path: '/goldendoodle-size-chart/' },
   { name: 'bernedoodle', path: '/bernedoodle-size-chart/' },
   { name: 'cat-weight', path: '/cat-weight-chart/' },
+  { name: 'puppy-feeding', path: '/puppy-feeding-chart/' },
 ];
 
 await mkdir(SHOTS, { recursive: true });

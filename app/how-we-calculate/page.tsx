@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { TextPage } from '@/components/TextPage';
 import { DataTable } from '@/components/ui/Table';
-import { PREGNANCY, HEAT, ENERGY, DOG_MER, CAT_MER, DOG_YEARS, CAT_YEARS } from '@/lib/constants';
+import { PREGNANCY, HEAT, ENERGY, DOG_MER, DOG_GROWTH_TAPER, CAT_MER, DOG_YEARS, CAT_YEARS } from '@/lib/constants';
 import type { Sourced } from '@/lib/constants';
 
 export const metadata: Metadata = {
@@ -24,6 +24,7 @@ const rows: Row[] = [
   { label: 'Resting energy requirement', value: `RER = ${ENERGY.rerCoefficient.value} × kg^${ENERGY.rerExponent.value}`, s: ENERGY.rerCoefficient },
   { label: 'Dog MER: neutered / intact adult', value: `${DOG_MER.neuteredAdult.value} / ${DOG_MER.intactAdult.value} × RER`, s: DOG_MER.neuteredAdult },
   { label: 'Dog MER: growth (<4mo / ≥4mo)', value: `${DOG_MER.growthUnder4mo.value} / ${DOG_MER.growth4moToAdult.value} × RER`, s: DOG_MER.growthUnder4mo },
+  { label: 'Dog MER: puppy growth taper (% of adult weight)', value: `${DOG_GROWTH_TAPER.under50.value} / ${DOG_GROWTH_TAPER.to80.value} / ${DOG_GROWTH_TAPER.to95.value} × RER (<50% / 50–80% / 80–95%)`, s: DOG_GROWTH_TAPER.under50 },
   { label: 'Cat MER: neutered / intact adult', value: `${CAT_MER.neuteredAdult.value} / ${CAT_MER.intactAdult.value} × RER`, s: CAT_MER.neuteredAdult },
   { label: 'Treats budget', value: `${ENERGY.treatsPct.value}% of daily calories`, s: ENERGY.treatsPct },
   { label: 'Individual variation', value: `up to ${ENERGY.varyPct.value}%`, s: ENERGY.varyPct },
