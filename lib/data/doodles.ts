@@ -26,6 +26,8 @@ export interface DoodleBreed {
   sourceNote: string; // plain line about what the source is
   photoId: string;
   giantNote?: string; // shown under the by-age table (e.g. Standard reaching giant size)
+  parentsFirst?: boolean; // default the size estimator to "by parents" (no breed standard)
+  defaultParents?: { motherLb: number; fatherLb: number }; // sensible starting weights
 }
 
 export const GOLDENDOODLE: DoodleBreed = {
@@ -61,6 +63,26 @@ export const BERNEDOODLE: DoodleBreed = {
     { size: 'Miniature', weightLabel: '26–45 lb', heightLabel: '14–17 in', lowLb: 26, highLb: 45, repLb: 35.5, bound: 'range', crateIn: '30' },
     { size: 'Medium', weightLabel: '46–65 lb', heightLabel: '18–21 in', lowLb: 46, highLb: 65, repLb: 55.5, bound: 'range', crateIn: '36' },
     { size: 'Standard', weightLabel: '66 lb and up', heightLabel: '22–29 in', lowLb: 66, highLb: null, repLb: 66, bound: 'at least', crateIn: '42' },
+  ],
+};
+
+// Cavapoo (Cavalier King Charles Spaniel x Poodle). There is no Cavapoo breed
+// association or size standard; size is set by the Poodle parent (AKC-standard).
+// Toy and Miniature are commonly used breeder categories; the overall range is
+// from Wikipedia. The parents'-weight estimator is the main tool.
+export const CAVAPOO: DoodleBreed = {
+  slug: 'cavapoo-size-chart',
+  name: 'Cavapoo',
+  sourceName: 'Wikipedia (Cavapoo) and the AKC parent-breed standards',
+  sourceUrl: 'https://en.wikipedia.org/wiki/Cavapoo',
+  sourceNote:
+    'There is no Cavapoo breed association or size standard. Size is set by the Poodle parent, which is AKC-standardised. Toy and Miniature are commonly used breeder categories, not a breed standard; the overall Cavapoo range is about 9–22 lb and 9–13 in (Wikipedia).',
+  photoId: 'cavapoo-size-chart',
+  parentsFirst: true,
+  defaultParents: { motherLb: 7, fatherLb: 16 }, // Toy/Mini Poodle x Cavalier
+  sizes: [
+    { size: 'Toy', weightLabel: 'About 7–13 lb', heightLabel: 'About 9–12 in', lowLb: 7, highLb: 13, repLb: 10, bound: 'range', crateIn: '18–22' },
+    { size: 'Miniature', weightLabel: 'About 12–25 lb', heightLabel: 'About 12–16 in', lowLb: 12, highLb: 25, repLb: 18.5, bound: 'range', crateIn: '24' },
   ],
 };
 

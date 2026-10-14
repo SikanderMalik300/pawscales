@@ -25,6 +25,7 @@ const PHOTOS = [
   ['german-shepherd-weight-chart', 0.5, 0.3, ['sq', 'ld']],
   ['goldendoodle-size-chart', 0.5, 0.4, ['sq', 'ld']],
   ['bernedoodle-size-chart', 0.45, 0.4, ['sq', 'ld']],
+  ['cavapoo-size-chart', 0.5, 0.3, ['sq', 'ld']],
   ['cat-weight-chart', 0.3, 0.42, ['sq', 'ld']],
   ['puppy-feeding-chart', 0.5, 0.45, ['sq', 'ld']],
   ['hub-dog', 0.5, 0.45, ['sq', 'ld']],

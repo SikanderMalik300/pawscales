@@ -16,10 +16,10 @@ import { roundTo } from '@/lib/calc/round';
 const f1 = (n: number) => roundTo(n, 1).toString();
 
 export function DoodleSizeCalculator({ breed }: { breed: DoodleBreed }) {
-  const [mode, setMode] = useState<'size' | 'parents'>('size');
+  const [mode, setMode] = useState<'size' | 'parents'>(breed.parentsFirst ? 'parents' : 'size');
   const [sizeName, setSizeName] = useState(breed.sizes[2]?.size ?? breed.sizes[0].size);
-  const [mother, setMother] = useState('15');
-  const [father, setFather] = useState('65');
+  const [mother, setMother] = useState(String(breed.defaultParents?.motherLb ?? 15));
+  const [father, setFather] = useState(String(breed.defaultParents?.fatherLb ?? 65));
   const [age, setAge] = useState('');
   const [weight, setWeight] = useState('');
 

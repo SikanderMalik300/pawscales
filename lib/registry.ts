@@ -326,6 +326,22 @@ export const BREED_PAGES: ToolEntry[] = [
     breedPage: true,
   },
   {
+    slug: 'cavapoo-size-chart',
+    title: 'Cavapoo Size Chart: Toy & Miniature Weight by Age',
+    metaDescription:
+      'How big do Cavapoos get? Toy and Miniature sizes set by the Poodle parent, with AKC parent standards, weight by age, and a parents’-weight estimator.',
+    h1: 'Cavapoo Size Chart',
+    shortName: 'Cavapoo size chart',
+    oneLiner: 'Cavapoo sizes by the Poodle parent, with a parents estimator.',
+    category: 'dog-size-charts',
+    related: ['goldendoodle-size-chart', 'bernedoodle-size-chart', 'puppy-weight-calculator', 'dog-crate-size-chart'],
+    lastUpdated: '2026-10-15',
+    sources: [],
+    fromOwner: null,
+    notCovered: [],
+    breedPage: true,
+  },
+  {
     slug: 'cat-weight-chart',
     title: 'Cat Weight Chart: Kitten Growth by Month',
     metaDescription:

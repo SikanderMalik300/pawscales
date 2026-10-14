@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { GOLDENDOODLE, BERNEDOODLE, sizeBand, parentsRange, doodleTypicalByAge } from '@/lib/data/doodles';
+import { GOLDENDOODLE, BERNEDOODLE, CAVAPOO, sizeBand, parentsRange, doodleTypicalByAge } from '@/lib/data/doodles';
 import { bandForKg } from '@/lib/calc/breedGrowth';
 import { predictPuppyWeight } from '@/lib/calc/puppyWeight';
 import { lbToKg, kgToLb } from '@/lib/units';
@@ -127,5 +127,35 @@ describe('Bernedoodle (SwissRidge) categories', () => {
     const gold = doodleTypicalByAge(GOLDENDOODLE);
     // Medium columns differ (Bernedoodle rep 55.5 vs Goldendoodle rep 43)
     expect(bern[bern.length - 1].bySize['Medium']).not.toBe(gold[gold.length - 1].bySize['Medium']);
+  });
+});
+
+describe('Cavapoo (breeder categories, no standard)', () => {
+  it('has Toy and Miniature categories with the stated wording', () => {
+    expect(CAVAPOO.sizes.map((s) => s.size)).toEqual(['Toy', 'Miniature']);
+    const [toy, mini] = CAVAPOO.sizes;
+    expect(toy.weightLabel).toBe('About 7–13 lb');
+    expect(toy.heightLabel).toBe('About 9–12 in');
+    expect(mini.weightLabel).toBe('About 12–25 lb');
+    expect(mini.heightLabel).toBe('About 12–16 in');
+  });
+  it('states there is no breed standard and defaults to the parents estimator', () => {
+    expect(CAVAPOO.sourceNote).toMatch(/no Cavapoo breed association or size standard/i);
+    expect(CAVAPOO.parentsFirst).toBe(true);
+  });
+  it('maps Toy to a small band and Mini a step up', () => {
+    const [toy, mini] = CAVAPOO.sizes;
+    expect(sizeBand(toy)).toBe('I');  // rep 10 lb
+    expect(sizeBand(mini)).toBe('II'); // rep 18.5 lb
+  });
+  it('parents rule: Toy Poodle 6 x Cavalier 16 -> 6 to 11 lb', () => {
+    expect(parentsRange(6, 16)).toEqual({ lowLb: 6, highLb: 11 });
+  });
+  it('table starts at 3 months and no cell exceeds its representative weight', () => {
+    const rows = doodleTypicalByAge(CAVAPOO);
+    expect(rows[0].months).toBe(3);
+    for (const r of rows) {
+      for (const s of CAVAPOO.sizes) expect(r.bySize[s.size]).toBeLessThanOrEqual(s.repLb);
+    }
   });
 });
