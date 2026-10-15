@@ -46,6 +46,7 @@ const PAGES = [
   ['goldendoodle-size-chart', '/goldendoodle-size-chart/'],
   ['bernedoodle-size-chart', '/bernedoodle-size-chart/'],
   ['cavapoo-size-chart', '/cavapoo-size-chart/'],
+  ['benadryl-dosage-calculator', '/benadryl-dosage-calculator/'],
   ['cat-weight-chart', '/cat-weight-chart/'],
   ['puppy-feeding-chart', '/puppy-feeding-chart/'],
 ];

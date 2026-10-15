@@ -62,6 +62,7 @@ const PAGES = [
   { name: 'goldendoodle', path: '/goldendoodle-size-chart/' },
   { name: 'bernedoodle', path: '/bernedoodle-size-chart/' },
   { name: 'cavapoo', path: '/cavapoo-size-chart/' },
+  { name: 'benadryl', path: '/benadryl-dosage-calculator/' },
   { name: 'cat-weight', path: '/cat-weight-chart/' },
   { name: 'puppy-feeding', path: '/puppy-feeding-chart/' },
 ];
