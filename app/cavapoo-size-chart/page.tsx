@@ -17,16 +17,15 @@ export default function Page() {
         Cavalier King Charles Spaniel is 13&ndash;18 lb (AKC); crossed with a Toy
         Poodle you get a Toy Cavapoo (about 7&ndash;13 lb), and with a Miniature
         Poodle a Miniature Cavapoo (about 12&ndash;25 lb). There is no Cavapoo breed
-        standard, so the best guide is the parents &mdash; enter their weights to
-        estimate.</>
+        standard, so the best guide is the parents. Enter their weights to estimate.</>
       }
       method={
         <>
           <p>
             Because there is no Cavapoo breed standard, we start from the parents. A
             rough rule is that a puppy lands between the lighter parent and the average
-            of both. The two labels &mdash; Toy and Miniature &mdash; are commonly used
-            breeder categories set by the Poodle parent, not an official standard. To
+            of both. The two labels, Toy and Miniature, are commonly used breeder
+            categories set by the Poodle parent, not an official standard. To
             show weight by age, we scale the Salt et al. (2017) median growth curve to
             each category&rsquo;s representative weight, capped at the adult weight.
           </p>

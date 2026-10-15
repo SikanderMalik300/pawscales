@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { readdirSync, readFileSync, statSync } from 'node:fs';
-import { join, extname } from 'node:path';
+import { readdirSync, readFileSync, statSync, existsSync } from 'node:fs';
+import { join, extname, relative } from 'node:path';
 
 // design.md section 12 + section 2: a test that fails if banned patterns appear.
 // Guards the whole app/components/lib tree against Tailwind default-palette
@@ -23,6 +23,15 @@ function walk(dir: string, out: string[] = []): string[] {
 }
 
 const files = DIRS.flatMap((d) => walk(join(ROOT, d)));
+
+function walkHtml(dir: string, out: string[] = []): string[] {
+  for (const name of readdirSync(dir)) {
+    const p = join(dir, name);
+    if (statSync(p).isDirectory()) walkHtml(p, out);
+    else if (extname(p) === '.html') out.push(p);
+  }
+  return out;
+}
 
 const PALETTE =
   'slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose';
@@ -62,17 +71,41 @@ describe('design guardrails', () => {
   });
 
   // A13 / design.md: no em dashes in visible text. Allowed only in the <title>
-  // metadata (the `title:` property) and in a source citation name.
-  it('no em dash (—) in page body text', () => {
+  // metadata (the `title:` property) and in a source citation name. Catches both
+  // the literal character and the HTML entities (&mdash; slipped through once).
+  const EM_DASH = /—|&mdash;|&#8212;|&#x2014;/i;
+  it('no em dash in source body text (literal or entity)', () => {
     const violations: string[] = [];
     for (const f of files) {
       readFileSync(f, 'utf8').split('\n').forEach((line, i) => {
-        if (!line.includes('—')) return;
+        if (!EM_DASH.test(line)) return;
         if (/\btitle:/.test(line)) return; // <title> metadata
         if (/\bname:\s*['"`].*—/.test(line) || /citation/.test(line)) return; // source titles
-        violations.push(`${f}:${i + 1}  ${line.trim().slice(0, 80)}`);
+        violations.push(`${relative(ROOT, f)}:${i + 1}  ${line.trim().slice(0, 80)}`);
       });
     }
     expect(violations, `em dash in body text:\n${violations.join('\n')}`).toEqual([]);
+  });
+
+  // The thorough check: scan the full rendered HTML of every exported page for
+  // em dashes in the visible body (excluding <head> and <script>, where the
+  // <title> metadata and Next.js payload legitimately carry them). This covers
+  // body copy produced by templates from data, not just literals in source.
+  // Requires a prior `next build`; otherwise it reports that it was skipped.
+  const OUT = join(ROOT, 'out');
+  const htmlFiles: string[] = existsSync(OUT) ? walkHtml(OUT) : [];
+  it('no em dash in any rendered page body', () => {
+    if (!htmlFiles.length) {
+      console.warn('design-guard: out/ not found — run `npm run build` to scan rendered HTML.');
+      return;
+    }
+    const violations: string[] = [];
+    for (const f of htmlFiles) {
+      const body = readFileSync(f, 'utf8')
+        .replace(/<head[\s\S]*?<\/head>/i, '')
+        .replace(/<script[\s\S]*?<\/script>/gi, '');
+      if (body.includes('—')) violations.push(relative(ROOT, f));
+    }
+    expect(violations, `em dash in rendered body of:\n${violations.join('\n')}`).toEqual([]);
   });
 });
