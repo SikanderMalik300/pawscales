@@ -9,8 +9,12 @@ import {
 import { benadrylDose, BENADRYL, type Species } from '@/lib/calc/benadryl';
 import { parseNum, lbToKg } from '@/lib/units';
 
-const mg = (n: number) => `${Math.round(n)} mg`;
-const tabs = (n: number) => `${n} ${n === 1 ? 'tablet' : 'tablets'}`;
+const mg = (n: number) => `${Math.round(n)} mg`; // raw dose window (rounded)
+const tmg = (n: number) => `${n} mg`; // exact tablet amount (keeps the .5)
+const tabletWord = (n: number) => (n <= 1 ? 'tablet' : 'tablets');
+const tabletRange = (lo: number, hi: number) =>
+  lo === hi ? `${lo} ${tabletWord(lo)}` : `${lo}–${hi} tablets`;
+const perKg = (mgAmt: number, kg: number) => Math.round((mgAmt / kg) * 10) / 10;
 
 export function BenadrylCalculator() {
   const [species, setSpecies] = useState<Species>('dog');
@@ -68,12 +72,12 @@ export function BenadrylCalculator() {
                 ) : (
                   <>
                     <Overline>Typical dose (start low)</Overline>
-                    <ResultNumber value={String(r.lowTablets)} unit={`× 25 mg ${r.lowTablets === 1 ? 'tablet' : 'tablets'}`} />
+                    <ResultNumber value={String(r.lowTablets)} unit={`× 25 mg ${tabletWord(r.lowTablets!)}`} />
                     <p className="text-[16px] text-ink">
-                      About {mg(r.leadMg)} to start (~1 mg/lb), {cfg.freq}.
+                      = {tmg(r.lowTabletMg!)} (about {perKg(r.lowTabletMg!, r.kg)} mg/kg), {cfg.freq}.
                     </p>
                     <ResultDivider />
-                    <SecondaryRow label="Full range" value={`${mg(r.lowMg)}–${mg(r.highMg)} (${tabs(r.lowTablets!)}–${tabs(r.highTablets!)})`} />
+                    <SecondaryRow label="Full range" value={`${mg(r.lowMg)}–${mg(r.highMg)} (${tabletRange(r.lowTablets!, r.highTablets!)})`} />
                     <SecondaryRow label="Never exceed" value={`${mg(r.highMg)} (${cfg.maxMgKg} mg/kg) per dose`} />
                   </>
                 )}

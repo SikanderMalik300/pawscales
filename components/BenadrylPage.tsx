@@ -24,6 +24,9 @@ const fmtDate = (iso?: string) => {
   return `${MONTHS[m - 1]} ${d}, ${y}`;
 };
 const mg = (n: number) => `${Math.round(n)} mg`;
+const tabletWord = (n: number) => (n <= 1 ? 'tablet' : 'tablets');
+const tabletRange = (lo: number, hi: number) =>
+  lo === hi ? `${lo} ${tabletWord(lo)}` : `${lo}–${hi}`;
 
 function H2({ children, id }: { children: ReactNode; id?: string }) {
   return <h2 id={id} className="text-[22px] sm:text-[26px]">{children}</h2>;
@@ -47,7 +50,7 @@ function chart(species: Species) {
           cells: {
             w: `${lb} lb`,
             dose: `${mg(d.lowMg)}–${mg(d.highMg)}`,
-            tabs: d.noTablet ? 'ask your vet' : `${d.lowTablets}–${d.highTablets}`,
+            tabs: d.noTablet ? 'ask your vet' : tabletRange(d.lowTablets!, d.highTablets!),
           },
         };
       })}

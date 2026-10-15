@@ -266,7 +266,7 @@ export const REGISTRY: ToolEntry[] = [
     oneLiner: 'Diphenhydramine dose by weight for dogs and cats.',
     category: 'dog-calculators',
     related: ['dog-food-calculator', 'cat-food-calculator', 'dog-years-calculator'],
-    lastUpdated: '2026-10-15',
+    lastUpdated: '2026-10-16',
     sources: [],
     fromOwner: null,
     notCovered: [],
