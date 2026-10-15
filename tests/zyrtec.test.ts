@@ -27,6 +27,25 @@ describe('Zyrtec (cetirizine) dog dose — caps', () => {
   });
 });
 
+describe('Zyrtec — "Never exceed" is per weight', () => {
+  it('the ceiling is never above 2 mg/kg or 20 mg, for 4, 10, 25, 44 and 80 lb', () => {
+    for (const lb of [4, 10, 25, 44, 80]) {
+      const d = dogDoseForLb(lb)!;
+      const kg = lb * LB_TO_KG;
+      expect(d.ceilMg, `${lb}lb <= 2mg/kg`).toBeLessThanOrEqual(2 * kg + 1e-9);
+      expect(d.ceilMg, `${lb}lb <= 20mg`).toBeLessThanOrEqual(20 + 1e-9);
+    }
+  });
+  it('small dogs show a per-weight ceiling, not a flat 20 mg (10 lb ~ 9 mg)', () => {
+    const d = dogDoseForLb(10)!;
+    expect(Math.round(d.ceilMg)).toBe(9); // 2 mg/kg x 4.54 kg
+    expect(d.ceilMg).toBeLessThan(20);
+  });
+  it('big dogs are capped at the 20 mg ceiling', () => {
+    expect(dogDoseForLb(80)!.ceilMg).toBe(20);
+  });
+});
+
 describe('Zyrtec dog dose — the checked weights', () => {
   it('10 lb: 5 mg, half a tablet', () => {
     const d = dogDoseForLb(10)!;

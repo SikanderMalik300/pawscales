@@ -79,7 +79,7 @@ export function ZyrtecCalculator() {
                     </p>
                     <ResultDivider />
                     <SecondaryRow label="Full range" value={`${mg(r.lowMg)}–${mg(r.highMg)} (${tabletRange(r.lowTablets!, r.highTablets!)})`} />
-                    <SecondaryRow label="Never exceed" value={`20 mg (2 mg/kg) per dose`} />
+                    <SecondaryRow label="Never exceed" value={`${mg(r.ceilMg)}${r.ceilMg < 20 ? ' (2 mg/kg)' : ''} per dose`} />
                   </>
                 )}
                 <p className="mt-3 text-[13px] text-muted">

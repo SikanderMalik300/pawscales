@@ -108,7 +108,7 @@ export function ZyrtecPage(c: ZyrtecContent) {
             Zyrtec is a brand of cetirizine, an antihistamine. The published dose for
             dogs is <strong>1 to 2 mg/kg once a day</strong> (AAHA 2023 guidelines), or
             <strong> 10 to 20 mg per dog</strong> (Merck Veterinary Manual), which is
-            roughly 1 mg per pound. The calculator leads with that lower amount and caps
+            about 0.5 mg per pound. The calculator leads with that lower amount and caps
             the result at 20 mg per dose, so a big dog is not given a very large amount.
             Always confirm with your vet first.
           </p>

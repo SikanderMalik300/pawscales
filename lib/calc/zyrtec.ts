@@ -30,6 +30,7 @@ export interface DogDose {
   kg: number;
   lowMg: number; // raw low (1 mg/kg), or 20 for a large dog
   highMg: number; // min(2 mg/kg, 20)
+  ceilMg: number; // never-exceed ceiling: the smaller of 2 mg/kg x weight and 20 mg
   largeDog: boolean; // 1 mg/kg >= 20 mg (from about 20 kg / 44 lb): flat 20 mg
   tooSmall: boolean; // no 5 mg step fits at or under 2 mg/kg (under ~2.5 kg)
   noTablet: boolean;
@@ -43,13 +44,13 @@ export function cetirizineDog(kg: number): DogDose | null {
   if (!(kg > 0)) return null;
   const c = CETIRIZINE_DOG;
   const rawLow = c.minMgKg * kg;
-  const cappedHigh = Math.min(c.maxMgKg * kg, c.capMg);
+  const cappedHigh = Math.min(c.maxMgKg * kg, c.capMg); // never-exceed ceiling
 
   // Large dog: even the low end (1 mg/kg) is at or above the 20 mg cap.
   if (rawLow >= c.capMg) {
     const t = c.capMg / c.tabletMg; // 2 tablets
     return {
-      kg, lowMg: c.capMg, highMg: c.capMg, largeDog: true, tooSmall: false, noTablet: false,
+      kg, lowMg: c.capMg, highMg: c.capMg, ceilMg: cappedHigh, largeDog: true, tooSmall: false, noTablet: false,
       lowTabletMg: c.capMg, highTabletMg: c.capMg, lowTablets: t, highTablets: t,
     };
   }
@@ -63,6 +64,7 @@ export function cetirizineDog(kg: number): DogDose | null {
     kg,
     lowMg: roundTo(rawLow, 1),
     highMg: roundTo(cappedHigh, 1),
+    ceilMg: cappedHigh,
     largeDog: false,
     tooSmall,
     noTablet,
