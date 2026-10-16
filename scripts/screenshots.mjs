@@ -63,6 +63,7 @@ const PAGES = [
   { name: 'bernedoodle', path: '/bernedoodle-size-chart/' },
   { name: 'cavapoo', path: '/cavapoo-size-chart/' },
   { name: 'benadryl', path: '/benadryl-dosage-calculator/' },
+  { name: 'gabapentin', path: '/gabapentin-for-dogs-and-cats/' },
   { name: 'zyrtec', path: '/zyrtec-dosage-calculator/' },
   { name: 'cat-weight', path: '/cat-weight-chart/' },
   { name: 'puppy-feeding', path: '/puppy-feeding-chart/' },

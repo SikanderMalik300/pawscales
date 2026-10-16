@@ -47,6 +47,7 @@ const PAGES = [
   ['bernedoodle-size-chart', '/bernedoodle-size-chart/'],
   ['cavapoo-size-chart', '/cavapoo-size-chart/'],
   ['benadryl-dosage-calculator', '/benadryl-dosage-calculator/'],
+  ['gabapentin-for-dogs-and-cats', '/gabapentin-for-dogs-and-cats/'],
   ['zyrtec-dosage-calculator', '/zyrtec-dosage-calculator/'],
   ['cat-weight-chart', '/cat-weight-chart/'],
   ['puppy-feeding-chart', '/puppy-feeding-chart/'],
