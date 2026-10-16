@@ -29,13 +29,15 @@ export function HubPage({
   slug,
   whichTool,
   faq,
+  extraTools = [],
 }: {
   slug: Category;
   whichTool: { need: string; tool: string }[]; // tool = registry slug
   faq: FaqItem[];
+  extraTools?: string[]; // slugs from other categories that still fit this hub
 }) {
   const hub = HUBS.find((h) => h.slug === slug)!;
-  const tools = byCategory(slug);
+  const tools = [...byCategory(slug), ...extraTools.map((s) => bySlug(s)).filter((t): t is NonNullable<typeof t> => Boolean(t))];
   const breedCharts = breedPages().filter((p) => p.category === slug);
   const growthHeading = slug === 'dog-size-charts' ? 'Breed growth charts' : 'Growth charts';
   const photo = getPhoto(`hub-${slug === 'dog-calculators' ? 'dog' : slug === 'cat-calculators' ? 'cat' : 'size'}`);

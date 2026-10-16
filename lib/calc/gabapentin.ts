@@ -28,19 +28,23 @@ export const CAT_PREVISIT = { lowMg: 50, highMg: 100 };
 export const DOG_WEIGHTS_LB = [10, 20, 40, 60, 80, 100];
 export const CAT_WEIGHTS_LB = [6, 8, 10, 12, 15];
 
-/** Round to the nearest 5 mg (the reference table is approximate). */
-export const round5 = (mg: number): number => Math.round(mg / 5) * 5;
+// Keep the shown range inside the published range: round the low end UP and the
+// high end DOWN to the nearest 5 mg, so no value falls below min x kg or above
+// max x kg (same two-way rule as the Benadryl/Zyrtec tablet rounding).
+export const roundUp5 = (mg: number): number => Math.ceil(mg / 5) * 5;
+export const roundDown5 = (mg: number): number => Math.floor(mg / 5) * 5;
 
 export interface RefRow {
   lb: number;
-  lowMg: number; // round5(minMgKg x kg)
-  highMg: number; // round5(maxMgKg x kg)
+  lowMg: number; // roundUp5(minMgKg x kg): at least min x kg
+  highMg: number; // roundDown5(maxMgKg x kg): at most max x kg
 }
 
-/** A by-weight reference row: the mg range for a weight, rounded to 5 mg. */
+/** A by-weight reference row: the mg range for a weight, kept inside the
+ *  published mg/kg range and rounded to 5 mg. */
 export function refRow(range: DoseRange, lb: number): RefRow {
   const kg = lb * LB_TO_KG;
-  return { lb, lowMg: round5(range.minMgKg * kg), highMg: round5(range.maxMgKg * kg) };
+  return { lb, lowMg: roundUp5(range.minMgKg * kg), highMg: roundDown5(range.maxMgKg * kg) };
 }
 
 export const dogOngoingTable = (): RefRow[] => DOG_WEIGHTS_LB.map((lb) => refRow(DOG_ONGOING, lb));

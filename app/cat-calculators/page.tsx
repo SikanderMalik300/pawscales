@@ -7,6 +7,7 @@ export default function Page() {
   return (
     <HubPage
       slug="cat-calculators"
+      extraTools={['benadryl-dosage-calculator', 'gabapentin-for-dogs-and-cats']}
       whichTool={[
         { need: 'Convert your cat’s age to human years', tool: 'cat-years-calculator' },
         { need: 'Estimate a kitten’s age week by week', tool: 'kitten-age-chart' },

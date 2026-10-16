@@ -2,34 +2,32 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import {
-  dogOngoingTable, catPainTable, refRow, round5,
+  dogOngoingTable, catPainTable, refRow, roundUp5, roundDown5,
   DOG_ONGOING, CAT_PAIN, DOG_WEIGHTS_LB, CAT_WEIGHTS_LB,
 } from '@/lib/calc/gabapentin';
 import { bySlug } from '@/lib/registry';
 import { LB_TO_KG } from '@/lib/units';
 
 describe('gabapentin reference values = mg/kg x kg (integrity)', () => {
-  it('each dog row equals round5(mg/kg x weight in kg)', () => {
-    for (const r of dogOngoingTable()) {
-      const kg = r.lb * LB_TO_KG;
-      expect(r.lowMg).toBe(round5(DOG_ONGOING.minMgKg * kg));
-      expect(r.highMg).toBe(round5(DOG_ONGOING.maxMgKg * kg));
-      // rounding never drifts more than 2.5 mg from the exact value
-      expect(Math.abs(r.lowMg - DOG_ONGOING.minMgKg * kg)).toBeLessThanOrEqual(2.5);
-      expect(Math.abs(r.highMg - DOG_ONGOING.maxMgKg * kg)).toBeLessThanOrEqual(2.5);
+  it('every value stays inside the published range (low >= min x kg, high <= max x kg)', () => {
+    for (const [table, range] of [[dogOngoingTable(), DOG_ONGOING], [catPainTable(), CAT_PAIN]] as const) {
+      for (const r of table) {
+        const kg = r.lb * LB_TO_KG;
+        expect(r.lowMg, `${r.lb}lb low >= min`).toBeGreaterThanOrEqual(range.minMgKg * kg - 1e-9);
+        expect(r.highMg, `${r.lb}lb high <= max`).toBeLessThanOrEqual(range.maxMgKg * kg + 1e-9);
+        expect(r.lowMg).toBe(roundUp5(range.minMgKg * kg));
+        expect(r.highMg).toBe(roundDown5(range.maxMgKg * kg));
+        expect(r.lowMg % 5).toBe(0);
+        expect(r.highMg % 5).toBe(0);
+      }
     }
   });
-  it('each cat row equals round5(mg/kg x weight in kg)', () => {
-    for (const r of catPainTable()) {
-      const kg = r.lb * LB_TO_KG;
-      expect(r.lowMg).toBe(round5(CAT_PAIN.minMgKg * kg));
-      expect(r.highMg).toBe(round5(CAT_PAIN.maxMgKg * kg));
-    }
-  });
-  it('the checked rows match the approved report (10 and 100 lb dog, 10 lb cat)', () => {
+  it('the checked rows match the approved examples', () => {
     expect(refRow(DOG_ONGOING, 10)).toMatchObject({ lowMg: 25, highMg: 135 });
-    expect(refRow(DOG_ONGOING, 100)).toMatchObject({ lowMg: 225, highMg: 1360 });
+    expect(refRow(DOG_ONGOING, 40).highMg).toBe(540); // not 545 (rounds down)
+    expect(refRow(DOG_ONGOING, 100)).toMatchObject({ lowMg: 230, highMg: 1360 });
     expect(refRow(CAT_PAIN, 10)).toMatchObject({ lowMg: 15, highMg: 45 });
+    expect(refRow(CAT_PAIN, 12).highMg).toBe(50); // not 55 (rounds down)
   });
   it('rows are a low-high range, never a single value', () => {
     for (const r of [...dogOngoingTable(), ...catPainTable()]) {
