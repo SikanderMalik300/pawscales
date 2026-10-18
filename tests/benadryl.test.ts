@@ -38,6 +38,20 @@ describe('Benadryl dose — lowest tablet reaches the minimum', () => {
   });
 });
 
+describe('Benadryl shown mg window — low up, high down, never over max', () => {
+  it('the shown high end (and never-exceed) is never over weight x max', () => {
+    for (const s of SPECIES) {
+      for (const lb of allWeights(s)) {
+        const d = doseForLb(s, lb)!;
+        const kg = lb * LB_TO_KG;
+        expect(d.highMgShown, `${s} ${lb}lb high shown`).toBeLessThanOrEqual(BENADRYL[s].maxMgKg * kg + 1e-9);
+        expect(d.lowMgShown, `${s} ${lb}lb low shown`).toBeGreaterThanOrEqual(BENADRYL[s].minMgKg * kg - 1e-9);
+        expect(Number.isInteger(d.lowMgShown) && Number.isInteger(d.highMgShown)).toBe(true);
+      }
+    }
+  });
+});
+
 describe('Benadryl rounding — the corrected cases', () => {
   it('50 lb dog is 2 to 3.5 tablets', () => {
     const d = doseForLb('dog', 50)!;

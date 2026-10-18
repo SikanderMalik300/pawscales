@@ -23,7 +23,7 @@ const fmtDate = (iso?: string) => {
   const [y, m, d] = iso.split('-').map(Number);
   return `${MONTHS[m - 1]} ${d}, ${y}`;
 };
-const mg = (n: number) => `${Math.round(n)} mg`;
+const mgWindow = (lo: number, hi: number) => (lo === hi ? `${hi} mg` : `${lo} mg–${hi} mg`);
 const tabletWord = (n: number) => (n <= 1 ? 'tablet' : 'tablets');
 const tabletRange = (lo: number, hi: number) =>
   lo === hi ? `${lo} ${tabletWord(lo)}` : `${lo}–${hi}`;
@@ -49,7 +49,7 @@ function chart(species: Species) {
         return {
           cells: {
             w: `${lb} lb`,
-            dose: `${mg(d.lowMg)}–${mg(d.highMg)}`,
+            dose: mgWindow(d.lowMgShown, d.highMgShown),
             tabs: d.noTablet ? 'ask your vet' : tabletRange(d.lowTablets!, d.highTablets!),
           },
         };

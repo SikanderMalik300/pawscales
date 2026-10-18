@@ -12,9 +12,9 @@ const CONTENT: MedicationContent = {
     <>
       Dramamine is a brand name for dimenhydrinate, an antihistamine used mainly
       for motion sickness. The published dog dose is <strong>4 to 8 mg/kg</strong> by
-      mouth, {DRAMAMINE.freq} (Merck Veterinary Manual), given about an hour before
-      travel. Enter your dog&rsquo;s weight for the amount and a tablet count. Ask
-      your vet first, especially for small dogs.
+      mouth, {DRAMAMINE.freq} (Merck Veterinary Manual). Enter your dog&rsquo;s weight
+      for the amount and a tablet count. Ask your vet first, especially for small dogs,
+      and ask about the right timing before travel.
     </>
   ),
   reviewed:
@@ -28,8 +28,8 @@ const CONTENT: MedicationContent = {
     sourceNote: (
       <>
         Dose from the Merck Veterinary Manual antiemetic table (dimenhydrinate 4 to
-        8 mg/kg, {DRAMAMINE.freq}). For motion sickness in dogs. Give about 1 hour
-        before travel.
+        8 mg/kg, {DRAMAMINE.freq}). For motion sickness in dogs. Ask your vet about
+        timing before travel.
       </>
     ),
     warning: (
@@ -54,8 +54,9 @@ const CONTENT: MedicationContent = {
         and nausea on car or plane trips. The published dog dose is <strong>4 to 8
         mg/kg</strong> by mouth, {DRAMAMINE.freq} (Merck Veterinary Manual), which works
         out to roughly 2 to 4 mg per pound. For travel, the Merck{' '}
-        <a className="link" href={MOTION}>Motion Sickness in Animals</a> chapter suggests
-        giving it about an hour before you set off, so it has time to take effect. The
+        <a className="link" href={MOTION}>Motion Sickness in Animals</a> chapter gives a
+        one-hour-before-travel timing for the related antihistamine meclizine, not
+        dimenhydrinate; ask your vet how long before a trip to give Dramamine. The
         calculator leads with the lower, cautious amount and shows the full range.
         Confirm the amount with your vet first, especially for small dogs.
       </p>
@@ -141,7 +142,7 @@ const CONTENT: MedicationContent = {
   faq: [
     {
       q: 'How long before a trip should I give Dramamine?',
-      a: 'The Merck Veterinary Manual Motion Sickness in Animals chapter suggests giving dimenhydrinate about an hour before travel, so it has time to take effect. Follow your vet’s timing.',
+      a: 'Merck’s Motion Sickness in Animals chapter lists a one-hour-before-travel timing for meclizine, a related antihistamine, not dimenhydrinate specifically. Ask your vet how long before travel to give Dramamine.',
     },
     {
       q: 'Can I use Dramamine Less Drowsy?',
@@ -167,7 +168,7 @@ const CONTENT: MedicationContent = {
     </>,
     <>
       <a className="link" href={MOTION}>Merck Veterinary Manual, Motion Sickness in Animals</a>{' '}
-      (give about 1 hour before travel; antihistamines ineffective in cats).
+      (meclizine given about 1 hour before travel; antihistamines ineffective in cats).
     </>,
     <>
       <a className="link" href={ANTIHIST}>Merck Veterinary Manual, Antihistamines for Integumentary Disease in Animals</a>{' '}

@@ -10,7 +10,7 @@
 // (so it never exceeds the maximum). If no half tablet fits the window, the
 // result is mg-only with a "too small for tablets" message.
 import { LB_TO_KG } from '@/lib/units';
-import { roundTo } from '@/lib/calc/round';
+import { roundTo, mgCeil, mgFloor } from '@/lib/calc/round';
 
 export type Species = 'dog' | 'cat';
 
@@ -37,6 +37,8 @@ export interface BenadrylDose {
   kg: number;
   lowMg: number; // minMgKg x kg
   highMg: number; // maxMgKg x kg (the maximum per dose)
+  lowMgShown: number; // whole mg, rounded UP (>= minMgKg x kg)
+  highMgShown: number; // whole mg, rounded DOWN (<= maxMgKg x kg)
   leadMg: number; // the ~1 mg/lb (2 mg/kg) headline dose
   freq: string;
   noTablet: boolean; // no half tablet fits inside [lowMg, highMg]
@@ -66,6 +68,8 @@ export function benadrylDose(species: Species, kg: number): BenadrylDose | null 
     kg,
     lowMg: roundTo(lowMg, 1),
     highMg: roundTo(highMg, 1),
+    lowMgShown: mgCeil(lowMg),
+    highMgShown: mgFloor(highMg),
     leadMg: roundTo(leadMg, 1),
     freq: c.freq,
     noTablet,

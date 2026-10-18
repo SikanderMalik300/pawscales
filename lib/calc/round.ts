@@ -13,3 +13,10 @@ export const roundTo = (x: number, d: number): number => {
 
 /** Format a weight for a growth table: always one decimal (6 -> "6.0"). */
 export const fmt1 = (x: number): string => roundTo(x, 1).toFixed(1);
+
+/** Display mg window endpoints. The low end rounds UP and the high end rounds
+ *  DOWN to whole mg (like the gabapentin 5 mg rounding), so the shown range and
+ *  the "never exceed" value always stay inside [min x kg, max x kg] and never
+ *  suggest going over the maximum. Float noise is trimmed first. */
+export const mgCeil = (x: number): number => Math.ceil(roundTo(x, 6));
+export const mgFloor = (x: number): number => Math.floor(roundTo(x, 6));

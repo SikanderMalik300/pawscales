@@ -48,6 +48,21 @@ describe('Dramamine (dimenhydrinate) dose, 50 mg tablet', () => {
     expect(d.highTablets).toBe(1);
   });
 
+  it('the shown high end (and never-exceed) is never over weight x max; low rounds up', () => {
+    for (const lb of weights) {
+      const d = dose(lb);
+      const kg = lb * LB_TO_KG;
+      expect(d.highMgShown, `${lb}lb high shown`).toBeLessThanOrEqual(maxMgKg * kg + 1e-9);
+      expect(d.lowMgShown, `${lb}lb low shown`).toBeGreaterThanOrEqual(minMgKg * kg - 1e-9);
+      expect(Number.isInteger(d.lowMgShown) && Number.isInteger(d.highMgShown)).toBe(true);
+    }
+  });
+
+  it('shows whole-mg ranges, low up and high down (10 lb 19-36, 50 lb 91-181)', () => {
+    expect([dose(10).lowMgShown, dose(10).highMgShown]).toEqual([19, 36]);
+    expect([dose(50).lowMgShown, dose(50).highMgShown]).toEqual([91, 181]);
+  });
+
   it('offers a 50 mg tablet and a 25 mg chewable, defaulting to 50 mg', () => {
     expect(DRAMAMINE.tablets.map((t) => t.mg)).toEqual([50, 25]);
     expect(DRAMAMINE.defaultTabletMg).toBe(50);
@@ -76,8 +91,12 @@ describe('Dramamine page is dogs-only and carries the safety layer', () => {
     expect(page).toMatch(/list a cat dose because our source/i);
     expect(page).toMatch(/ineffective for motion sickness in cats/i);
   });
-  it('carries the travel-timing line and the shared ASPCA box', () => {
-    expect(page).toMatch(/hour before/i);
+  it('attributes the 1-hour travel timing to meclizine, not dimenhydrinate', () => {
+    expect(page).toMatch(/meclizine/i);
+    expect(page).toMatch(/ask your vet (how long|about)/i);
+    expect(page).not.toMatch(/giving dimenhydrinate about an hour before/i);
+  });
+  it('carries the shared ASPCA box', () => {
     expect(page).toMatch(/ASPCA/);
     expect(med).toMatch(/888\) 426-4435/);
   });

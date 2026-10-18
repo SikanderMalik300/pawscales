@@ -57,6 +57,21 @@ describe('Pepcid (famotidine) dose, 10 mg tablet', () => {
     expect(d.highTablets).toBe(2);
   });
 
+  it('the shown high end (and never-exceed) is never over weight x max; low rounds up', () => {
+    for (const lb of weights) {
+      const d = dose(lb);
+      const kg = lb * LB_TO_KG;
+      expect(d.highMgShown, `${lb}lb high shown`).toBeLessThanOrEqual(maxMgKg * kg + 1e-9);
+      expect(d.lowMgShown, `${lb}lb low shown`).toBeGreaterThanOrEqual(minMgKg * kg - 1e-9);
+      expect(Number.isInteger(d.lowMgShown) && Number.isInteger(d.highMgShown)).toBe(true);
+    }
+  });
+
+  it('shows whole-mg ranges, low up and high down (10 lb 3-4, 50 lb 12-22)', () => {
+    expect([dose(10).lowMgShown, dose(10).highMgShown]).toEqual([3, 4]);
+    expect([dose(50).lowMgShown, dose(50).highMgShown]).toEqual([12, 22]);
+  });
+
   it('offers 10 mg and 20 mg tablets, once a day, defaulting to 10 mg', () => {
     expect(PEPCID.tablets.map((t) => t.mg)).toEqual([10, 20]);
     expect(PEPCID.defaultTabletMg).toBe(10);

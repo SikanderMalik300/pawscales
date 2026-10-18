@@ -21,7 +21,7 @@ const fmtDate = (iso?: string) => {
   const [y, m, d] = iso.split('-').map(Number);
   return `${MONTHS[m - 1]} ${d}, ${y}`;
 };
-const mg = (n: number) => `${Math.round(n)} mg`;
+const mgWindow = (lo: number, hi: number) => (lo === hi ? `${hi} mg` : `${lo} mg–${hi} mg`);
 const nounFor = (label: string) => (/chewable/i.test(label) ? 'chewable' : 'tablet');
 
 function H2({ children, id }: { children: ReactNode; id?: string }) {
@@ -127,7 +127,7 @@ export function MedicationPage(c: MedicationContent) {
             const tabs = d.noTablet
               ? 'ask your vet'
               : d.lowTablets === d.highTablets ? `${d.lowTablets}` : `${d.lowTablets}–${d.highTablets}`;
-            return { cells: { w: `${lb} lb`, dose: `${mg(d.lowMg)}–${mg(d.highMg)}`, tabs } };
+            return { cells: { w: `${lb} lb`, dose: mgWindow(d.lowMgShown, d.highMgShown), tabs } };
           })}
           footnote={
             <>

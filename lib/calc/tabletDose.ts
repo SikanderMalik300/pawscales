@@ -4,12 +4,14 @@
 // mg/kg) and the high end rounds DOWN (so it never exceeds the maximum). If no
 // half tablet fits the window, the result is mg-only with a message.
 import { LB_TO_KG } from '@/lib/units';
-import { roundTo } from '@/lib/calc/round';
+import { roundTo, mgCeil, mgFloor } from '@/lib/calc/round';
 
 export interface TabletDoseResult {
   kg: number;
   lowMg: number; // minMgKg x kg
   highMg: number; // maxMgKg x kg (the maximum per dose)
+  lowMgShown: number; // whole mg, rounded UP (>= minMgKg x kg)
+  highMgShown: number; // whole mg, rounded DOWN (<= maxMgKg x kg)
   noTablet: boolean; // no half tablet fits inside [lowMg, highMg]
   tooSmall: boolean; // even one half tablet exceeds the maximum
   lowTabletMg?: number;
@@ -34,6 +36,8 @@ export function tabletDose(minMgKg: number, maxMgKg: number, kg: number, tabletM
     kg,
     lowMg: roundTo(lowMg, 1),
     highMg: roundTo(highMg, 1),
+    lowMgShown: mgCeil(lowMg),
+    highMgShown: mgFloor(highMg),
     noTablet,
     tooSmall,
     ...(noTablet

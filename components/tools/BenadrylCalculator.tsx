@@ -9,7 +9,9 @@ import {
 import { benadrylDose, BENADRYL, type Species } from '@/lib/calc/benadryl';
 import { parseNum, lbToKg } from '@/lib/units';
 
-const mg = (n: number) => `${Math.round(n)} mg`; // raw dose window (rounded)
+const mgTxt = (n: number) => `${n} mg`;
+// Dose window: low already rounded up, high rounded down; collapse if equal.
+const mgWindow = (lo: number, hi: number) => (lo === hi ? mgTxt(hi) : `${mgTxt(lo)}–${mgTxt(hi)}`);
 const tmg = (n: number) => `${n} mg`; // exact tablet amount (keeps the .5)
 const tabletWord = (n: number) => (n <= 1 ? 'tablet' : 'tablets');
 const tabletRange = (lo: number, hi: number) =>
@@ -61,7 +63,7 @@ export function BenadrylCalculator() {
                   <>
                     <Overline>Dose for this weight</Overline>
                     <p className="text-[20px] font-medium leading-tight text-ink">
-                      {mg(r.lowMg)}&ndash;{mg(r.highMg)} per dose
+                      {mgWindow(r.lowMgShown, r.highMgShown)} per dose
                     </p>
                     <p className="mt-2 text-[14px] text-ink">
                       {r.tooSmall
@@ -77,8 +79,8 @@ export function BenadrylCalculator() {
                       = {tmg(r.lowTabletMg!)} (about {perKg(r.lowTabletMg!, r.kg)} mg/kg), {cfg.freq}.
                     </p>
                     <ResultDivider />
-                    <SecondaryRow label="Full range" value={`${mg(r.lowMg)}–${mg(r.highMg)} (${tabletRange(r.lowTablets!, r.highTablets!)})`} />
-                    <SecondaryRow label="Never exceed" value={`${mg(r.highMg)} (${cfg.maxMgKg} mg/kg) per dose`} />
+                    <SecondaryRow label="Full range" value={`${mgWindow(r.lowMgShown, r.highMgShown)} (${tabletRange(r.lowTablets!, r.highTablets!)})`} />
+                    <SecondaryRow label="Never exceed" value={`${mgTxt(r.highMgShown)} (${cfg.maxMgKg} mg/kg) per dose`} />
                   </>
                 )}
                 <p className="mt-3 text-[13px] text-muted">
