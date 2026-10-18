@@ -66,6 +66,8 @@ const PAGES = [
   { name: 'gabapentin', path: '/gabapentin-for-dogs-and-cats/' },
   { name: 'chocolate', path: '/dog-chocolate-toxicity-calculator/' },
   { name: 'trazodone', path: '/trazodone-for-dogs-and-cats/' },
+  { name: 'dramamine', path: '/dramamine-dosage-calculator/' },
+  { name: 'pepcid', path: '/pepcid-dosage-calculator/' },
   { name: 'zyrtec', path: '/zyrtec-dosage-calculator/' },
   { name: 'cat-weight', path: '/cat-weight-chart/' },
   { name: 'puppy-feeding', path: '/puppy-feeding-chart/' },

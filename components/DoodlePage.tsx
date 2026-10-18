@@ -37,6 +37,7 @@ export interface DoodlePageContent {
   sources: { name: string; url: string }[];
   related: string[];
   comparison?: ReactNode; // optional extra comparison table (Bernedoodle)
+  extra?: ReactNode; // optional extra section after the comparison (e.g. growth notes)
 }
 
 export function DoodlePage(c: DoodlePageContent) {
@@ -168,6 +169,8 @@ export function DoodlePage(c: DoodlePageContent) {
 
       <div className="container-page mt-10 max-w-reading space-y-10">
         {c.comparison && <section>{c.comparison}</section>}
+
+        {c.extra && <section>{c.extra}</section>}
 
         <section>
           <H2>The method, with two examples</H2>

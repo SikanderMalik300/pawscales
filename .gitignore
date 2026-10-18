@@ -13,6 +13,7 @@ yarn-error.log*
 # Testing / QA
 /coverage/
 /qa/screenshots/
+/qa/med-shots/
 /playwright-report/
 /test-results/
 

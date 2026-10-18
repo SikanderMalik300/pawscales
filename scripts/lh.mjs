@@ -50,6 +50,8 @@ const PAGES = [
   ['gabapentin-for-dogs-and-cats', '/gabapentin-for-dogs-and-cats/'],
   ['dog-chocolate-toxicity-calculator', '/dog-chocolate-toxicity-calculator/'],
   ['trazodone-for-dogs-and-cats', '/trazodone-for-dogs-and-cats/'],
+  ['dramamine-dosage-calculator', '/dramamine-dosage-calculator/'],
+  ['pepcid-dosage-calculator', '/pepcid-dosage-calculator/'],
   ['zyrtec-dosage-calculator', '/zyrtec-dosage-calculator/'],
   ['cat-weight-chart', '/cat-weight-chart/'],
   ['puppy-feeding-chart', '/puppy-feeding-chart/'],

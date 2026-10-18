@@ -37,6 +37,8 @@ const PAGES = [
   { slug: 'gabapentin-for-dogs-and-cats', title: 'Gabapentin for Dogs & Cats', color: HUB.dog, photo: 'gabapentin-for-dogs-and-cats' },
   { slug: 'dog-chocolate-toxicity-calculator', title: 'Dog Chocolate Toxicity Calculator', color: HUB.dog, photo: 'dog-chocolate-toxicity-calculator' },
   { slug: 'trazodone-for-dogs-and-cats', title: 'Trazodone for Dogs & Cats', color: HUB.dog, photo: 'trazodone-for-dogs-and-cats' },
+  { slug: 'dramamine-dosage-calculator', title: 'Dramamine Dosage for Dogs', color: HUB.dog, photo: 'dramamine-dosage-calculator' },
+  { slug: 'pepcid-dosage-calculator', title: 'Pepcid Dosage for Dogs', color: HUB.dog, photo: 'pepcid-dosage-calculator' },
   { slug: 'zyrtec-dosage-calculator', title: 'Zyrtec Dosage for Dogs', color: HUB.dog, photo: 'zyrtec-dosage-calculator' },
   { slug: 'cat-weight-chart', title: 'Cat Weight Chart', color: HUB.cat, photo: 'cat-weight-chart' },
   { slug: 'puppy-feeding-chart', title: 'Puppy Feeding Chart', color: HUB.dog, photo: 'puppy-feeding-chart' },

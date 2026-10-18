@@ -30,6 +30,8 @@ const PHOTOS = [
   ['gabapentin-for-dogs-and-cats', 0.5, 0.35, ['sq', 'ld']],
   ['dog-chocolate-toxicity-calculator', 0.5, 0.42, ['sq', 'ld']],
   ['trazodone-for-dogs-and-cats', 0.5, 0.5, ['sq', 'ld']],
+  ['dramamine-dosage-calculator', 0.5, 0.48, ['sq', 'ld']],
+  ['pepcid-dosage-calculator', 0.68, 0.64, ['sq', 'ld']],
   ['zyrtec-dosage-calculator', 0.4, 0.5, ['sq', 'ld']],
   ['cat-weight-chart', 0.3, 0.42, ['sq', 'ld']],
   ['puppy-feeding-chart', 0.5, 0.45, ['sq', 'ld']],

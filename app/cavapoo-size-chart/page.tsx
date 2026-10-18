@@ -80,11 +80,45 @@ export default function Page() {
           </p>
         </>
       }
+      extra={
+        <>
+          <h2 className="text-[22px] sm:text-[26px]">Growth notes</h2>
+          <p className="mt-2 text-[16px] text-ink">
+            A few things make one Cavapoo litter bigger or smaller than another:
+          </p>
+          <ul className="mt-3 space-y-2 text-[16px] text-ink [&_li]:list-disc">
+            <li className="ml-5">
+              <strong>The Poodle parent is the main factor.</strong> A Toy Poodle keeps
+              a litter small; a Miniature Poodle pushes it larger. The Cavalier side is
+              fairly consistent at 13&ndash;18 lb, so most of the size variation comes
+              from which Poodle was used.
+            </li>
+            <li className="ml-5">
+              <strong>First-generation (F1) pups vary the most.</strong> An F1 Cavapoo
+              is half Cavalier, half Poodle, and littermates can land anywhere between
+              the two parents. Later generations (F1b, F2 and multigen), which cross back
+              to a Poodle or pair two Cavapoos, tend to be a little more predictable in
+              size and coat, but still are not fixed.
+            </li>
+            <li className="ml-5">
+              <strong>There is no breed standard to rely on.</strong> No kennel club
+              recognises the Cavapoo, so &ldquo;Toy&rdquo; and &ldquo;Miniature&rdquo; are
+              breeder shorthand, not defined sizes. We do not repeat any single
+              breeder&rsquo;s weight promises; the figures here come from the AKC parent
+              standards and published growth data.
+            </li>
+          </ul>
+          <p className="mt-4 text-[13px] text-muted">
+            Updated October 19, 2026: added a Cavapoo-versus-parents table, growth notes,
+            and clearer answers on full-grown age and projecting adult size.
+          </p>
+        </>
+      }
       faq={[
         { q: 'What are the Cavapoo sizes?', a: 'There is no official Cavapoo standard, but breeders commonly use two sizes based on the Poodle parent: Toy Cavapoo (Toy Poodle cross), about 9 to 12 inches and 7 to 13 pounds, and Miniature Cavapoo (Miniature Poodle cross), about 12 to 16 inches and 12 to 25 pounds. The overall range across all Cavapoos is roughly 9 to 22 pounds.' },
-        { q: 'How big will my Cavapoo get?', a: 'The best guide is the parents, especially the Poodle. A rough rule is that a puppy lands between the lighter parent and the average of both. A Cavalier is 13 to 18 pounds, so a Toy Poodle cross stays small (7 to 13 pounds) and a Miniature Poodle cross is larger (12 to 25 pounds). Ask the breeder which Poodle size is behind the litter.' },
+        { q: 'How big will my Cavapoo get?', a: 'The best guide is the parents, especially the Poodle. A rough rule is that a puppy lands between the lighter parent and the average of both. A Cavalier is 13 to 18 pounds, so a Toy Poodle cross stays small (7 to 13 pounds) and a Miniature Poodle cross is larger (12 to 25 pounds). For a sharper number, weigh your puppy and use our puppy weight calculator, which projects adult weight from age and current weight: a Miniature pup at 16 weeks weighing 8 pounds is about 53% of its adult weight, which projects to roughly 15 pounds. Ask the breeder which Poodle size is behind the litter.' },
         { q: 'What is the difference between a Toy and Mini Cavapoo?', a: 'It is the Poodle parent. A Toy Cavapoo comes from a Toy Poodle and stays around 7 to 13 pounds; a Miniature Cavapoo comes from a Miniature Poodle and reaches about 12 to 25 pounds. There is no breed body that defines these, so the labels are breeder shorthand, and a dog can land between the two.' },
-        { q: 'When is a Cavapoo full grown?', a: 'Most Cavapoos reach their adult height by about 10 to 12 months and fill out a little more into the second year. Smaller Toy Cavapoos finish a touch earlier than Miniatures. Because they are small dogs, most of the growing is done by the end of the first year.' },
+        { q: 'When is a Cavapoo full grown?', a: 'By our growth curve, a Cavapoo is about 85 to 90% of its adult weight by 8 months and roughly 90 to 95% by around 12 months. A Miniature Cavapoo reaches about 95% of its adult weight near 12 months; a Toy Cavapoo does most of its growing in the first year and adds the last little bit early in the second. Height comes first, then the body fills out. Use the weight-by-age table above as the guide, and weigh your own puppy.' },
         { q: 'How accurate is this size chart?', a: 'Treat it as a guide, not a standard: there is no Cavapoo breed association, so the categories are breeder consensus and the parent-breed figures come from the AKC. The weight-by-age figures scale growth data from more than 60,000 dogs to each category. Because the Cavapoo is a cross, individual dogs vary, so weigh your puppy and go by the parents.' },
       ]}
       sources={[
