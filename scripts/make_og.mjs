@@ -42,6 +42,7 @@ const PAGES = [
   { slug: 'zyrtec-dosage-calculator', title: 'Zyrtec Dosage for Dogs', color: HUB.dog, photo: 'zyrtec-dosage-calculator' },
   { slug: 'cat-weight-chart', title: 'Cat Weight Chart', color: HUB.cat, photo: 'cat-weight-chart' },
   { slug: 'puppy-feeding-chart', title: 'Puppy Feeding Chart', color: HUB.dog, photo: 'puppy-feeding-chart' },
+  { slug: 'kitten-feeding-chart', title: 'Kitten Feeding Chart', color: HUB.cat, photo: 'kitten-feeding-chart' },
   { slug: 'default', title: 'Free dog and cat calculators, built on real data', color: HUB.home, photo: 'hero' },
 ];
 

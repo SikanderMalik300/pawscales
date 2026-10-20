@@ -55,6 +55,7 @@ const PAGES = [
   ['zyrtec-dosage-calculator', '/zyrtec-dosage-calculator/'],
   ['cat-weight-chart', '/cat-weight-chart/'],
   ['puppy-feeding-chart', '/puppy-feeding-chart/'],
+  ['kitten-feeding-chart', '/kitten-feeding-chart/'],
 ];
 const results = [];
 for (const [name, path] of PAGES) {

@@ -71,6 +71,7 @@ const PAGES = [
   { name: 'zyrtec', path: '/zyrtec-dosage-calculator/' },
   { name: 'cat-weight', path: '/cat-weight-chart/' },
   { name: 'puppy-feeding', path: '/puppy-feeding-chart/' },
+  { name: 'kitten-feeding', path: '/kitten-feeding-chart/' },
 ];
 
 await mkdir(SHOTS, { recursive: true });
