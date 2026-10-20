@@ -470,7 +470,7 @@ export const BREED_PAGES: ToolEntry[] = [
     shortName: 'Cat weight chart',
     oneLiner: 'Kitten weight by month, male and female, from vet data.',
     category: 'cat-calculators',
-    related: ['kitten-age-chart', 'cat-years-calculator', 'cat-food-calculator'],
+    related: ['kitten-feeding-chart', 'kitten-age-chart', 'cat-years-calculator', 'cat-food-calculator'],
     lastUpdated: '2026-10-15',
     sources: [],
     fromOwner: null,

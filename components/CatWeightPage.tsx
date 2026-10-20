@@ -128,7 +128,8 @@ export function CatWeightPage(c: CatWeightContent) {
             month, for females and males. They come from research on more than 8,000
             neutered cats in good body condition, measured at US vet clinics (Salt et
             al. 2023). Most kittens reach their adult weight between about 10 and 12
-            months, then settle.
+            months, then settle. To work out how much to feed at each of these ages, see
+            our <a className="link" href="/kitten-feeding-chart/">kitten feeding chart</a>.
           </p>
         </section>
         {sexTable('F')}

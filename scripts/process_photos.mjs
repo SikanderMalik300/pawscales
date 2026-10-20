@@ -35,7 +35,7 @@ const PHOTOS = [
   ['zyrtec-dosage-calculator', 0.4, 0.5, ['sq', 'ld']],
   ['cat-weight-chart', 0.3, 0.42, ['sq', 'ld']],
   ['puppy-feeding-chart', 0.5, 0.45, ['sq', 'ld']],
-  ['kitten-feeding-chart', 0.42, 0.46, ['sq', 'ld']],
+  ['kitten-feeding-chart', 0.5, 0.66, ['sq', 'ld']],
   ['hub-dog', 0.5, 0.45, ['sq', 'ld']],
   ['hub-cat', 0.5, 0.4, ['sq', 'ld']],
   ['hub-size', 0.5, 0.5, ['sq', 'ld']],

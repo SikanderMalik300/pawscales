@@ -21,6 +21,8 @@ const SLUG = 'kitten-feeding-chart';
 const catHub = HUBS.find((h) => h.slug === 'cat-calculators')!;
 const CORNELL = 'https://www.vet.cornell.edu/departments/cornell-feline-health-center/health-information/feline-health-topics/how-often-should-you-feed-your-cat';
 const MERCK_DER = 'https://www.merckvetmanual.com/multimedia/table/daily-maintenance-energy-requirements-for-dogs-and-cats';
+const NRC = 'https://nap.nationalacademies.org/catalog/10668/nutrient-requirements-of-dogs-and-cats';
+const DVM360 = 'https://www.dvm360.com/view/easy-nutritional-math-it-was-my-understanding-that-there-would-be-no-math';
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const fmtDate = (iso?: string) => {
   if (!iso) return '';
@@ -120,8 +122,10 @@ export function KittenFeedingPage(c: KittenFeedingContent) {
               const x = row.bySex[sex];
               return (
                 <span>
-                  {x.kcal} kcal
-                  <span className="block text-[12px] text-muted">{fmt1(x.weightLb)} lb · {x.kcalPerMeal}/meal</span>
+                  {x.kcal} kcal{x.adult ? <sup>†</sup> : null}
+                  <span className="block text-[12px] text-muted">
+                    {fmt1(x.weightLb)} lb · {x.adult ? 'adult' : `${x.kcalPerMeal}/meal`}
+                  </span>
                 </span>
               );
             };
@@ -136,15 +140,18 @@ export function KittenFeedingPage(c: KittenFeedingContent) {
           })}
           footnote={
             <>
-              kcal a day (2.5 × RER), split into the meals shown; the sub-line is the
-              median weight for that age and the calories per meal. Food needs rise
-              through the first year as the kitten grows.
+              kcal a day from the NRC 2006 growth curve, split into the meals shown; the
+              sub-line is the median weight for that age and the calories per meal. The
+              amount eases off, not up, as a kitten nears adult size.{' '}
+              <sup>†</sup> within 5% of adult weight, so shown as adult maintenance.
             </>
           }
           source={
             <>
-              Energy: <a className="link" href={MERCK_DER}>Merck Veterinary Manual, Daily Maintenance Energy Requirements</a>{' '}
-              (kittens 2.5 × RER; RER = 70 × kg<sup>0.75</sup>). Weight for age:{' '}
+              Energy: the <a className="link" href={NRC}>NRC 2006</a> growth equation (ME =
+              100 × BW<sup>0.67</sup> × 6.7 × (e<sup>−0.189p</sup> − 0.66), p = weight ÷
+              adult weight), reproduced free in{' '}
+              <a className="link" href={DVM360}>Packer, dvm360 (2021)</a>. Weight for age:{' '}
               <a className="link" href={CAT_WEIGHT.source.mainArticle}>Salt et al. 2023</a>{' '}
               (<a className="link" href={CAT_WEIGHT.source.mainDataset}>Liverpool DataCat 1459</a>, CC BY 3.0).
             </>
@@ -187,13 +194,14 @@ export function KittenFeedingPage(c: KittenFeedingContent) {
           </div>
         </section>
 
-        <NoteBox label="At one year, switch to adult amounts">
-          Around <strong>12 months</strong>, feed your kitten as an adult cat: about{' '}
-          <strong>1.2 × RER</strong> for a neutered cat and <strong>1.4 × RER</strong> for
-          an intact one (Merck). That is roughly {adultLow} to {adultHigh} kcal a day for
-          a {fmt1(adultF)} to {fmt1(adultM)} lb cat, well below the growing-kitten amount.
-          Energy needs <strong>drop after spaying or neutering</strong>, so watch your
-          cat&rsquo;s weight and cut back if needed. The{' '}
+        <NoteBox label="Near adult size, switch to adult amounts">
+          Once your kitten reaches about <strong>95% of its expected adult weight</strong>,
+          or <strong>12 months</strong>, feed it as an adult cat: about <strong>1.2 ×
+          RER</strong> for a neutered cat and <strong>1.4 × RER</strong> for an intact one
+          (Merck). That is roughly {adultLow} to {adultHigh} kcal a day for a{' '}
+          {fmt1(adultF)} to {fmt1(adultM)} lb cat, below the growing-kitten peak. Energy
+          needs <strong>drop after spaying or neutering</strong>, so watch your cat&rsquo;s
+          weight and cut back if needed. The{' '}
           <a className="link" href="/cat-food-calculator/">cat food calculator</a> does the
           adult numbers.
         </NoteBox>
@@ -201,17 +209,22 @@ export function KittenFeedingPage(c: KittenFeedingContent) {
         <section>
           <H2>How the chart is worked out</H2>
           <p className="mt-3 text-[16px] text-ink">
-            We take the kitten&rsquo;s resting energy (RER = 70 × body weight in kg to the
-            power 0.75) and multiply by 2.5, the healthy-kitten factor in the Merck
-            Veterinary Manual&rsquo;s daily energy table. The weight for each age is the
-            median for a neutered Domestic Shorthair kitten from{' '}
+            We work out the day&rsquo;s calories with the <strong>NRC 2006 growth
+            equation</strong>: ME = 100 × BW<sup>0.67</sup> × 6.7 × (e<sup>−0.189 × p</sup>{' '}
+            − 0.66), where p is the kitten&rsquo;s weight divided by its expected adult
+            weight (capped at 1). Unlike a flat multiple of resting energy, it eases toward
+            adult needs as the kitten fills out, so a 10 to 11 month kitten is not overfed.{' '}
+            <strong>Merck&rsquo;s simpler rule of thumb is 2.5 × RER</strong>, which we show
+            as a cross-check, not the main number. The weight for each age is the median for
+            a neutered Domestic Shorthair kitten from{' '}
             <a className="link" href={CAT_WEIGHT.source.mainArticle}>Salt et al. (2023)</a>,
             the same dataset behind our{' '}
-            <a className="link" href="/cat-weight-chart/">cat weight chart</a>. Calories
-            per meal are the day&rsquo;s calories divided by the meals from Cornell. For a
-            number tuned to your food, the calculator divides the daily calories by the
-            kcal per cup or per can on the label (for example, if your label says{' '}
-            {EXAMPLE_KCAL_PER_CUP} kcal per cup).
+            <a className="link" href="/cat-weight-chart/">cat weight chart</a>. Calories per
+            meal are the day&rsquo;s calories divided by the meals from Cornell. For a
+            number tuned to your food, the calculator divides the daily calories by the kcal
+            per cup or per can on the label (for example, if your label says{' '}
+            {EXAMPLE_KCAL_PER_CUP} kcal per cup). The equation is printed in NRC 2006 and
+            reproduced free by <a className="link" href={DVM360}>Packer (dvm360, 2021)</a>.
           </p>
         </section>
 
@@ -235,8 +248,13 @@ export function KittenFeedingPage(c: KittenFeedingContent) {
           <H2>Sources</H2>
           <ul className="mt-3 space-y-2 text-[16px] text-ink">
             <li>
+              <a className="link" href={NRC}>National Research Council (2006), Nutrient Requirements of Dogs and Cats</a>{' '}
+              (the kitten growth ME equation; RER = 70 × kg<sup>0.75</sup>). Reproduced free in{' '}
+              <a className="link" href={DVM360}>Packer RA, &ldquo;Easy nutritional math,&rdquo; dvm360 (2021)</a>, under &ldquo;Robin&rsquo;s Fun Equations,&rdquo; where you can check the formula.
+            </li>
+            <li>
               <a className="link" href={MERCK_DER}>Merck Veterinary Manual, Daily Maintenance Energy Requirements for Dogs and Cats</a>{' '}
-              (healthy kittens 2.5 × RER; adult cats 1.2 × RER neutered, 1.4 × RER intact; RER = 70 × kg<sup>0.75</sup>; free-choice note; a starting point only).
+              (adult cats 1.2 × RER neutered, 1.4 × RER intact; the 2.5 × RER kitten rule of thumb used as a cross-check; free-choice and &ldquo;starting point only&rdquo; notes).
             </li>
             <li>
               <a className="link" href={CORNELL}>Cornell Feline Health Center, How often should you feed your cat?</a>{' '}
