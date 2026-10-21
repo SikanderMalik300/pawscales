@@ -3,6 +3,44 @@
 import { SITE } from '@/lib/registry';
 
 const PERSON_ID = `${SITE.url}/authors/sikander-malik/#person`;
+const AUTHOR_URL = `${SITE.url}/authors/sikander-malik/`;
+
+/** The site author as a Person node, for author fields on page schema. */
+const authorPerson = () => ({
+  '@type': 'Person',
+  '@id': PERSON_ID,
+  name: SITE.author,
+  url: AUTHOR_URL,
+});
+
+/** WebPage node for a content page, with author and publish/modify dates (and,
+ *  for medication/health pages, lastReviewed). datePublished and dateModified
+ *  both use the registry lastUpdated, the one date we track per page. */
+export function webPageSchema({
+  name,
+  url,
+  description,
+  lastUpdated,
+  reviewed = false,
+}: {
+  name: string;
+  url: string;
+  description?: string;
+  lastUpdated: string; // YYYY-MM-DD
+  reviewed?: boolean;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name,
+    url,
+    ...(description ? { description } : {}),
+    datePublished: lastUpdated,
+    dateModified: lastUpdated,
+    ...(reviewed ? { lastReviewed: lastUpdated } : {}),
+    author: authorPerson(),
+  };
+}
 
 export function organizationSchema() {
   return {
@@ -54,10 +92,12 @@ export function webApplicationSchema({
   name,
   url,
   description,
+  lastUpdated,
 }: {
   name: string;
   url: string;
   description: string;
+  lastUpdated?: string; // YYYY-MM-DD
 }) {
   return {
     '@context': 'https://schema.org',
@@ -68,7 +108,8 @@ export function webApplicationSchema({
     applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: 0, priceCurrency: 'USD' },
-    author: { '@id': PERSON_ID },
+    ...(lastUpdated ? { datePublished: lastUpdated, dateModified: lastUpdated } : {}),
+    author: authorPerson(),
   };
 }
 

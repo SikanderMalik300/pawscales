@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { TextPage } from '@/components/TextPage';
 
 export const metadata: Metadata = {
-  title: 'Affiliate Disclosure — PawScales',
+  title: 'Affiliate Disclosure | PawScales',
   description: 'PawScales has no affiliate links or ads at launch. If that changes, we will label them clearly.',
   alternates: { canonical: 'https://pawscales.com/affiliate-disclosure/' },
 };

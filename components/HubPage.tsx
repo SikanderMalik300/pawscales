@@ -7,8 +7,9 @@ import { Picture } from '@/components/ui/Picture';
 import { PhotoTile } from '@/components/ui/PhotoTile';
 import { DataTable } from '@/components/ui/Table';
 import { Faq, type FaqItem } from '@/components/ui/Faq';
+import type { ReactNode } from 'react';
 import { JsonLd } from '@/components/JsonLd';
-import { breadcrumbSchema } from '@/lib/schema';
+import { breadcrumbSchema, faqSchema } from '@/lib/schema';
 
 export function hubMetadata(slug: Category): Metadata {
   const hub = HUBS.find((h) => h.slug === slug)!;
@@ -27,11 +28,13 @@ export function hubMetadata(slug: Category): Metadata {
 
 export function HubPage({
   slug,
+  intro,
   whichTool,
   faq,
   extraTools = [],
 }: {
   slug: Category;
+  intro: ReactNode; // 150-250 word intro: what's here and how to choose a tool
   whichTool: { need: string; tool: string }[]; // tool = registry slug
   faq: FaqItem[];
   extraTools?: string[]; // slugs from other categories that still fit this hub
@@ -56,6 +59,7 @@ export function HubPage({
         url,
         description: hub.intro,
       }} />
+      <JsonLd data={faqSchema(faq.map((f) => ({ q: f.q, a: typeof f.a === 'string' ? f.a : '' })))} />
 
       <Band color={slug} className="py-6">
         <Breadcrumbs items={[{ name: 'PawScales', href: '/' }, { name: hub.h1 }]} />
@@ -73,6 +77,10 @@ export function HubPage({
           )}
         </div>
       </Band>
+
+      <section className="container-page max-w-reading pt-10">
+        <div className="space-y-3 text-[16px] text-ink">{intro}</div>
+      </section>
 
       <div className="container-page py-10">
         <div className="grid grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-4">

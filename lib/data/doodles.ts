@@ -31,6 +31,10 @@ export interface DoodleBreed {
   parentsFirst?: boolean; // default the size estimator to "by parents" (no breed standard)
   heightFirst?: boolean; // default the size estimator to "by height" (standard is height-based)
   defaultParents?: { motherLb: number; fatherLb: number }; // sensible starting weights
+  // Extra weight-by-age columns that are NOT breed-standard sizes (e.g. an F1
+  // first-cross projection). Shown only in the weight-by-age table, not the sizes
+  // table, crate table or size finder.
+  extraCurves?: { name: string; repLb: number; foot: string }[];
 }
 
 export const GOLDENDOODLE: DoodleBreed = {
@@ -104,6 +108,13 @@ export const LABRADOODLE: DoodleBreed = {
   photoId: 'labradoodle-size-chart',
   heightFirst: true,
   defaultParents: { motherLb: 45, fatherLb: 70 }, // Standard Poodle x Labrador
+  extraCurves: [
+    {
+      name: 'F1',
+      repLb: 61.5, // midpoint of the 48-75 lb F1 range (Labrador x Standard Poodle)
+      foot: 'F1 is a first-cross (Labrador × Standard Poodle) estimate, about 48 to 75 lb, not an ALAA size; first-cross dogs often run large.',
+    },
+  ],
   sizes: [
     { size: 'Miniature', weightLabel: '15–30 lb', heightLabel: '14–16 in', lowLb: 15, highLb: 30, repLb: 22.5, bound: 'range', crateIn: '24', lowIn: 14, highIn: 17 },
     { size: 'Medium', weightLabel: '30–50 lb', heightLabel: '17–20 in', lowLb: 30, highLb: 50, repLb: 40, bound: 'range', crateIn: '36', lowIn: 17, highIn: 21 },
@@ -140,6 +151,10 @@ export function doodleTypicalByAge(breed: DoodleBreed): DoodleAgeRow[] {
     for (const s of breed.sizes) {
       const r = expectedByAge(s.repLb, s.repLb, sizeBand(s))[i];
       bySize[s.size] = roundTo(r.typicalLb, 1);
+    }
+    for (const c of breed.extraCurves ?? []) {
+      const r = expectedByAge(c.repLb, c.repLb, bandForKg(c.repLb * LB_TO_KG))[i];
+      bySize[c.name] = roundTo(r.typicalLb, 1);
     }
     return { months: row.months, weeks: row.weeks, bySize, kind: row.kind };
   });

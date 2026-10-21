@@ -86,7 +86,7 @@ export default function Page() {
         { name: 'Dog calculators', url: `${SITE.url}/dog-calculators/` },
         { name: 'Puppy Weight Calculator', url },
       ])} />
-      <JsonLd data={webApplicationSchema({ name: tool.h1, url, description: tool.metaDescription })} />
+      <JsonLd data={webApplicationSchema({ name: tool.h1, url, description: tool.metaDescription, lastUpdated: tool.lastUpdated })} />
       <JsonLd data={faqSchema(FAQ)} />
       <JsonLd data={datasetSchema()} />
 

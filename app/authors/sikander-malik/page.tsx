@@ -7,7 +7,7 @@ import { SITE } from '@/lib/registry';
 const url = `${SITE.url}/authors/sikander-malik/`;
 
 export const metadata: Metadata = {
-  title: 'Sikander Malik — PawScales',
+  title: 'Sikander Malik | PawScales',
   description:
     'Sikander Malik builds and reviews PawScales, free dog and cat calculators built from veterinary research and open data.',
   alternates: { canonical: url },

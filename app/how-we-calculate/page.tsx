@@ -6,7 +6,7 @@ import { PREGNANCY, HEAT, ENERGY, DOG_MER, DOG_GROWTH_TAPER, CAT_MER, DOG_YEARS,
 import type { Sourced } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'How We Calculate — PawScales',
+  title: 'How We Calculate | PawScales',
   description: 'Every constant PawScales uses, with its value, source and the date we checked it.',
   alternates: { canonical: 'https://pawscales.com/how-we-calculate/' },
 };

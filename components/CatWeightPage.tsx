@@ -10,7 +10,7 @@ import { Faq, type FaqItem } from '@/components/ui/Faq';
 import { AuthorBox } from '@/components/ui/AuthorBox';
 import { PhotoTile } from '@/components/ui/PhotoTile';
 import { JsonLd } from '@/components/JsonLd';
-import { breadcrumbSchema, faqSchema, catDatasetSchema } from '@/lib/schema';
+import { breadcrumbSchema, faqSchema, catDatasetSchema, webPageSchema } from '@/lib/schema';
 import { CatWeightCalculator } from '@/components/tools/CatWeightCalculator';
 import { CAT_WEIGHT, SEX_LABEL, type Sex, type CatRow } from '@/lib/data/catWeight';
 import { fmt1 } from '@/lib/calc/round';
@@ -86,7 +86,7 @@ export function CatWeightPage(c: CatWeightContent) {
         { name: catHub.h1, url: `${SITE.url}/${catHub.slug}/` },
         { name: 'Cat Weight Chart', url },
       ])} />
-      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'WebPage', name: 'Cat Weight Chart', url, description: entry.metaDescription }} />
+      <JsonLd data={webPageSchema({ name: 'Cat Weight Chart', url, description: entry.metaDescription, lastUpdated: entry.lastUpdated })} />
       <JsonLd data={faqSchema(c.faq.map((f) => ({ q: f.q, a: typeof f.a === 'string' ? f.a : '' })))} />
       <JsonLd data={catDatasetSchema()} />
 

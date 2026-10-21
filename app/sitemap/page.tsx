@@ -4,7 +4,7 @@ import { TextPage } from '@/components/TextPage';
 import { HUBS, byCategory, breedPages } from '@/lib/registry';
 
 export const metadata: Metadata = {
-  title: 'Sitemap — PawScales',
+  title: 'Sitemap | PawScales',
   description: 'All PawScales pages: calculators, charts, hubs and company pages, with one-line descriptions.',
   alternates: { canonical: 'https://pawscales.com/sitemap/' },
 };

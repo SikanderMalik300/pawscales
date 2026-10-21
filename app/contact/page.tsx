@@ -3,7 +3,7 @@ import { TextPage } from '@/components/TextPage';
 import { ContactForm } from '@/components/ContactForm';
 
 export const metadata: Metadata = {
-  title: 'Contact — PawScales',
+  title: 'Contact | PawScales',
   description: 'Questions, corrections or ideas for PawScales? Send a message or email hello@pawscales.com.',
   alternates: { canonical: 'https://pawscales.com/contact/' },
 };

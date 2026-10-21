@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { TextPage } from '@/components/TextPage';
 
 export const metadata: Metadata = {
-  title: 'Disclaimer — PawScales',
+  title: 'Disclaimer | PawScales',
   description: 'PawScales provides estimates for general information. It is not veterinary advice.',
   alternates: { canonical: 'https://pawscales.com/disclaimer/' },
 };

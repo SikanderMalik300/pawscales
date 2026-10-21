@@ -4,7 +4,7 @@ import { TextPage } from '@/components/TextPage';
 import { DataTable } from '@/components/ui/Table';
 
 export const metadata: Metadata = {
-  title: 'Editorial Policy — PawScales',
+  title: 'Editorial Policy | PawScales',
   description:
     'How PawScales is written, sourced and tested: who writes it, which sources we accept, how we use AI, our update policy and corrections log.',
   alternates: { canonical: 'https://pawscales.com/editorial-policy/' },

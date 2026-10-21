@@ -9,7 +9,7 @@ import { Faq, type FaqItem } from '@/components/ui/Faq';
 import { AuthorBox } from '@/components/ui/AuthorBox';
 import { PhotoTile } from '@/components/ui/PhotoTile';
 import { JsonLd } from '@/components/JsonLd';
-import { breadcrumbSchema, faqSchema, datasetSchema } from '@/lib/schema';
+import { breadcrumbSchema, faqSchema, datasetSchema, webPageSchema } from '@/lib/schema';
 import { BreedGrowthCalculator } from '@/components/tools/BreedGrowthCalculator';
 import { bandForSex, type Breed } from '@/lib/data/breeds';
 import { expectedByAge, TOTAL_DOGS, type BreedRow } from '@/lib/calc/breedGrowth';
@@ -95,11 +95,11 @@ export function BreedGrowthPage(c: BreedGrowthContent) {
         { name: sizeHub.h1, url: `${SITE.url}/${sizeHub.slug}/` },
         { name: `${breed.name} Weight Chart`, url },
       ])} />
-      <JsonLd data={{
-        '@context': 'https://schema.org', '@type': 'WebPage',
+      <JsonLd data={webPageSchema({
         name: `${breed.name} Weight Chart`, url,
         description: bySlug(breed.slug)?.metaDescription,
-      }} />
+        lastUpdated: bySlug(breed.slug)?.lastUpdated ?? '',
+      })} />
       <JsonLd data={faqSchema(c.faq.map((f) => ({ q: f.q, a: typeof f.a === 'string' ? f.a : '' })))} />
       <JsonLd data={datasetSchema()} />
 

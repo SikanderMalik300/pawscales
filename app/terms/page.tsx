@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { TextPage } from '@/components/TextPage';
 
 export const metadata: Metadata = {
-  title: 'Terms of Use — PawScales',
+  title: 'Terms of Use | PawScales',
   description: 'The terms for using PawScales, a free set of dog and cat calculators.',
   alternates: { canonical: 'https://pawscales.com/terms/' },
 };

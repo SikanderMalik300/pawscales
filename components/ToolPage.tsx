@@ -57,7 +57,7 @@ export function ToolPage(c: ToolPageContent) {
         { name: hub.h1, url: `${SITE.url}/${hub.slug}/` },
         { name: tool.h1, url },
       ])} />
-      <JsonLd data={webApplicationSchema({ name: tool.h1, url, description: tool.metaDescription })} />
+      <JsonLd data={webApplicationSchema({ name: tool.h1, url, description: tool.metaDescription, lastUpdated: tool.lastUpdated })} />
       <JsonLd data={faqSchema(c.faq.map((f) => ({ q: f.q, a: faqText(f.a) })))} />
       {c.extraSchema?.map((s, i) => <JsonLd key={i} data={s} />)}
 

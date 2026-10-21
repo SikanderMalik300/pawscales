@@ -9,7 +9,7 @@ import { Faq, type FaqItem } from '@/components/ui/Faq';
 import { AuthorBox } from '@/components/ui/AuthorBox';
 import { PhotoTile } from '@/components/ui/PhotoTile';
 import { JsonLd } from '@/components/JsonLd';
-import { breadcrumbSchema, faqSchema, datasetSchema } from '@/lib/schema';
+import { breadcrumbSchema, faqSchema, datasetSchema, webPageSchema } from '@/lib/schema';
 import { DoodleSizeCalculator } from '@/components/tools/DoodleSizeCalculator';
 import { doodleTypicalByAge, type DoodleBreed } from '@/lib/data/doodles';
 import { TOTAL_DOGS } from '@/lib/calc/breedGrowth';
@@ -58,7 +58,7 @@ export function DoodlePage(c: DoodlePageContent) {
         { name: sizeHub.h1, url: `${SITE.url}/${sizeHub.slug}/` },
         { name: `${breed.name} Size Chart`, url },
       ])} />
-      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'WebPage', name: `${breed.name} Size Chart`, url, description: entry?.metaDescription }} />
+      <JsonLd data={webPageSchema({ name: `${breed.name} Size Chart`, url, description: entry?.metaDescription, lastUpdated: entry?.lastUpdated ?? '' })} />
       <JsonLd data={faqSchema(c.faq.map((f) => ({ q: f.q, a: typeof f.a === 'string' ? f.a : '' })))} />
       <JsonLd data={datasetSchema()} />
 
@@ -99,6 +99,7 @@ export function DoodlePage(c: DoodlePageContent) {
         </section>
         <DataTable
           caption={`${breed.name} size categories`}
+          tableCaption={`${breed.name} size categories by height and weight`}
           columns={[
             { key: 'size', header: 'Size' },
             { key: 'height', header: 'Height at the withers' },
@@ -110,21 +111,25 @@ export function DoodlePage(c: DoodlePageContent) {
 
         <DataTable
           caption="Expected weight by age (lb)"
+          tableCaption={`${breed.name} expected weight by age`}
           columns={[
             { key: 'age', header: 'Age' },
             ...breed.sizes.map((s) => ({ key: s.size, header: colHeader(s), numeric: true })),
+            ...(breed.extraCurves ?? []).map((c) => ({ key: c.name, header: c.name, numeric: true })),
           ]}
           rows={ageRows.map((r) => ({
             cells: {
               age: `${r.months} mo${mark(r.kind)}`,
               ...Object.fromEntries(breed.sizes.map((s) => [s.size, fmt1(r.bySize[s.size])])),
+              ...Object.fromEntries((breed.extraCurves ?? []).map((c) => [c.name, fmt1(r.bySize[c.name])])),
             },
           }))}
           footnote={
             <>
-              Each column is that size&rsquo;s representative adult weight (the GANA
-              bound) scaled by the median growth curve. &ldquo;Up to&rdquo; and
-              &ldquo;min&rdquo; mark GANA&rsquo;s open-ended Petite and Standard ranges.
+              Each column is that size&rsquo;s representative adult weight scaled by the
+              median growth curve.
+              {breed.sizes.some((s) => s.bound !== 'range') && ' “Up to” and “min” mark the open-ended ranges.'}
+              {(breed.extraCurves ?? []).map((c) => ` ${c.foot}`)}
               {anyInterp && ' * interpolated between observed ages.'}
               {anyEst && ' ‡ estimated beyond the last observed age.'}
             </>
@@ -133,7 +138,7 @@ export function DoodlePage(c: DoodlePageContent) {
             <>
               Growth curve from {TOTAL_DOGS.toLocaleString()} healthy dogs
               (<a className="link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5584974/">Salt et al. 2017</a>),
-              scaled to the GANA size bounds.
+              scaled to each size&rsquo;s representative weight.
             </>
           }
         />
@@ -146,6 +151,7 @@ export function DoodlePage(c: DoodlePageContent) {
 
         <DataTable
           caption={`Crate size by ${breed.name} size`}
+          tableCaption={`Crate size by ${breed.name} size`}
           columns={[
             { key: 'size', header: 'Size' },
             { key: 'crate', header: 'Typical crate', numeric: true },

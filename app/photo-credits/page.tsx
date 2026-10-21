@@ -4,7 +4,7 @@ import { DataTable } from '@/components/ui/Table';
 import { PHOTOS } from '@/lib/data/photos';
 
 export const metadata: Metadata = {
-  title: 'Photo Credits — PawScales',
+  title: 'Photo Credits | PawScales',
   description: 'Every photo on PawScales, with its photographer, source and license.',
   alternates: { canonical: 'https://pawscales.com/photo-credits/' },
 };

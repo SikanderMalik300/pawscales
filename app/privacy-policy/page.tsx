@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { TextPage } from '@/components/TextPage';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — PawScales',
+  title: 'Privacy Policy | PawScales',
   description: 'How PawScales handles data: calculators run in your browser, and we name every processor we use.',
   alternates: { canonical: 'https://pawscales.com/privacy-policy/' },
 };

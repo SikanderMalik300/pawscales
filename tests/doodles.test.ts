@@ -206,6 +206,17 @@ describe('Labradoodle (ALAA height-based sizes)', () => {
     const gold = doodleTypicalByAge(GOLDENDOODLE);
     expect(rows[rows.length - 1].bySize['Medium']).not.toBe(gold[gold.length - 1].bySize['Medium']);
   });
+  it('carries an F1 first-cross column in the weight-by-age table', () => {
+    expect(LABRADOODLE.extraCurves?.[0]).toMatchObject({ name: 'F1', repLb: 61.5 });
+    const rows = doodleTypicalByAge(LABRADOODLE);
+    expect(rows[0].bySize['F1']).toBe(20.7); // 3 months
+    expect(rows[rows.length - 1].bySize['F1']).toBe(61.5); // 24 months, the adult rep
+    for (const r of rows) expect(r.bySize['F1']).toBeLessThanOrEqual(61.5);
+  });
+  it('other doodles have no extra curves (F1 column is Labradoodle-only)', () => {
+    expect(GOLDENDOODLE.extraCurves).toBeUndefined();
+    expect(doodleTypicalByAge(GOLDENDOODLE)[0].bySize['F1']).toBeUndefined();
+  });
 });
 
 describe('doodle size-finder modes', () => {

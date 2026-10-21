@@ -109,3 +109,23 @@ describe('design guardrails', () => {
     expect(violations, `em dash in rendered body of:\n${violations.join('\n')}`).toEqual([]);
   });
 });
+
+// Trust pages set their <title> as a literal, which the source scan above skips
+// (title: lines are exempt). Check those titles use "X | PawScales", not an em dash.
+describe('trust page titles use a pipe, not an em dash', () => {
+  const TRUST = [
+    'how-we-calculate', 'editorial-policy', 'contact', 'privacy-policy', 'terms',
+    'disclaimer', 'affiliate-disclosure', 'sitemap', 'photo-credits',
+  ].map((s) => join(ROOT, 'app', s, 'page.tsx'));
+  TRUST.push(join(ROOT, 'app', 'authors', 'sikander-malik', 'page.tsx'));
+
+  it('each trust page title is "X | PawScales" with no em dash', () => {
+    for (const f of TRUST) {
+      expect(existsSync(f), `${relative(ROOT, f)} exists`).toBe(true);
+      const m = readFileSync(f, 'utf8').match(/title:\s*'([^']*PawScales[^']*)'/);
+      expect(m, `${relative(ROOT, f)} has a PawScales title`).toBeTruthy();
+      expect(m![1], `${relative(ROOT, f)} title`).toContain('| PawScales');
+      expect(m![1], `${relative(ROOT, f)} title has no em dash`).not.toMatch(/—|&mdash;/);
+    }
+  });
+});

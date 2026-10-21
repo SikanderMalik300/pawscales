@@ -10,7 +10,7 @@ import { Faq, type FaqItem } from '@/components/ui/Faq';
 import { AuthorBox } from '@/components/ui/AuthorBox';
 import { PhotoTile } from '@/components/ui/PhotoTile';
 import { JsonLd } from '@/components/JsonLd';
-import { breadcrumbSchema, faqSchema, datasetSchema } from '@/lib/schema';
+import { breadcrumbSchema, faqSchema, datasetSchema, webPageSchema } from '@/lib/schema';
 import { fmt1 } from '@/lib/calc/round';
 import {
   feedingChart, CHART_ADULTS_LB, CHART_AGES, CHART_KCAL_PER_CUP, CHART_HANDOFF,
@@ -59,7 +59,7 @@ export function PuppyFeedingPage(c: PuppyFeedingContent) {
         { name: dogHub.h1, url: `${SITE.url}/${dogHub.slug}/` },
         { name: 'Puppy Feeding Chart', url },
       ])} />
-      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'WebPage', name: 'Puppy Feeding Chart', url, description: entry.metaDescription }} />
+      <JsonLd data={webPageSchema({ name: 'Puppy Feeding Chart', url, description: entry.metaDescription, lastUpdated: entry.lastUpdated })} />
       <JsonLd data={faqSchema(c.faq.map((f) => ({ q: f.q, a: typeof f.a === 'string' ? f.a : '' })))} />
       <JsonLd data={datasetSchema()} />
 

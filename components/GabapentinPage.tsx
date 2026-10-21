@@ -10,7 +10,7 @@ import { Faq, type FaqItem } from '@/components/ui/Faq';
 import { AuthorBox } from '@/components/ui/AuthorBox';
 import { PhotoTile } from '@/components/ui/PhotoTile';
 import { JsonLd } from '@/components/JsonLd';
-import { breadcrumbSchema, faqSchema } from '@/lib/schema';
+import { breadcrumbSchema, faqSchema, webPageSchema } from '@/lib/schema';
 import {
   dogOngoingTable, catPainTable, DOG_ONGOING, CAT_PAIN, CAT_PREVISIT, type RefRow,
 } from '@/lib/calc/gabapentin';
@@ -78,7 +78,7 @@ export function GabapentinPage(c: GabapentinContent) {
         { name: dogHub.h1, url: `${SITE.url}/${dogHub.slug}/` },
         { name: entry.h1, url },
       ])} />
-      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'WebPage', name: entry.h1, url, description: entry.metaDescription }} />
+      <JsonLd data={webPageSchema({ name: entry.h1, url, description: entry.metaDescription, lastUpdated: entry.lastUpdated, reviewed: true })} />
       <JsonLd data={faqSchema(c.faq.map((f) => ({ q: f.q, a: typeof f.a === 'string' ? f.a : '' })))} />
 
       <Band color="dog-calculators" className="pb-20 pt-5">

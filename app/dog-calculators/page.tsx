@@ -7,6 +7,28 @@ export default function Page() {
   return (
     <HubPage
       slug="dog-calculators"
+      intro={
+        <>
+          <p>
+            This page gathers the free PawScales tools for dog owners in one place. You
+            can predict how big a puppy will get from its age and current weight, convert
+            a dog&rsquo;s age into human years by size, find a due date and a week-by-week
+            timeline from a breeding, and work out how many calories and cups to feed at
+            each life stage. There are tools for a raw diet by calories, for the next heat
+            and fertile window, and, where owners often search, careful by-weight dosage
+            calculators for common over-the-counter medicines, each one asking you to
+            check with your vet first.
+          </p>
+          <p>
+            Not sure which to open? If you have a growing puppy, start with the puppy
+            weight calculator and the feeding chart. For an adult dog, the age and food
+            calculators answer the everyday questions, and for breeding you can use the
+            heat cycle and pregnancy tools together. Every calculator runs in your browser,
+            shows the formula it uses, and links the research or veterinary source behind
+            each number, with the date we checked it.
+          </p>
+        </>
+      }
       whichTool={[
         { need: 'Predict how big a puppy will get', tool: 'puppy-weight-calculator' },
         { need: 'Find a due date and timeline', tool: 'dog-pregnancy-calculator' },
