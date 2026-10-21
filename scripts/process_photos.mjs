@@ -26,6 +26,7 @@ const PHOTOS = [
   ['goldendoodle-size-chart', 0.5, 0.4, ['sq', 'ld']],
   ['bernedoodle-size-chart', 0.45, 0.4, ['sq', 'ld']],
   ['cavapoo-size-chart', 0.5, 0.3, ['sq', 'ld']],
+  ['labradoodle-size-chart', 0.45, 0.3, ['sq', 'ld']],
   ['benadryl-dosage-calculator', 0.5, 0.62, ['sq', 'ld']],
   ['gabapentin-for-dogs-and-cats', 0.5, 0.35, ['sq', 'ld']],
   ['dog-chocolate-toxicity-calculator', 0.5, 0.42, ['sq', 'ld']],

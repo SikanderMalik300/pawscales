@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { GOLDENDOODLE, BERNEDOODLE, CAVAPOO, sizeBand, parentsRange, doodleTypicalByAge } from '@/lib/data/doodles';
+import { GOLDENDOODLE, BERNEDOODLE, CAVAPOO, LABRADOODLE, sizeBand, parentsRange, doodleTypicalByAge, sizeForHeightIn } from '@/lib/data/doodles';
 import { bandForKg } from '@/lib/calc/breedGrowth';
 import { predictPuppyWeight } from '@/lib/calc/puppyWeight';
 import { lbToKg, kgToLb } from '@/lib/units';
@@ -157,5 +157,64 @@ describe('Cavapoo (breeder categories, no standard)', () => {
     for (const r of rows) {
       for (const s of CAVAPOO.sizes) expect(r.bySize[s.size]).toBeLessThanOrEqual(s.repLb);
     }
+  });
+});
+
+describe('Labradoodle (ALAA height-based sizes)', () => {
+  it('has the three ALAA sizes in order with the stated wording', () => {
+    expect(LABRADOODLE.sizes.map((s) => s.size)).toEqual(['Miniature', 'Medium', 'Standard']);
+    const [mini, medium, standard] = LABRADOODLE.sizes;
+    expect(mini.weightLabel).toBe('15–30 lb');
+    expect(mini.heightLabel).toBe('14–16 in');
+    expect(medium.weightLabel).toBe('30–50 lb');
+    expect(standard.weightLabel).toBe('50–65 lb');
+    expect(standard.heightLabel).toBe('21–24 in');
+  });
+  it('is sourced to the ALAA, is height-first, and states weights are an estimate', () => {
+    expect(LABRADOODLE.sourceUrl).toMatch(/alaa-labradoodles\.com/);
+    expect(LABRADOODLE.sourceName).toMatch(/ALAA/);
+    expect(LABRADOODLE.heightFirst).toBe(true);
+    expect(LABRADOODLE.sourceNote).toMatch(/PawScales estimate|height, not weight/i);
+  });
+  it('the weights cover the 15 to 65 lb band with no gaps', () => {
+    const [mini, medium, standard] = LABRADOODLE.sizes;
+    expect([mini.lowLb, mini.highLb]).toEqual([15, 30]);
+    expect([medium.lowLb, medium.highLb]).toEqual([30, 50]); // meets Mini at 30
+    expect([standard.lowLb, standard.highLb]).toEqual([50, 65]); // meets Medium at 50
+  });
+  it('maps each size to a Salt band (Mini III, Medium and Standard IV)', () => {
+    const [mini, medium, standard] = LABRADOODLE.sizes;
+    expect(sizeBand(mini)).toBe('III');
+    expect(sizeBand(medium)).toBe('IV');
+    expect(sizeBand(standard)).toBe('IV');
+  });
+  it('classifies a shoulder height into the right ALAA size', () => {
+    expect(sizeForHeightIn(LABRADOODLE, 10)?.size).toBe('Miniature'); // below the band -> smallest
+    expect(sizeForHeightIn(LABRADOODLE, 15)?.size).toBe('Miniature');
+    expect(sizeForHeightIn(LABRADOODLE, 17)?.size).toBe('Medium'); // 17 is the Medium floor
+    expect(sizeForHeightIn(LABRADOODLE, 19)?.size).toBe('Medium');
+    expect(sizeForHeightIn(LABRADOODLE, 21)?.size).toBe('Standard'); // 21 is the Standard floor
+    expect(sizeForHeightIn(LABRADOODLE, 26)?.size).toBe('Standard'); // above -> largest
+    expect(sizeForHeightIn(LABRADOODLE, 0)).toBeNull();
+  });
+  it('table starts at 3 months, no cell exceeds its representative weight, and is not a Goldendoodle copy', () => {
+    const rows = doodleTypicalByAge(LABRADOODLE);
+    expect(rows[0].months).toBe(3);
+    for (const r of rows) {
+      for (const s of LABRADOODLE.sizes) expect(r.bySize[s.size]).toBeLessThanOrEqual(s.repLb);
+    }
+    const gold = doodleTypicalByAge(GOLDENDOODLE);
+    expect(rows[rows.length - 1].bySize['Medium']).not.toBe(gold[gold.length - 1].bySize['Medium']);
+  });
+});
+
+describe('doodle size-finder modes', () => {
+  it('only the Labradoodle is height-first; Cavapoo stays parents-first', () => {
+    expect(LABRADOODLE.heightFirst).toBe(true);
+    expect(GOLDENDOODLE.heightFirst).toBeUndefined();
+    expect(CAVAPOO.parentsFirst).toBe(true);
+  });
+  it('height classification is a no-op for a breed with no height bands', () => {
+    expect(sizeForHeightIn(GOLDENDOODLE, 18)).toBeNull();
   });
 });

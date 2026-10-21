@@ -62,6 +62,7 @@ const PAGES = [
   { name: 'goldendoodle', path: '/goldendoodle-size-chart/' },
   { name: 'bernedoodle', path: '/bernedoodle-size-chart/' },
   { name: 'cavapoo', path: '/cavapoo-size-chart/' },
+  { name: 'labradoodle', path: '/labradoodle-size-chart/' },
   { name: 'benadryl', path: '/benadryl-dosage-calculator/' },
   { name: 'gabapentin', path: '/gabapentin-for-dogs-and-cats/' },
   { name: 'chocolate', path: '/dog-chocolate-toxicity-calculator/' },

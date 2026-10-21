@@ -33,6 +33,7 @@ const PAGES = [
   { slug: 'goldendoodle-size-chart', title: 'Goldendoodle Size Chart', color: HUB.size, photo: 'goldendoodle-size-chart' },
   { slug: 'bernedoodle-size-chart', title: 'Bernedoodle Size Chart', color: HUB.size, photo: 'bernedoodle-size-chart' },
   { slug: 'cavapoo-size-chart', title: 'Cavapoo Size Chart', color: HUB.size, photo: 'cavapoo-size-chart' },
+  { slug: 'labradoodle-size-chart', title: 'Labradoodle Size Chart', color: HUB.size, photo: 'labradoodle-size-chart' },
   { slug: 'benadryl-dosage-calculator', title: 'Benadryl Dosage for Dogs & Cats', color: HUB.dog, photo: 'benadryl-dosage-calculator' },
   { slug: 'gabapentin-for-dogs-and-cats', title: 'Gabapentin for Dogs & Cats', color: HUB.dog, photo: 'gabapentin-for-dogs-and-cats' },
   { slug: 'dog-chocolate-toxicity-calculator', title: 'Dog Chocolate Toxicity Calculator', color: HUB.dog, photo: 'dog-chocolate-toxicity-calculator' },

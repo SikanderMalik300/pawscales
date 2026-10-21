@@ -46,6 +46,7 @@ const PAGES = [
   ['goldendoodle-size-chart', '/goldendoodle-size-chart/'],
   ['bernedoodle-size-chart', '/bernedoodle-size-chart/'],
   ['cavapoo-size-chart', '/cavapoo-size-chart/'],
+  ['labradoodle-size-chart', '/labradoodle-size-chart/'],
   ['benadryl-dosage-calculator', '/benadryl-dosage-calculator/'],
   ['gabapentin-for-dogs-and-cats', '/gabapentin-for-dogs-and-cats/'],
   ['dog-chocolate-toxicity-calculator', '/dog-chocolate-toxicity-calculator/'],

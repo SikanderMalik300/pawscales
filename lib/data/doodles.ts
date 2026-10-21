@@ -15,6 +15,8 @@ export interface DoodleSize {
   repLb: number; // representative adult weight used for the growth curve
   bound: 'up to' | 'range' | 'at least';
   crateIn: string; // typical crate length (from our crate chart, by weight)
+  lowIn?: number; // height band low (in), for breeds whose standard is height-first
+  highIn?: number; // height band high (in), exclusive upper bound for classification
 }
 
 export interface DoodleBreed {
@@ -27,6 +29,7 @@ export interface DoodleBreed {
   photoId: string;
   giantNote?: string; // shown under the by-age table (e.g. Standard reaching giant size)
   parentsFirst?: boolean; // default the size estimator to "by parents" (no breed standard)
+  heightFirst?: boolean; // default the size estimator to "by height" (standard is height-based)
   defaultParents?: { motherLb: number; fatherLb: number }; // sensible starting weights
 }
 
@@ -86,7 +89,39 @@ export const CAVAPOO: DoodleBreed = {
   ],
 };
 
+// Labradoodle (Labrador Retriever x Poodle). The Australian Labradoodle has a
+// breed association, the ALAA, which sets three sizes by HEIGHT at the wither.
+// The ALAA standard gives only an overall 15-65 lb and no weight per size, so
+// the per-size weights are a PawScales estimate inside that band (height, not
+// weight, is the ALAA definition; the finder asks for height first).
+export const LABRADOODLE: DoodleBreed = {
+  slug: 'labradoodle-size-chart',
+  name: 'Labradoodle',
+  sourceName: 'Australian Labradoodle Association of America (ALAA)',
+  sourceUrl: 'https://alaa-labradoodles.com/for-breeders/breed-standard/',
+  sourceNote:
+    'The Australian Labradoodle Association of America (ALAA) sets three sizes by height at the wither. Its standard gives only an overall 15 to 65 lb, with no weight per size, so the weights here are a PawScales estimate within that band: ALAA sets height, not weight. Other associations use slightly different height bands.',
+  photoId: 'labradoodle-size-chart',
+  heightFirst: true,
+  defaultParents: { motherLb: 45, fatherLb: 70 }, // Standard Poodle x Labrador
+  sizes: [
+    { size: 'Miniature', weightLabel: '15–30 lb', heightLabel: '14–16 in', lowLb: 15, highLb: 30, repLb: 22.5, bound: 'range', crateIn: '24', lowIn: 14, highIn: 17 },
+    { size: 'Medium', weightLabel: '30–50 lb', heightLabel: '17–20 in', lowLb: 30, highLb: 50, repLb: 40, bound: 'range', crateIn: '36', lowIn: 17, highIn: 21 },
+    { size: 'Standard', weightLabel: '50–65 lb', heightLabel: '21–24 in', lowLb: 50, highLb: 65, repLb: 57.5, bound: 'range', crateIn: '42', lowIn: 21, highIn: 25 },
+  ],
+};
+
 export const sizeBand = (s: DoodleSize): Cat => bandForKg(s.repLb * LB_TO_KG);
+
+/** Classify a height at the shoulder (inches) into a size band, for a breed whose
+ *  standard is height-based (ALAA). Below the first band -> smallest; above the
+ *  last -> largest. Returns null for non-positive input or a non-height breed. */
+export function sizeForHeightIn(breed: DoodleBreed, inches: number): DoodleSize | null {
+  const sized = breed.sizes.filter((s) => s.lowIn != null && s.highIn != null);
+  if (!sized.length || !(inches > 0)) return null;
+  for (const s of sized) if (inches < s.highIn!) return s;
+  return sized[sized.length - 1];
+}
 
 export interface DoodleAgeRow {
   months: number;

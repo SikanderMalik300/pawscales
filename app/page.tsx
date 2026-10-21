@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { byCategory, HUBS, bySlug } from '@/lib/registry';
+import { byCategory, HUBS, bySlug, recentPages } from '@/lib/registry';
 
 export const metadata: Metadata = {
   title: 'PawScales: Free dog and cat calculators, built on real data',
@@ -120,6 +120,24 @@ export default function Home() {
       <HubSection slug="dog-calculators" />
       <HubSection slug="cat-calculators" band="sky" />
       <HubSection slug="dog-size-charts" band="butter" />
+
+      {/* Recently added */}
+      <section className="py-12">
+        <div className="container-page">
+          <h2 className="mb-5 text-[22px] sm:text-[26px]">Recently added</h2>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-4">
+            {recentPages(8).map((t) => (
+              <PhotoTile
+                key={t.slug}
+                href={`/${t.slug}/`}
+                photoId={t.slug}
+                label={t.shortName}
+                description={t.oneLiner}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Popular answers */}
       <section className="band bg-sand py-12">

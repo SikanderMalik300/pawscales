@@ -9,15 +9,18 @@ import {
 import { GrowthChart, type ChartPoint } from '@/components/ui/GrowthChart';
 import { predictPuppyWeight } from '@/lib/calc/puppyWeight';
 import { bandForKg, MONTH_WEEKS } from '@/lib/calc/breedGrowth';
-import { sizeBand, parentsRange, type DoodleBreed } from '@/lib/data/doodles';
+import { sizeBand, parentsRange, sizeForHeightIn, type DoodleBreed } from '@/lib/data/doodles';
 import { parseNum, lbToKg, kgToLb } from '@/lib/units';
 import { roundTo } from '@/lib/calc/round';
 
 const f1 = (n: number) => roundTo(n, 1).toString();
 
+type Mode = 'size' | 'parents' | 'height';
+
 export function DoodleSizeCalculator({ breed }: { breed: DoodleBreed }) {
-  const [mode, setMode] = useState<'size' | 'parents'>(breed.parentsFirst ? 'parents' : 'size');
+  const [mode, setMode] = useState<Mode>(breed.heightFirst ? 'height' : breed.parentsFirst ? 'parents' : 'size');
   const [sizeName, setSizeName] = useState(breed.sizes[2]?.size ?? breed.sizes[0].size);
+  const [height, setHeight] = useState('');
   const [mother, setMother] = useState(String(breed.defaultParents?.motherLb ?? 15));
   const [father, setFather] = useState(String(breed.defaultParents?.fatherLb ?? 65));
   const [age, setAge] = useState('');
@@ -26,9 +29,25 @@ export function DoodleSizeCalculator({ breed }: { breed: DoodleBreed }) {
   const size = breed.sizes.find((s) => s.size === sizeName)!;
   const mNum = parseNum(mother);
   const fNum = parseNum(father);
+  const hNum = parseNum(height);
+
+  const modeOptions = breed.heightFirst
+    ? [{ value: 'height', label: 'By height' }, { value: 'size', label: 'By size' }, { value: 'parents', label: 'By parents' }]
+    : [{ value: 'size', label: 'By size' }, { value: 'parents', label: 'By parents' }];
 
   // expected adult range + band for the chosen path
   const { label, band, rangeNote } = useMemo(() => {
+    if (mode === 'height') {
+      const hs = sizeForHeightIn(breed, hNum ?? NaN);
+      if (hs) {
+        return {
+          label: `${hs.size}: ${hs.weightLabel}, ${hs.heightLabel}`,
+          band: sizeBand(hs),
+          rangeNote: `At ${hNum} in at the shoulder. Typical crate: ${hs.crateIn} in.`,
+        };
+      }
+      return { label: 'Enter a height at the shoulder', band: null as ReturnType<typeof sizeBand> | null, rangeNote: 'ALAA sets size by height at the shoulder; use weight only as a fallback.' };
+    }
     if (mode === 'size') {
       return {
         label: `${size.size}: ${size.weightLabel}, ${size.heightLabel}`,
@@ -45,7 +64,7 @@ export function DoodleSizeCalculator({ breed }: { breed: DoodleBreed }) {
       };
     }
     return { label: 'Enter both parents’ weights', band: null as ReturnType<typeof sizeBand> | null, rangeNote: '' };
-  }, [mode, size, mNum, fNum]);
+  }, [mode, size, mNum, fNum, hNum, breed]);
 
   const ageNum = parseNum(age);
   const weightNum = parseNum(weight);
@@ -68,10 +87,14 @@ export function DoodleSizeCalculator({ breed }: { breed: DoodleBreed }) {
     <div className="rounded-[16px] border border-line bg-white p-5 shadow-card sm:p-6">
       <div className="flex flex-col gap-6 md:grid md:grid-cols-12">
         <div className="flex min-w-0 flex-col gap-4 md:col-span-5">
-          <Segmented label="Estimate by" className="w-full"
-            options={[{ value: 'size', label: 'By size' }, { value: 'parents', label: 'By parents' }]}
-            value={mode} onChange={setMode} />
-          {mode === 'size' ? (
+          <Segmented scroll label="Estimate by" className="w-full"
+            options={modeOptions}
+            value={mode} onChange={(v) => setMode(v as Mode)} />
+          {mode === 'height' ? (
+            <Field id="ht" label="Height at the shoulder" suffix="in" value={height}
+              onChange={(e) => setHeight(e.target.value)}
+              helper="ALAA's measure; floor to the top of the shoulder" />
+          ) : mode === 'size' ? (
             <div>
               <p className="mb-1.5 text-[14px] font-medium text-ink">Size</p>
               <select aria-label="Size" value={sizeName} onChange={(e) => setSizeName(e.target.value)}

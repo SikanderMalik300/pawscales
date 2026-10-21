@@ -471,7 +471,23 @@ export const BREED_PAGES: ToolEntry[] = [
     oneLiner: 'Kitten weight by month, male and female, from vet data.',
     category: 'cat-calculators',
     related: ['kitten-feeding-chart', 'kitten-age-chart', 'cat-years-calculator', 'cat-food-calculator'],
-    lastUpdated: '2026-10-15',
+    lastUpdated: '2026-10-21',
+    sources: [],
+    fromOwner: null,
+    notCovered: [],
+    breedPage: true,
+  },
+  {
+    slug: 'labradoodle-size-chart',
+    title: 'Labradoodle Size Chart: Mini, Medium & Standard',
+    metaDescription:
+      'Labradoodle sizes: Miniature, Medium and Standard, set by height from the ALAA, with weight by age and a Labrador and Poodle parent comparison.',
+    h1: 'Labradoodle Size Chart',
+    shortName: 'Labradoodle size chart',
+    oneLiner: 'Labradoodle sizes by height, from the ALAA, with weight by age.',
+    category: 'dog-size-charts',
+    related: ['goldendoodle-size-chart', 'puppy-weight-calculator', 'dog-crate-size-chart', 'dog-food-calculator'],
+    lastUpdated: '2026-10-21',
     sources: [],
     fromOwner: null,
     notCovered: [],
@@ -499,6 +515,11 @@ export const relatedGrowthPages = (slug: string): ToolEntry[] => {
 };
 
 export const allPages = (): ToolEntry[] => ALL;
+
+/** The most recently added or updated pages, newest first, for the homepage
+ *  "Recently added" block. Sorted by lastUpdated (YYYY-MM-DD sorts lexically). */
+export const recentPages = (n: number): ToolEntry[] =>
+  [...ALL].sort((a, b) => b.lastUpdated.localeCompare(a.lastUpdated)).slice(0, n);
 
 export const SITE = {
   name: 'PawScales',
