@@ -8,6 +8,7 @@ import { Band } from '@/components/ui/Band';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { Picture } from '@/components/ui/Picture';
 import { PuppyCalculator } from '@/components/tools/PuppyCalculator';
+import { AddToYourSite } from '@/components/AddToYourSite';
 import { DataTable } from '@/components/ui/Table';
 import { NoteBox } from '@/components/ui/NoteBox';
 import { Faq } from '@/components/ui/Faq';
@@ -86,7 +87,7 @@ export default function Page() {
         { name: 'Dog calculators', url: `${SITE.url}/dog-calculators/` },
         { name: 'Puppy Weight Calculator', url },
       ])} />
-      <JsonLd data={webApplicationSchema({ name: tool.h1, url, description: tool.metaDescription, lastUpdated: tool.lastUpdated })} />
+      <JsonLd data={webApplicationSchema({ name: tool.h1, url, description: tool.metaDescription, published: tool.published, lastUpdated: tool.lastUpdated })} />
       <JsonLd data={faqSchema(FAQ)} />
       <JsonLd data={datasetSchema()} />
 
@@ -260,6 +261,8 @@ export default function Page() {
             points.
           </p>
         </section>
+
+        <AddToYourSite slug="puppy-weight-calculator" />
 
         <section>
           <h2 className="text-[22px] sm:text-[26px]">Related tools</h2>

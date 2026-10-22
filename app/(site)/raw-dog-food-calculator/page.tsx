@@ -14,8 +14,9 @@ export default function Page() {
       quickAnswer={
         <>A 44 lb (20 kg) neutered adult dog needs about 1,059 kcal a day. On a
         typical raw food at 1,400 kcal/kg that is about 757 g (26.7 oz) a day,
-        which works out to 3.8% of body weight. This calculator uses calories, not
-        a flat percentage, because raw foods differ in energy density.</>
+        which works out to 3.8% of body weight. This raw food calculator for dogs
+        uses calories, not a flat percentage, because raw foods differ in energy
+        density.</>
       }
       calculator={<RawFoodCalculator />}
       howTo={[

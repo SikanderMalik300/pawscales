@@ -9,6 +9,8 @@ import { AuthorBox } from '@/components/ui/AuthorBox';
 import { NoteBox } from '@/components/ui/NoteBox';
 import { PhotoTile } from '@/components/ui/PhotoTile';
 import { JsonLd } from '@/components/JsonLd';
+import { AddToYourSite } from '@/components/AddToYourSite';
+import { isEmbedTool } from '@/lib/embeds';
 import {
   breadcrumbSchema,
   faqSchema,
@@ -57,7 +59,7 @@ export function ToolPage(c: ToolPageContent) {
         { name: hub.h1, url: `${SITE.url}/${hub.slug}/` },
         { name: tool.h1, url },
       ])} />
-      <JsonLd data={webApplicationSchema({ name: tool.h1, url, description: tool.metaDescription, lastUpdated: tool.lastUpdated })} />
+      <JsonLd data={webApplicationSchema({ name: tool.h1, url, description: tool.metaDescription, published: tool.published, lastUpdated: tool.lastUpdated })} />
       <JsonLd data={faqSchema(c.faq.map((f) => ({ q: f.q, a: faqText(f.a) })))} />
       {c.extraSchema?.map((s, i) => <JsonLd key={i} data={s} />)}
 
@@ -155,6 +157,8 @@ export function ToolPage(c: ToolPageContent) {
             <div className="mt-3 text-[16px] text-ink">{c.aboutData}</div>
           </section>
         )}
+
+        {isEmbedTool(tool.slug) && <AddToYourSite slug={tool.slug} />}
 
         <section>
           <H2>Related tools</H2>

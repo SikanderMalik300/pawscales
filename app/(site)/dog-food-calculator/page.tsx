@@ -14,8 +14,8 @@ export default function Page() {
       quickAnswer={
         <>A healthy 44 lb (20 kg) neutered adult dog needs about 1,059 kcal a day,
         or roughly 2.8 cups of a 380-kcal-per-cup food. Enter your dog's weight,
-        life stage and the calories on the bag to get cups per day, using the vet
-        formula RER = 70 × kg^0.75.</>
+        life stage and the calories on the bag, and this dog feeding calculator
+        gives cups per day, using the vet formula RER = 70 × kg^0.75.</>
       }
       calculator={<DogFoodCalculator />}
       howTo={[

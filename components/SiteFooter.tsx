@@ -48,6 +48,7 @@ export function SiteFooter() {
             { href: '/dog-calculators/', label: 'Dog tools' },
             { href: '/cat-calculators/', label: 'Cat tools' },
             { href: '/dog-size-charts/', label: 'Size charts' },
+            { href: '/embed/', label: 'Free calculators for your site' },
           ]}
         />
         <Row

@@ -15,7 +15,7 @@ const PAGES = [
     name: 'Benadryl',
     leadMgKg: BENADRYL.dog.minMgKg, // 2 mg/kg -> ~0.9 mg/lb (stated "1")
     sources: [
-      'app/benadryl-dosage-calculator/page.tsx',
+      'app/(site)/benadryl-dosage-calculator/page.tsx',
       'components/BenadrylPage.tsx',
       'components/tools/BenadrylCalculator.tsx',
     ],
@@ -24,7 +24,7 @@ const PAGES = [
     name: 'Zyrtec',
     leadMgKg: CETIRIZINE_DOG.minMgKg, // 1 mg/kg -> ~0.45 mg/lb (stated "0.5")
     sources: [
-      'app/zyrtec-dosage-calculator/page.tsx',
+      'app/(site)/zyrtec-dosage-calculator/page.tsx',
       'components/ZyrtecPage.tsx',
       'components/tools/ZyrtecCalculator.tsx',
     ],

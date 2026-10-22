@@ -43,7 +43,7 @@ describe('gabapentin reference values = mg/kg x kg (integrity)', () => {
 describe('gabapentin page is reference-only (prescription rule 4)', () => {
   const root = join(__dirname, '..');
   const page = readFileSync(join(root, 'components/GabapentinPage.tsx'), 'utf8');
-  const route = readFileSync(join(root, 'app/gabapentin-for-dogs-and-cats/page.tsx'), 'utf8');
+  const route = readFileSync(join(root, 'app/(site)/gabapentin-for-dogs-and-cats/page.tsx'), 'utf8');
 
   it('carries the "follow your vet\'s prescription" headline', () => {
     expect(page).toMatch(/Follow your vet/i);

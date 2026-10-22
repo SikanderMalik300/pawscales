@@ -19,7 +19,8 @@ export interface ToolEntry {
   oneLiner: string; // one-line description for hubs, home, related rows
   category: Category;
   related: string[]; // slugs
-  lastUpdated: string; // YYYY-MM-DD, honest lastmod
+  lastUpdated: string; // YYYY-MM-DD, honest lastmod (dateModified)
+  published?: string; // YYYY-MM-DD first-publish date (git), for datePublished
   sources: Source[];
   fromOwner: string | null; // "From Sikander" note; null renders nothing
   notCovered: string[];
@@ -161,7 +162,7 @@ export const REGISTRY: ToolEntry[] = [
     oneLiner: 'Neck measurement to collar size, with a breed chart.',
     category: 'dog-size-charts',
     related: ['dog-harness-size-chart', 'dog-crate-size-chart'],
-    lastUpdated: '2026-10-10',
+    lastUpdated: '2026-10-22',
     sources: [],
     fromOwner: null,
     notCovered: [],
@@ -191,7 +192,7 @@ export const REGISTRY: ToolEntry[] = [
     oneLiner: 'Daily calories and cups from weight and life stage.',
     category: 'dog-calculators',
     related: ['puppy-feeding-chart', 'raw-dog-food-calculator', 'puppy-weight-calculator', 'benadryl-dosage-calculator', 'zyrtec-dosage-calculator'],
-    lastUpdated: '2026-10-15',
+    lastUpdated: '2026-10-22',
     sources: [],
     fromOwner: null,
     notCovered: [],
@@ -213,7 +214,7 @@ export const REGISTRY: ToolEntry[] = [
   },
   {
     slug: 'raw-dog-food-calculator',
-    title: 'Raw Dog Food Calculator: Grams Per Day by Calories',
+    title: 'Raw Dog Food Calculator: How Much Raw Food to Feed a Dog',
     metaDescription:
       'Calculate how much raw food to feed from your dog’s calorie needs and the food’s kcal per pound, plus the % of body weight it works out to.',
     h1: 'Raw Dog Food Calculator',
@@ -221,7 +222,7 @@ export const REGISTRY: ToolEntry[] = [
     oneLiner: 'Grams of raw food per day from calorie needs.',
     category: 'dog-calculators',
     related: ['dog-food-calculator', 'puppy-feeding-chart', 'puppy-weight-calculator'],
-    lastUpdated: '2026-10-10',
+    lastUpdated: '2026-10-22',
     sources: [],
     fromOwner: null,
     notCovered: [],
@@ -251,7 +252,7 @@ export const REGISTRY: ToolEntry[] = [
     oneLiner: 'Daily calories and cans or cups, split wet and dry.',
     category: 'cat-calculators',
     related: ['kitten-feeding-chart', 'cat-weight-chart', 'cat-years-calculator', 'kitten-age-chart', 'benadryl-dosage-calculator'],
-    lastUpdated: '2026-10-10',
+    lastUpdated: '2026-10-22',
     sources: [],
     fromOwner: null,
     notCovered: [],
@@ -494,6 +495,43 @@ export const BREED_PAGES: ToolEntry[] = [
     breedPage: true,
   },
 ];
+
+// First-publish date per page (date of its first commit), for schema
+// datePublished. lastUpdated stays the dateModified. Pages not listed fall back
+// to lastUpdated.
+const PUBLISHED: Record<string, string> = {
+  'puppy-weight-calculator': '2026-10-10',
+  'dog-pregnancy-calculator': '2026-10-10',
+  'dog-years-calculator': '2026-10-10',
+  'cat-years-calculator': '2026-10-10',
+  'kitten-age-chart': '2026-10-10',
+  'dog-crate-size-chart': '2026-10-10',
+  'dog-collar-size-chart': '2026-10-10',
+  'dog-harness-size-chart': '2026-10-10',
+  'dog-food-calculator': '2026-10-10',
+  'raw-dog-food-calculator': '2026-10-10',
+  'dog-heat-cycle-calculator': '2026-10-10',
+  'cat-food-calculator': '2026-10-10',
+  'puppy-feeding-chart': '2026-10-15',
+  'kitten-feeding-chart': '2026-10-20',
+  'benadryl-dosage-calculator': '2026-10-16',
+  'zyrtec-dosage-calculator': '2026-10-16',
+  'gabapentin-for-dogs-and-cats': '2026-10-17',
+  'dog-chocolate-toxicity-calculator': '2026-10-17',
+  'trazodone-for-dogs-and-cats': '2026-10-18',
+  'dramamine-dosage-calculator': '2026-10-19',
+  'pepcid-dosage-calculator': '2026-10-19',
+  'golden-retriever-weight-chart': '2026-10-12',
+  'german-shepherd-weight-chart': '2026-10-13',
+  'goldendoodle-size-chart': '2026-10-14',
+  'bernedoodle-size-chart': '2026-10-14',
+  'cavapoo-size-chart': '2026-10-15',
+  'cat-weight-chart': '2026-10-15',
+  'labradoodle-size-chart': '2026-10-21',
+};
+for (const e of [...REGISTRY, ...BREED_PAGES]) {
+  e.published = PUBLISHED[e.slug] ?? e.lastUpdated;
+}
 
 const ALL = [...REGISTRY, ...BREED_PAGES];
 

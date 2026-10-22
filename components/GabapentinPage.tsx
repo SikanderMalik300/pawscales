@@ -78,7 +78,7 @@ export function GabapentinPage(c: GabapentinContent) {
         { name: dogHub.h1, url: `${SITE.url}/${dogHub.slug}/` },
         { name: entry.h1, url },
       ])} />
-      <JsonLd data={webPageSchema({ name: entry.h1, url, description: entry.metaDescription, lastUpdated: entry.lastUpdated, reviewed: true })} />
+      <JsonLd data={webPageSchema({ name: entry.h1, url, description: entry.metaDescription, published: entry.published, lastUpdated: entry.lastUpdated, reviewed: true })} />
       <JsonLd data={faqSchema(c.faq.map((f) => ({ q: f.q, a: typeof f.a === 'string' ? f.a : '' })))} />
 
       <Band color="dog-calculators" className="pb-20 pt-5">

@@ -64,7 +64,7 @@ export default function Page() {
         'Measure dry food with a scale or a proper measuring cup. Free-feeding dry food is a common cause of weight gain.',
       ]}
       faq={[
-        { q: 'How much wet food should a cat eat a day?', a: 'It depends on weight and the can’s calories. A 4.5 kg (10 lb) neutered adult needs about 260 kcal a day, which is roughly 3 cans of an 85-kcal wet food. Larger or intact cats need more. Check the calories on your can, since they range from about 70 to 110 kcal.' },
+        { q: 'How much wet food should I feed my cat?', a: 'It depends on weight and the can’s calories. A 4.5 kg (10 lb) neutered adult needs about 260 kcal a day, which is roughly 3 cans of an 85-kcal wet food. Larger or intact cats need more. Check the calories on your can, since they range from about 70 to 110 kcal, and enter them above for your cat’s exact number.' },
         { q: 'How much dry food per day?', a: 'Work out daily calories, then divide by the calories per cup. A 4.5 kg neutered adult eating all dry at 400 kcal/cup needs about ⅔ to ¾ cup a day. Dry food is calorie-dense, so small differences in scooping add up quickly.' },
         { q: 'How many calories does a cat need?', a: 'A resting cat needs RER = 70 × kg^0.75 kcal. Most neutered indoor cats need about 1.2 times that. A 4.5 kg cat lands near 260 kcal a day. Intact or very active cats need more, up to about 1.4 times resting energy.' },
         { q: 'Wet or dry?', a: 'Both can be complete and balanced. Wet food adds water, which many cats do not drink enough of, and tends to be lower in calories per gram, which helps with weight. Dry food is convenient and good for puzzle feeders. Many owners feed a mix.' },

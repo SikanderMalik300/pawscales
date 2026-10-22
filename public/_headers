@@ -4,6 +4,11 @@
   X-Frame-Options: SAMEORIGIN
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
+# Embeds may be framed by any site; everything else stays unframeable above.
+/embed/*
+  ! X-Frame-Options
+  Content-Security-Policy: frame-ancestors *
+
 /_next/static/*
   Cache-Control: public, max-age=31536000, immutable
 

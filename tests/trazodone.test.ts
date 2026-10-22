@@ -42,7 +42,7 @@ describe('trazodone reference values stay inside the published range', () => {
 describe('trazodone page is reference-only (prescription rule 4)', () => {
   const root = join(__dirname, '..');
   const page = readFileSync(join(root, 'components/TrazodonePage.tsx'), 'utf8');
-  const route = readFileSync(join(root, 'app/trazodone-for-dogs-and-cats/page.tsx'), 'utf8');
+  const route = readFileSync(join(root, 'app/(site)/trazodone-for-dogs-and-cats/page.tsx'), 'utf8');
 
   it('carries the "follow your vet\'s prescription" headline', () => {
     expect(page).toMatch(/Follow your vet/i);

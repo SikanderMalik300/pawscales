@@ -98,6 +98,7 @@ export function BreedGrowthPage(c: BreedGrowthContent) {
       <JsonLd data={webPageSchema({
         name: `${breed.name} Weight Chart`, url,
         description: bySlug(breed.slug)?.metaDescription,
+        published: bySlug(breed.slug)?.published,
         lastUpdated: bySlug(breed.slug)?.lastUpdated ?? '',
       })} />
       <JsonLd data={faqSchema(c.faq.map((f) => ({ q: f.q, a: typeof f.a === 'string' ? f.a : '' })))} />

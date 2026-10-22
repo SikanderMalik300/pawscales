@@ -1,11 +1,6 @@
 import type { Metadata } from 'next';
 import { sans } from './fonts';
 import './globals.css';
-import { SiteHeader } from '@/components/SiteHeader';
-import { SiteFooter } from '@/components/SiteFooter';
-import { JsonLd } from '@/components/JsonLd';
-import { organizationSchema, websiteSchema } from '@/lib/schema';
-import { Analytics } from '@/components/Analytics';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://pawscales.com'),
@@ -45,20 +40,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={sans.variable}>
-      <body>
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-[6px] focus:bg-brand focus:px-4 focus:py-2 focus:text-white"
-        >
-          Skip to content
-        </a>
-        <JsonLd data={organizationSchema()} />
-        <JsonLd data={websiteSchema()} />
-        <SiteHeader />
-        <main id="main">{children}</main>
-        <SiteFooter />
-        <Analytics />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

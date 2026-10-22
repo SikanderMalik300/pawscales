@@ -116,8 +116,8 @@ describe('trust page titles use a pipe, not an em dash', () => {
   const TRUST = [
     'how-we-calculate', 'editorial-policy', 'contact', 'privacy-policy', 'terms',
     'disclaimer', 'affiliate-disclosure', 'sitemap', 'photo-credits',
-  ].map((s) => join(ROOT, 'app', s, 'page.tsx'));
-  TRUST.push(join(ROOT, 'app', 'authors', 'sikander-malik', 'page.tsx'));
+  ].map((s) => join(ROOT, 'app', '(site)', s, 'page.tsx'));
+  TRUST.push(join(ROOT, 'app', '(site)', 'authors', 'sikander-malik', 'page.tsx'));
 
   it('each trust page title is "X | PawScales" with no em dash', () => {
     for (const f of TRUST) {

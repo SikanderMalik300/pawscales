@@ -20,13 +20,15 @@ export function webPageSchema({
   name,
   url,
   description,
+  published,
   lastUpdated,
   reviewed = false,
 }: {
   name: string;
   url: string;
   description?: string;
-  lastUpdated: string; // YYYY-MM-DD
+  published?: string; // YYYY-MM-DD first-publish date; falls back to lastUpdated
+  lastUpdated: string; // YYYY-MM-DD, the dateModified
   reviewed?: boolean;
 }) {
   return {
@@ -35,7 +37,7 @@ export function webPageSchema({
     name,
     url,
     ...(description ? { description } : {}),
-    datePublished: lastUpdated,
+    datePublished: published ?? lastUpdated,
     dateModified: lastUpdated,
     ...(reviewed ? { lastReviewed: lastUpdated } : {}),
     author: authorPerson(),
@@ -92,12 +94,14 @@ export function webApplicationSchema({
   name,
   url,
   description,
+  published,
   lastUpdated,
 }: {
   name: string;
   url: string;
   description: string;
-  lastUpdated?: string; // YYYY-MM-DD
+  published?: string; // YYYY-MM-DD first-publish date
+  lastUpdated?: string; // YYYY-MM-DD, the dateModified
 }) {
   return {
     '@context': 'https://schema.org',
@@ -108,7 +112,7 @@ export function webApplicationSchema({
     applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: 0, priceCurrency: 'USD' },
-    ...(lastUpdated ? { datePublished: lastUpdated, dateModified: lastUpdated } : {}),
+    ...(lastUpdated ? { datePublished: published ?? lastUpdated, dateModified: lastUpdated } : {}),
     author: authorPerson(),
   };
 }

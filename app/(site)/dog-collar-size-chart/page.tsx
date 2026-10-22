@@ -64,6 +64,7 @@ export default function Page() {
         'For sighthounds and dogs whose head is narrower than their neck, consider a martingale.',
       ]}
       faq={[
+        { q: 'What size collar does my dog need?', a: 'Measure around the neck where the collar sits and add 2 inches; that is the collar length to buy. The chart above maps neck size to a collar size from XS to XXL with breed examples, so a 14-inch neck is about a 16-inch collar, usually a Medium. Sizes vary by brand, so go by the inches rather than the label.' },
         { q: 'How do I measure my dog’s neck?', a: 'Wrap a soft tape around the neck where the collar sits, usually a little above the shoulders, and keep it snug while slipping two fingers underneath. Add 2 inches to that number for the collar length. A 14-inch neck means a 16-inch collar.' },
         { q: 'How tight should a collar be?', a: 'Snug enough that it will not slip over the head, loose enough to fit two fingers flat between the collar and the neck. Too tight rubs and restricts; too loose can catch or slide off. Re-check fit after grooming or weight changes.' },
         { q: 'What size collar for a puppy?', a: 'Measure the current neck and add 2 inches, but expect to resize often. Puppies outgrow collars every few weeks, so buy an adjustable one and check the fit regularly so it never gets tight as they grow.' },

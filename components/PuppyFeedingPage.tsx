@@ -59,7 +59,7 @@ export function PuppyFeedingPage(c: PuppyFeedingContent) {
         { name: dogHub.h1, url: `${SITE.url}/${dogHub.slug}/` },
         { name: 'Puppy Feeding Chart', url },
       ])} />
-      <JsonLd data={webPageSchema({ name: 'Puppy Feeding Chart', url, description: entry.metaDescription, lastUpdated: entry.lastUpdated })} />
+      <JsonLd data={webPageSchema({ name: 'Puppy Feeding Chart', url, description: entry.metaDescription, published: entry.published, lastUpdated: entry.lastUpdated })} />
       <JsonLd data={faqSchema(c.faq.map((f) => ({ q: f.q, a: typeof f.a === 'string' ? f.a : '' })))} />
       <JsonLd data={datasetSchema()} />
 
