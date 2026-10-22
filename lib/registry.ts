@@ -109,7 +109,7 @@ export const REGISTRY: ToolEntry[] = [
   },
   {
     slug: 'cat-years-calculator',
-    title: 'Cat Years Calculator: Cat Age in Human Years',
+    title: 'Cat Age Calculator: Cat Years to Human Years',
     metaDescription:
       'Convert your cat’s age to human years. The first year equals about 15 human years, the second 9 more, then about 4 per year.',
     h1: 'Cat Years Calculator',
@@ -117,7 +117,7 @@ export const REGISTRY: ToolEntry[] = [
     oneLiner: 'Your cat’s age in human years.',
     category: 'cat-calculators',
     related: ['kitten-age-chart', 'cat-weight-chart', 'cat-food-calculator', 'dog-years-calculator'],
-    lastUpdated: '2026-10-10',
+    lastUpdated: '2026-10-22',
     sources: [],
     fromOwner: null,
     notCovered: [],

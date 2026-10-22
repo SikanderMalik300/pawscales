@@ -30,6 +30,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: p.pr,
     })),
+    // The /embed/ index only; the five iframe pages are noindex, so they stay out.
+    { url: u('/embed/'), lastModified: '2026-10-22', changeFrequency: 'monthly' as const, priority: 0.5 },
     ...HUBS.map((h) => ({
       url: u(`/${h.slug}/`),
       lastModified: LAUNCH,
