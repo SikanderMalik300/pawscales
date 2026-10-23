@@ -110,7 +110,10 @@ export function ZyrtecPage(c: ZyrtecContent) {
             <strong> 10 to 20 mg per dog</strong> (Merck Veterinary Manual), which is
             about 0.5 mg per pound. The calculator leads with that lower amount and caps
             the result at 20 mg per dose, so a big dog is not given a very large amount.
-            Always confirm with your vet first.
+            Always confirm with your vet first. Zyrtec is for itching and allergies, not
+            travel; for car sickness, see the{' '}
+            <a className="link" href="/dramamine-dosage-calculator/">Dramamine dosage calculator</a>{' '}
+            instead.
           </p>
         </section>
 

@@ -34,7 +34,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: u('/embed/'), lastModified: '2026-10-22', changeFrequency: 'monthly' as const, priority: 0.5 },
     ...HUBS.map((h) => ({
       url: u(`/${h.slug}/`),
-      lastModified: LAUNCH,
+      // dog-size-charts intro edited 2026-10-23 (added Cavapoo/Labradoodle links).
+      lastModified: h.slug === 'dog-size-charts' ? '2026-10-23' : LAUNCH,
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     })),

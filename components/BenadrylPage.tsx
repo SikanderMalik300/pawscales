@@ -141,7 +141,9 @@ export function BenadrylPage(c: BenadrylContent) {
             {BENADRYL.cat.freq} (AAHA 2023 guidelines). That works out to roughly 1 mg
             per pound. The calculator leads with that lower, cautious amount and shows
             the full range. Always confirm the amount with your vet first, especially
-            for cats and small dogs.
+            for cats and small dogs. Owners sometimes use it for mild car sickness;
+            for that, see the{' '}
+            <a className="link" href="/dramamine-dosage-calculator/">Dramamine dosage calculator</a>.
           </p>
         </section>
 

@@ -26,7 +26,8 @@ export default function Page() {
             adult weight and scale the Salt et al. (2017) growth curve (the median
             line) down to the puppy ages. A Goldendoodle is a Poodle cross, so treat
             these as a guide: height is the reliable marker, and weight varies with
-            coat, build and generation.
+            coat, build and generation. For the Labrador version of the same cross, see
+            our <a className="link" href="/labradoodle-size-chart/">Labradoodle size chart</a>.
           </p>
           <p>
             <strong>Example 1.</strong> A Medium puppy at 20 weeks weighing 22 lb is

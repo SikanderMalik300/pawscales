@@ -15,7 +15,11 @@ export default function Page() {
             and what to add, plus the size in several brands&rsquo; own charts where there
             is no industry standard. Alongside them are breed growth charts, from Golden
             Retrievers and German Shepherds to the popular doodles, that show expected
-            weight by age so you can see where a puppy sits on its curve.
+            weight by age so you can see where a puppy sits on its curve. Popular crosses
+            have their own charts, like the{' '}
+            <a className="link" href="/cavapoo-size-chart/">Cavapoo size chart</a>. The{' '}
+            <a className="link" href="/labradoodle-size-chart/">Labradoodle size chart</a>{' '}
+            covers the Labrador-Poodle mix.
           </p>
           <p>
             Which one do you need? For a crate, measure your dog nose to tail base and use

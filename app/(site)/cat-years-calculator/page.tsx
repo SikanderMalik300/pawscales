@@ -46,6 +46,7 @@ export default function Page() {
         <>
           <DataTable
             caption="Cat age in human years"
+            tableCaption="Cat age in human years, from 1 month to 20 years"
             columns={[
               { key: 'cat', header: 'Cat age' },
               { key: 'human', header: 'Human years', numeric: true },

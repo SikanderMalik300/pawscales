@@ -196,6 +196,13 @@ export default function Page() {
             <li>Puppies who are under- or overweight right now.</li>
             <li>Height or length. This estimates weight only.</li>
           </ul>
+          <p className="mt-4 text-[16px] text-ink">
+            For a crossbreed the parents matter more than a single curve. A
+            Cavalier-Poodle mix has its own{' '}
+            <a className="link" href="/cavapoo-size-chart/">Cavapoo size chart</a>. A
+            Labrador-Poodle mix is covered by the{' '}
+            <a className="link" href="/labradoodle-size-chart/">Labradoodle size chart</a>.
+          </p>
         </section>
       </div>
 
