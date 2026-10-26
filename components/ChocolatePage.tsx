@@ -12,15 +12,14 @@ import { PhotoTile } from '@/components/ui/PhotoTile';
 import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbSchema, faqSchema, webPageSchema } from '@/lib/schema';
 import { ChocolateCalculator } from '@/components/tools/ChocolateCalculator';
-import { CHOC_TYPES, THRESHOLDS } from '@/lib/calc/chocolate';
-import { LB_TO_KG } from '@/lib/units';
+import { CHOC_TYPES, THRESHOLDS, ozForLevel } from '@/lib/calc/chocolate';
 
 // Ounces of a chocolate type needed to reach a mg/kg band for a given dog weight,
-// from the same methylxanthine content and thresholds as the calculator.
-const CHART_WEIGHTS = [10, 20, 50, 80];
+// from the same methylxanthine content and thresholds as the calculator. Rounded
+// DOWN (ozForLevel) so the shown amount is never above the exact trigger.
 const ozToLevel = (mgPerOz: number, weightLb: number, mgKg: number): string => {
-  const oz = (mgKg * weightLb * LB_TO_KG) / mgPerOz;
-  return oz > 50 ? '>50' : (Math.round(oz * 10) / 10).toString();
+  const oz = ozForLevel(mgPerOz, weightLb, mgKg);
+  return oz > 50 ? '>50' : oz.toString();
 };
 const chartCell = (mgPerOz: number, weightLb: number): string =>
   [THRESHOLDS.upset, THRESHOLDS.cardiac, THRESHOLDS.seizure]

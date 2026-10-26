@@ -46,6 +46,16 @@ export function classifyDose(mgPerKg: number): Band {
   return 'low';
 }
 
+/** Ounces of a chocolate (mg of methylxanthine per oz) needed to reach a mg/kg
+ *  level for a dog of weightLb. Rounded DOWN to one decimal so the displayed
+ *  amount is never ABOVE the exact trigger (mgKg x weightKg / mgPerOz); erring
+ *  toward caution matters on a toxicity chart. */
+export function ozForLevel(mgPerOz: number, weightLb: number, mgKg: number): number {
+  if (!(mgPerOz > 0) || !(weightLb > 0)) return 0;
+  const exact = (mgKg * weightLb * LB_TO_KG) / mgPerOz;
+  return Math.floor(exact * 10) / 10;
+}
+
 export interface ChocInput {
   typeKey: ChocKey;
   amount: number;

@@ -327,7 +327,7 @@ export const REGISTRY: ToolEntry[] = [
     oneLiner: 'Is the chocolate your dog ate a toxic dose?',
     category: 'dog-calculators',
     related: ['benadryl-dosage-calculator', 'gabapentin-for-dogs-and-cats', 'dog-food-calculator'],
-    lastUpdated: '2026-10-26',
+    lastUpdated: '2026-10-27',
     sources: [],
     fromOwner: null,
     notCovered: [],

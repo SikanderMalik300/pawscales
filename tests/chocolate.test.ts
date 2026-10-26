@@ -2,9 +2,10 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import {
-  chocolateDose, classifyDose, chocType, CHOC_TYPES, THRESHOLDS, type ChocKey,
+  chocolateDose, classifyDose, chocType, ozForLevel, CHOC_TYPES, THRESHOLDS, type ChocKey,
 } from '@/lib/calc/chocolate';
 import { bySlug } from '@/lib/registry';
+import { LB_TO_KG } from '@/lib/units';
 
 const dose = (typeKey: ChocKey, amount: number, amountUnit: 'oz' | 'g', weight: number, weightUnit: 'lb' | 'kg') =>
   chocolateDose({ typeKey, amount, amountUnit, weight, weightUnit })!;
@@ -36,6 +37,26 @@ describe('chocolate: band thresholds are inclusive at 20, 40, 60', () => {
     expect(classifyDose(40)).toBe('cardiac');
     expect(classifyDose(59.9)).toBe('cardiac');
     expect(classifyDose(60)).toBe('seizure');
+  });
+});
+
+describe('chocolate chart ounces round DOWN, never over the trigger', () => {
+  const WEIGHTS = [10, 20, 50, 80];
+  const LEVELS = [THRESHOLDS.upset, THRESHOLDS.cardiac, THRESHOLDS.seizure];
+  it('every shown ounce value is at or below the exact trigger amount', () => {
+    for (const t of CHOC_TYPES) {
+      for (const w of WEIGHTS) {
+        for (const mgKg of LEVELS) {
+          const shown = ozForLevel(t.mgPerOz, w, mgKg);
+          const exact = (mgKg * w * LB_TO_KG) / t.mgPerOz;
+          expect(shown, `${t.key} ${w}lb ${mgKg}mg/kg`).toBeLessThanOrEqual(exact + 1e-9);
+        }
+      }
+    }
+  });
+  it('floors rather than rounds to nearest', () => {
+    expect(ozForLevel(250, 10, 20)).toBe(0.3); // very dark, 10 lb, mild (exact 0.363)
+    expect(ozForLevel(64, 10, 60)).toBe(4.2); // milk, 10 lb, seizure (exact 4.252)
   });
 });
 
