@@ -48,6 +48,8 @@ export const HEAT = {
   proestrusDays: S(9, 'Merck Veterinary Manual (owner)', MERCK, 'about 9 days, range 2 days to 3 weeks'),
   estrusDays: S(9, 'Merck Veterinary Manual (owner)', MERCK, 'about 9 days, range 3 days to 3 weeks'),
   diestrusMonths: S(2, 'Merck Veterinary Manual (owner)', MERCK, 'about 2 months in non-pregnant dogs'),
+  anestrusMonthsMin: S(1, 'Merck Veterinary Manual (owner)', MERCK, 'anestrus normally lasts 1 to 6 months'),
+  anestrusMonthsMax: S(6, 'Merck Veterinary Manual (owner)', MERCK, 'anestrus normally lasts 1 to 6 months'),
 };
 
 // ---- Energy requirement, shared by food calculators (A6.9, A6.10, A6.12) ----

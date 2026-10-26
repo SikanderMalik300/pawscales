@@ -16,6 +16,7 @@ export const EMBED_TOOLS: EmbedTool[] = [
   { slug: 'cat-years-calculator', title: 'Cat years calculator', height: 500 },
   { slug: 'dog-pregnancy-calculator', title: 'Dog pregnancy calculator', height: 560 },
   { slug: 'kitten-age-chart', title: 'Kitten age chart', height: 560 },
+  { slug: 'dog-heat-cycle-calculator', title: 'Dog heat cycle calculator', height: 640 },
 ];
 
 export const isEmbedTool = (slug: string): boolean => EMBED_TOOLS.some((t) => t.slug === slug);

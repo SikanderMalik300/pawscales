@@ -13,6 +13,19 @@ import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbSchema, faqSchema, webPageSchema } from '@/lib/schema';
 import { ChocolateCalculator } from '@/components/tools/ChocolateCalculator';
 import { CHOC_TYPES, THRESHOLDS } from '@/lib/calc/chocolate';
+import { LB_TO_KG } from '@/lib/units';
+
+// Ounces of a chocolate type needed to reach a mg/kg band for a given dog weight,
+// from the same methylxanthine content and thresholds as the calculator.
+const CHART_WEIGHTS = [10, 20, 50, 80];
+const ozToLevel = (mgPerOz: number, weightLb: number, mgKg: number): string => {
+  const oz = (mgKg * weightLb * LB_TO_KG) / mgPerOz;
+  return oz > 50 ? '>50' : (Math.round(oz * 10) / 10).toString();
+};
+const chartCell = (mgPerOz: number, weightLb: number): string =>
+  [THRESHOLDS.upset, THRESHOLDS.cardiac, THRESHOLDS.seizure]
+    .map((mgKg) => ozToLevel(mgPerOz, weightLb, mgKg))
+    .join(' / ');
 
 const SLUG = 'dog-chocolate-toxicity-calculator';
 const dogHub = HUBS.find((h) => h.slug === 'dog-calculators')!;
@@ -126,6 +139,63 @@ export function ChocolatePage(c: ChocolateContent) {
             </>
           }
         />
+
+        <section>
+          <H2>Dog chocolate toxicity chart</H2>
+          <p className="mt-2 text-[16px] text-ink">
+            How much of each chocolate it takes to reach the mild, severe and seizure
+            levels, for a 10, 20, 50 and 80 lb dog. Each cell is ounces to reach{' '}
+            <strong>mild / severe / seizure</strong>, worked out from the same
+            theobromine content and thresholds as the calculator above.
+          </p>
+          <div className="mt-3">
+            <DataTable
+              caption="Ounces of chocolate that reach each risk level, by dog weight"
+              tableCaption="Ounces of chocolate to reach mild, severe and seizure levels by dog weight"
+              columns={[
+                { key: 'type', header: 'Chocolate' },
+                { key: 'oz', header: 'mg/oz', numeric: true },
+                { key: 'w10', header: '10 lb', numeric: true },
+                { key: 'w20', header: '20 lb', numeric: true },
+                { key: 'w50', header: '50 lb', numeric: true },
+                { key: 'w80', header: '80 lb', numeric: true },
+              ]}
+              rows={CHOC_TYPES.filter((t) => t.key !== 'white').map((t) => ({
+                cells: {
+                  type: t.label,
+                  oz: `${t.mgPerOz}`,
+                  w10: chartCell(t.mgPerOz, 10),
+                  w20: chartCell(t.mgPerOz, 20),
+                  w50: chartCell(t.mgPerOz, 50),
+                  w80: chartCell(t.mgPerOz, 80),
+                },
+              }))}
+              footnote={
+                <>
+                  Each cell is ounces to reach mild ({THRESHOLDS.upset} mg/kg) / severe
+                  ({THRESHOLDS.cardiac}) / seizure ({THRESHOLDS.seizure}) methylxanthine
+                  per kg. Lower is more dangerous. White chocolate is left out: it has too
+                  little theobromine to reach these levels at any realistic amount.
+                </>
+              }
+              source={
+                <>
+                  Content from the{' '}
+                  <a className="link" href="https://www.merckvetmanual.com/toxicology/food-hazards/chocolate-toxicosis-in-animals">Merck Veterinary Manual</a>{' '}
+                  and thresholds from Merck / ASPCA, the same as the calculator.
+                </>
+              }
+            />
+          </div>
+          <div className="mt-4">
+            <NoteBox label="Any amount over a level: call">
+              If your dog reached a mild level or more, or you are not sure, call your vet
+              or the <strong>ASPCA Animal Poison Control Center at (888) 426-4435</strong>{' '}
+              (a fee may apply). Puppies, small dogs and dogs with heart problems can react
+              at lower amounts.
+            </NoteBox>
+          </div>
+        </section>
 
         <section>
           <H2>What to do if your dog ate chocolate</H2>

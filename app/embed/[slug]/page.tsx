@@ -8,8 +8,9 @@ import { PuppyCalculator } from '@/components/tools/PuppyCalculator';
 import { CatYearsCalculator } from '@/components/tools/CatYearsCalculator';
 import { PregnancyCalculator } from '@/components/tools/PregnancyCalculator';
 import { KittenCalculator } from '@/components/tools/KittenCalculator';
+import { HeatCalculator } from '@/components/tools/HeatCalculator';
 
-// Fixed set (static export): only these five embed pages exist.
+// Fixed set (static export): only these embed pages exist.
 export const dynamicParams = false;
 
 const CALC: Record<string, ComponentType> = {
@@ -18,6 +19,7 @@ const CALC: Record<string, ComponentType> = {
   'cat-years-calculator': CatYearsCalculator,
   'dog-pregnancy-calculator': PregnancyCalculator,
   'kitten-age-chart': KittenCalculator,
+  'dog-heat-cycle-calculator': HeatCalculator,
 };
 
 export function generateStaticParams() {

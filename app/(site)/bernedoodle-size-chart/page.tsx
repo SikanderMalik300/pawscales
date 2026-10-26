@@ -17,7 +17,7 @@ export default function Page() {
         created the Bernedoodle: Tiny (10–25 lb), Miniature (26–45 lb), Medium
         (46–65 lb) and Standard (66 lb and up). Height at the shoulder sets the size.
         Pick a size, or enter the parents&rsquo; weights, to estimate how big your
-        puppy will get.</>
+        puppy will get. Crate: about 30 in for a Mini, 42 in for a Standard.</>
       }
       method={
         <>
@@ -87,6 +87,21 @@ export default function Page() {
             Miniature (14–17 in), Medium (18–21 in) and Standard (22–29 in). Tiny and
             Miniature dogs finish growing by about 11–13 months; Medium and Standard
             dogs fill out to roughly 14–24 months.
+          </p>
+        </>
+      }
+      extra={
+        <>
+          <h2 className="text-[22px] sm:text-[26px]">Bernedoodle size comparison</h2>
+          <p className="mt-2 text-[16px] text-ink">
+            The four Bernedoodle sizes side by side: <strong>Tiny</strong> is 10 to 13 in
+            and 10 to 25 lb, <strong>Miniature</strong> 14 to 17 in and 26 to 45 lb,{' '}
+            <strong>Medium</strong> 18 to 21 in and 46 to 65 lb, and{' '}
+            <strong>Standard</strong> 22 to 29 in and 66 lb and up (SwissRidge Kennels).
+            Height at the shoulder sets the size. A Mini is roughly a third the weight of a
+            Standard, which is why the crate steps up from about <strong>30 in for a
+            Mini</strong> to <strong>42 in for a Standard</strong>. See the size and crate
+            tables above for the full figures by size.
           </p>
         </>
       }

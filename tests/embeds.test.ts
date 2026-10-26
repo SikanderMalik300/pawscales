@@ -19,10 +19,11 @@ describe('embed snippet', () => {
       expect(pLine, `${t.slug} credit line`).not.toContain('/embed/');
     }
   });
-  it('covers five tools that all exist in the registry', () => {
-    expect(EMBED_TOOLS.length).toBe(5);
+  it('covers the embeddable tools, which all exist in the registry', () => {
+    expect(EMBED_TOOLS.length).toBe(6);
     for (const t of EMBED_TOOLS) expect(bySlug(t.slug), t.slug).toBeTruthy();
     expect(isEmbedTool('dog-years-calculator')).toBe(true);
+    expect(isEmbedTool('dog-heat-cycle-calculator')).toBe(true);
     expect(isEmbedTool('benadryl-dosage-calculator')).toBe(false);
   });
 });
