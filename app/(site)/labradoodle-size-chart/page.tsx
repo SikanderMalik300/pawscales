@@ -134,6 +134,17 @@ export default function Page() {
         { name: 'American Kennel Club, Poodle (Miniature) breed standard (10 to 15 in).', url: AKC_MIN },
         { name: 'Salt C, Morris PJ, German AJ, et al. Growth standard charts for monitoring bodyweight in dogs. PLoS ONE 2017;12(9):e0182064.', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5584974/' },
       ]}
+      aboutData={
+        <p>
+          A Labradoodle joins a Labrador Retriever to a Poodle, and the Australian
+          Labradoodle Association of America files its Miniature, Medium and Standard
+          classes by shoulder height instead of a set weight. We turn those height
+          classes into a growth chart by scaling the Salt et al. (2017) median curve to
+          a representative weight for each one. Punch your puppy&rsquo;s weight into the{' '}
+          <a className="link" href="/puppy-weight-calculator/">puppy weight calculator</a>{' '}
+          for a tighter, dog-specific projection.
+        </p>
+      }
       related={['goldendoodle-size-chart', 'puppy-weight-calculator', 'dog-crate-size-chart', 'dog-food-calculator']}
     />
   );

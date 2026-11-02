@@ -128,6 +128,17 @@ export default function Page() {
         { name: 'American Kennel Club, Miniature Poodle (height over 10 to 15 in).', url: 'https://www.akc.org/dog-breeds/poodle-miniature/' },
         { name: 'Salt C, Morris PJ, German AJ, et al. Growth standard charts for monitoring bodyweight in dogs. PLoS ONE 2017;12(9):e0182064.', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5584974/' },
       ]}
+      aboutData={
+        <p>
+          With no kennel club behind the Cavapoo, the Toy and Miniature labels here lean
+          on the Cavalier and Poodle parent standards rather than any Cavapoo rulebook,
+          and the Poodle side is what caps the final size. The month-by-month weights
+          come from fitting the Salt et al. (2017) data to those two parent-derived
+          bands. Knowing your puppy&rsquo;s current weight lets the{' '}
+          <a className="link" href="/puppy-weight-calculator/">puppy weight calculator</a>{' '}
+          tighten the range considerably.
+        </p>
+      }
       related={['goldendoodle-size-chart', 'bernedoodle-size-chart', 'puppy-weight-calculator', 'dog-crate-size-chart']}
     />
   );

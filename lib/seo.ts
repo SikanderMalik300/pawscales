@@ -9,6 +9,11 @@ export function toolMetadata(tool: ToolEntry): Metadata {
     title: tool.title,
     description: tool.metaDescription,
     alternates: { canonical: url },
+    // Medication dosing pages stay live for visitors but are pulled from search
+    // until a vet reviews them (noindex, follow keeps the internal links crawlable).
+    ...(tool.medicalIndexable === false
+      ? { robots: { index: false, follow: true } }
+      : {}),
     openGraph: {
       title: tool.title,
       description: tool.metaDescription,

@@ -26,6 +26,10 @@ export interface ToolEntry {
   notCovered: string[];
   thumb?: string; // photo id (lib/data/photos.ts)
   breedPage?: boolean; // breed/size growth chart, shown in its own hub section
+  // Medication dosing pages are noindexed and kept out of the sitemap/IndexNow
+  // until a vet reviews them (set false to pull from search; omit = indexable).
+  // Flip back to true, in one line, once reviewed.
+  medicalIndexable?: boolean;
 }
 
 export const HUBS: {
@@ -286,6 +290,7 @@ export const REGISTRY: ToolEntry[] = [
     sources: [],
     fromOwner: null,
     notCovered: [],
+    medicalIndexable: false,
   },
   {
     slug: 'zyrtec-dosage-calculator',
@@ -301,6 +306,7 @@ export const REGISTRY: ToolEntry[] = [
     sources: [],
     fromOwner: null,
     notCovered: [],
+    medicalIndexable: false,
   },
   {
     slug: 'gabapentin-for-dogs-and-cats',
@@ -316,6 +322,7 @@ export const REGISTRY: ToolEntry[] = [
     sources: [],
     fromOwner: null,
     notCovered: [],
+    medicalIndexable: false,
   },
   {
     slug: 'dog-chocolate-toxicity-calculator',
@@ -327,7 +334,7 @@ export const REGISTRY: ToolEntry[] = [
     oneLiner: 'Is the chocolate your dog ate a toxic dose?',
     category: 'dog-calculators',
     related: ['benadryl-dosage-calculator', 'gabapentin-for-dogs-and-cats', 'dog-food-calculator'],
-    lastUpdated: '2026-10-27',
+    lastUpdated: '2026-11-03',
     sources: [],
     fromOwner: null,
     notCovered: [],
@@ -346,6 +353,7 @@ export const REGISTRY: ToolEntry[] = [
     sources: [],
     fromOwner: null,
     notCovered: [],
+    medicalIndexable: false,
   },
   {
     slug: 'dramamine-dosage-calculator',
@@ -361,6 +369,7 @@ export const REGISTRY: ToolEntry[] = [
     sources: [],
     fromOwner: null,
     notCovered: [],
+    medicalIndexable: false,
   },
   {
     slug: 'pepcid-dosage-calculator',
@@ -376,6 +385,7 @@ export const REGISTRY: ToolEntry[] = [
     sources: [],
     fromOwner: null,
     notCovered: [],
+    medicalIndexable: false,
   },
 ];
 
@@ -392,7 +402,7 @@ export const BREED_PAGES: ToolEntry[] = [
     oneLiner: 'Golden Retriever weight by month, male and female.',
     category: 'dog-size-charts',
     related: ['puppy-weight-calculator', 'dog-food-calculator', 'dog-crate-size-chart', 'german-shepherd-weight-chart'],
-    lastUpdated: '2026-10-14',
+    lastUpdated: '2026-11-03',
     sources: [],
     fromOwner: null,
     notCovered: [],
@@ -408,7 +418,7 @@ export const BREED_PAGES: ToolEntry[] = [
     oneLiner: 'German Shepherd weight by month, male and female.',
     category: 'dog-size-charts',
     related: ['puppy-weight-calculator', 'golden-retriever-weight-chart', 'dog-crate-size-chart', 'dog-food-calculator'],
-    lastUpdated: '2026-10-14',
+    lastUpdated: '2026-11-03',
     sources: [],
     fromOwner: null,
     notCovered: [],
@@ -424,7 +434,7 @@ export const BREED_PAGES: ToolEntry[] = [
     oneLiner: 'Goldendoodle sizes and weight by age, from GANA.',
     category: 'dog-size-charts',
     related: ['bernedoodle-size-chart', 'puppy-weight-calculator', 'dog-crate-size-chart', 'dog-harness-size-chart'],
-    lastUpdated: '2026-10-23',
+    lastUpdated: '2026-11-03',
     sources: [],
     fromOwner: null,
     notCovered: [],
@@ -440,7 +450,7 @@ export const BREED_PAGES: ToolEntry[] = [
     oneLiner: 'Bernedoodle sizes and weight by age, with a parent comparison.',
     category: 'dog-size-charts',
     related: ['goldendoodle-size-chart', 'puppy-weight-calculator', 'dog-crate-size-chart', 'dog-harness-size-chart'],
-    lastUpdated: '2026-10-26',
+    lastUpdated: '2026-11-03',
     sources: [],
     fromOwner: null,
     notCovered: [],
@@ -456,7 +466,7 @@ export const BREED_PAGES: ToolEntry[] = [
     oneLiner: 'Cavapoo sizes by the Poodle parent, with a parents estimator.',
     category: 'dog-size-charts',
     related: ['goldendoodle-size-chart', 'bernedoodle-size-chart', 'puppy-weight-calculator', 'dog-crate-size-chart'],
-    lastUpdated: '2026-10-19',
+    lastUpdated: '2026-11-03',
     sources: [],
     fromOwner: null,
     notCovered: [],
@@ -488,7 +498,7 @@ export const BREED_PAGES: ToolEntry[] = [
     oneLiner: 'Labradoodle sizes by height, from the ALAA, with weight by age.',
     category: 'dog-size-charts',
     related: ['goldendoodle-size-chart', 'puppy-weight-calculator', 'dog-crate-size-chart', 'dog-food-calculator'],
-    lastUpdated: '2026-10-21',
+    lastUpdated: '2026-11-03',
     sources: [],
     fromOwner: null,
     notCovered: [],

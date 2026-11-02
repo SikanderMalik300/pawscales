@@ -67,6 +67,16 @@ export default function Page() {
         { name: 'Salt C, Morris PJ, German AJ, et al. Growth standard charts. PLoS ONE 2017;12(9):e0182064.', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5584974/' },
         { name: 'WSAVA Body Condition Score chart for dogs.', url: 'https://wsava.org/wp-content/uploads/2020/01/Body-Condition-Score-Dog.pdf' },
       ]}
+      aboutData={
+        <p>
+          For the German Shepherd we take the same Salt et al. (2017) growth curves,
+          choose the band that matches each sex, and stretch them across the AKC weight
+          range of 50 to 90 lb. The underlying records come from a large open dataset of
+          healthy adult dogs. To project a single puppy instead, feed its age and weight
+          to the{' '}
+          <a className="link" href="/puppy-weight-calculator/">puppy weight calculator</a>.
+        </p>
+      }
       related={['puppy-weight-calculator', 'golden-retriever-weight-chart', 'dog-crate-size-chart', 'dog-food-calculator']}
     />
   );

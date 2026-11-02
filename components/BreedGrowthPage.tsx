@@ -80,6 +80,7 @@ export interface BreedGrowthContent {
   faq: FaqItem[];
   sources: { name: string; url: string }[];
   related: string[];
+  aboutData: ReactNode; // per-breed "About the data" prose, written fresh per page
 }
 
 export function BreedGrowthPage(c: BreedGrowthContent) {
@@ -167,13 +168,7 @@ export function BreedGrowthPage(c: BreedGrowthContent) {
 
         <section>
           <H2>About the data</H2>
-          <p className="mt-3 text-[16px] text-ink">
-            The curves come from {TOTAL_DOGS.toLocaleString()} purebred dogs that were
-            a healthy weight as adults, from the open dataset behind Salt et al.
-            (2017), scaled to the {breed.name}&rsquo;s AKC weight range. The generic
-            tool behind it is the{' '}
-            <a className="link" href="/puppy-weight-calculator/">puppy weight calculator</a>.
-          </p>
+          <div className="mt-3 text-[16px] text-ink">{c.aboutData}</div>
         </section>
 
         <section>

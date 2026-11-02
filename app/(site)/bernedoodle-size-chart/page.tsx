@@ -118,6 +118,17 @@ export default function Page() {
         { name: 'American Kennel Club, Poodle (Standard) breed standard (over 15 in; males ~60–70 lb, females ~40–50 lb).', url: 'https://www.akc.org/dog-breeds/poodle-standard/' },
         { name: 'Salt C, Morris PJ, German AJ, et al. Growth standard charts for monitoring bodyweight in dogs. PLoS ONE 2017;12(9):e0182064.', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5584974/' },
       ]}
+      aboutData={
+        <p>
+          A Bernedoodle carries Bernese Mountain Dog and Poodle lines, so for a given
+          height it often sits a touch heavier-boned than a Goldendoodle; SwissRidge
+          Kennels, which created the cross, splits it into Tiny, Miniature, Medium and
+          Standard. To draw the age chart we stretch the Salt et al. (2017) median curve
+          to each of those adult weights. Your own dog becomes far easier to predict
+          once you weigh him and open the{' '}
+          <a className="link" href="/puppy-weight-calculator/">puppy weight calculator</a>.
+        </p>
+      }
       related={['goldendoodle-size-chart', 'puppy-weight-calculator', 'dog-crate-size-chart', 'dog-harness-size-chart']}
     />
   );

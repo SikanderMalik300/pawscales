@@ -65,6 +65,16 @@ export default function Page() {
         { name: 'Salt C, Morris PJ, German AJ, et al. Growth standard charts. PLoS ONE 2017;12(9):e0182064.', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5584974/' },
         { name: 'WSAVA Body Condition Score chart for dogs.', url: 'https://wsava.org/wp-content/uploads/2020/01/Body-Condition-Score-Dog.pdf' },
       ]}
+      aboutData={
+        <p>
+          This Golden Retriever chart starts from the Salt et al. (2017) size-band
+          curves and rescales them to the AKC range of 55 to 75 lb, split by sex. The
+          dataset it draws on tracked more than 60,000 dogs that stayed lean into
+          adulthood. If you would rather type in your own numbers than read a table, the
+          same engine sits behind the{' '}
+          <a className="link" href="/puppy-weight-calculator/">puppy weight calculator</a>.
+        </p>
+      }
       related={['puppy-weight-calculator', 'dog-food-calculator', 'dog-crate-size-chart', 'german-shepherd-weight-chart']}
     />
   );

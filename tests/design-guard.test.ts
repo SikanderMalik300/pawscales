@@ -87,6 +87,18 @@ describe('design guardrails', () => {
     expect(violations, `em dash in body text:\n${violations.join('\n')}`).toEqual([]);
   });
 
+  // Explicitly cover the author page (its visible heading is a JSX literal, not
+  // `title:` metadata, so no line is exempt): no em dash anywhere in its source.
+  it('author page has no em dash (heading or body)', () => {
+    const f = join(ROOT, 'app', '(site)', 'authors', 'sikander-malik', 'page.tsx');
+    expect(existsSync(f), 'author page exists').toBe(true);
+    const bad = readFileSync(f, 'utf8').split('\n')
+      .map((l, i) => ({ l, i }))
+      .filter(({ l }) => EM_DASH.test(l))
+      .map(({ l, i }) => `${i + 1}  ${l.trim().slice(0, 80)}`);
+    expect(bad, `em dash in author page:\n${bad.join('\n')}`).toEqual([]);
+  });
+
   // The thorough check: scan the full rendered HTML of every exported page for
   // em dashes in the visible body (excluding <head> and <script>, where the
   // <title> metadata and Next.js payload legitimately carry them). This covers

@@ -17,9 +17,9 @@ export function AuthorBox({ updated }: { updated?: string }) {
         <div>
           <p className="text-[16px] font-semibold text-ink">By Sikander Malik</p>
           <p className="mt-1 text-[16px] leading-[1.6] text-ink">
-            Sikander builds PawScales from published veterinary research and open
-            data, and reviews every page before it goes live. He grew up with
-            Bravo, a Gull Dong.
+            Sikander is the founder of PawScales. He is not a veterinarian; he turns
+            named veterinary sources and open data into free tools, and checks every
+            number against its source before publishing. He had a dog, Bravo.
           </p>
           <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[14px]">
             <Link href="/authors/sikander-malik/" prefetch={false} className="link">

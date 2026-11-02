@@ -8,12 +8,13 @@ const LAUNCH = '2026-10-10';
 export default function sitemap(): MetadataRoute.Sitemap {
   const u = (path: string) => `${SITE.url}${path}`;
 
-  const staticPages = [
+  const staticPages: { path: string; pr: number; lm?: string }[] = [
     { path: '/', pr: 1.0 },
     { path: '/about/', pr: 0.5 },
     { path: '/how-we-calculate/', pr: 0.5 },
     { path: '/editorial-policy/', pr: 0.4 },
-    { path: '/authors/sikander-malik/', pr: 0.4 },
+    // Author page rewritten 2026-11-03 (honest bio, corrections log, Person schema).
+    { path: '/authors/sikander-malik/', pr: 0.4, lm: '2026-11-03' },
     { path: '/contact/', pr: 0.4 },
     { path: '/privacy-policy/', pr: 0.3 },
     { path: '/terms/', pr: 0.3 },
@@ -26,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticPages.map((p) => ({
       url: u(p.path),
-      lastModified: LAUNCH,
+      lastModified: p.lm ?? LAUNCH,
       changeFrequency: 'monthly' as const,
       priority: p.pr,
     })),
@@ -39,7 +40,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     })),
-    ...REGISTRY.map((t) => ({
+    // Medication dosing pages carry medicalIndexable:false and are left out of the
+    // sitemap (so IndexNow, which reads this sitemap, does not resubmit them either)
+    // while they are noindexed pending a vet review.
+    ...REGISTRY.filter((t) => t.medicalIndexable !== false).map((t) => ({
       url: u(`/${t.slug}/`),
       lastModified: t.lastUpdated,
       changeFrequency: 'monthly' as const,

@@ -38,6 +38,7 @@ export interface DoodlePageContent {
   related: string[];
   comparison?: ReactNode; // optional extra comparison table (Bernedoodle)
   extra?: ReactNode; // optional extra section after the comparison (e.g. growth notes)
+  aboutData: ReactNode; // per-breed "About the data" prose, written fresh per page
 }
 
 export function DoodlePage(c: DoodlePageContent) {
@@ -190,14 +191,7 @@ export function DoodlePage(c: DoodlePageContent) {
 
         <section>
           <H2>About the data</H2>
-          <p className="mt-3 text-[16px] text-ink">
-            Sizes are the {breed.sourceName} categories. The weight-by-age figures
-            scale the Salt et al. (2017) growth data ({TOTAL_DOGS.toLocaleString()}{' '}
-            healthy dogs) to those size bounds. Mixes vary more than purebreds, so for
-            your own puppy the{' '}
-            <a className="link" href="/puppy-weight-calculator/">puppy weight calculator</a>{' '}
-            (enter the current weight) gives a tighter estimate.
-          </p>
+          <div className="mt-3 text-[16px] text-ink">{c.aboutData}</div>
         </section>
 
         <section>

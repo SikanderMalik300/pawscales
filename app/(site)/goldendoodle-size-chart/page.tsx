@@ -53,6 +53,17 @@ export default function Page() {
         { name: 'Goldendoodle Association of North America (GANA), Goldendoodle sizes (Petite, Miniature, Medium, Standard; height and weight ranges).', url: 'https://www.goldendoodleassociation.com/about-the-breed/sizes/' },
         { name: 'Salt C, Morris PJ, German AJ, et al. Growth standard charts for monitoring bodyweight in dogs. PLoS ONE 2017;12(9):e0182064.', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5584974/' },
       ]}
+      aboutData={
+        <p>
+          Because a Goldendoodle is a Golden Retriever crossed with a Poodle, its grown
+          size tracks whichever Poodle, Toy, Miniature or Standard, stands behind it,
+          which is why GANA files the breed by height rather than by weight. The age
+          figures on this page take each GANA size and bend the median Salt et al. (2017)
+          growth curve to fit that adult weight. For a reading tuned to your own dog,
+          weigh him and run the numbers through the{' '}
+          <a className="link" href="/puppy-weight-calculator/">puppy weight calculator</a>.
+        </p>
+      }
       related={['bernedoodle-size-chart', 'puppy-weight-calculator', 'dog-crate-size-chart', 'dog-harness-size-chart']}
     />
   );

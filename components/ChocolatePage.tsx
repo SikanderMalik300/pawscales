@@ -16,10 +16,11 @@ import { CHOC_TYPES, THRESHOLDS, ozForLevel } from '@/lib/calc/chocolate';
 
 // Ounces of a chocolate type needed to reach a mg/kg band for a given dog weight,
 // from the same methylxanthine content and thresholds as the calculator. Rounded
-// DOWN (ozForLevel) so the shown amount is never above the exact trigger.
+// DOWN (ozForLevel) so the shown amount is never above the exact trigger, and
+// always to one decimal place so the column reads evenly ("1.0", "7.0").
 const ozToLevel = (mgPerOz: number, weightLb: number, mgKg: number): string => {
   const oz = ozForLevel(mgPerOz, weightLb, mgKg);
-  return oz > 50 ? '>50' : oz.toString();
+  return oz > 50 ? '>50' : oz.toFixed(1);
 };
 const chartCell = (mgPerOz: number, weightLb: number): string =>
   [THRESHOLDS.upset, THRESHOLDS.cardiac, THRESHOLDS.seizure]
